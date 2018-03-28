@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				background: #F0F0F0;
+				padding-bottom: 50px;
+			}
+			
+			header {
+				padding: 0.8rem;
+			}
+			
+			header img {
+				width: 1.5rem;
+			}
+			
+			.weui-avatar {
+				width: 4rem;
+				height: 4rem;
+				display: block;
+				margin: 0 auto;
+				border-radius: .3rem;
+			}
+			
+			.phone img {
+				width: .6rem;
+				vertical-align: bottom;
+				margin-right: .5rem;
+			}
+			
+			.user-nav {
+				margin: 0 auto;
+				padding: .5rem .5rem;
+				margin-bottom: .8rem;
+			}
+			
+			.user-nav img {
+				width: 1.6rem;
+			}
+			
+			.user-nav .weui-flex__item:first-child {
+				border: 0;
+			}
+			
+			.user-nav .weui-flex__item {
+				border-left: 1px solid #E6E6E6;
+			}
+			
+			.user-nav .weui-badge {
+				position: absolute;
+				top: 0rem;
+				right: 0.5rem;
+			}
+			
+			.header {
+				background: url(img/userbg.png);
+				background-size: 100%;
+			}
+			
+			.black-bg a {
+				display: inline-block;
+			}
+			
+			.user-info {
+				color: #fff;
+				padding-bottom: 1rem;
+			}
+			
+			.price {
+				width: 6rem;
+			}
+			
+			.price .price-color {
+				font-size: 1.3rem;
+			}
+			
+			.user-menu {
+				width: calc(100% - 7rem);
+				color: #666;
+				font-size: .75rem;
+			}
+			
+			.user-menu h4 {
+				font-size: .65rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<div class="header">
+			<header class="black-bg">
+				<a href="message-inform.html" class="relative"><img src="img/xiaoxi.png">
+					<span class="weui-badge weui-badge_dot new-msg hide"></span>
+				</a>
+			</header>
+			<section class="user-info bottomline black-bg">
+				<img src="" class="weui-avatar" />
+				<h2 class="text-center fontsize34" bind="user.username">这是用户名称</h2>
+				<p class="text-center phone"><img src="img/shouji.png"><span class="phone-number" bind="user.telephone">无</span></p>
+			</section>
+		</div>
+		<section class="user-nav">
+			<div class="price pull-left">
+				<p class="price-title">托管总余额</p>
+				<h3 class="price-color" bind="user.account">0.00</h3>
+			</div>
+			<div class="weui-flex pull-right text-center user-menu">
+				<div class="weui-flex__item relative" onclick="window.location.href='user-group-shopping-order.html'">
+					<img src="img/tuangoudingdan.png" />
+					<h4>团购订单</h4>
+					<span class="weui-badge hide" bind="opcount"></span>
+				</div>
+				<div class="weui-flex__item relative" onclick="window.location.href='user-hire-orders.html'">
+					<img src="img/dingdan.png" />
+					<h4>雇佣订单</h4>
+					<span class="weui-badge hide" bind="oscount"></span>
+				</div>
+				<div class="weui-flex__item" onclick="window.location.href='user-collect.html'">
+					<img src="img/shoucang.png" />
+					<h4>我的收藏</h4>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</section>
+		<section class="user-headle">
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='user-live.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">我的直播</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='user-shipping-address.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">收货地址</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='user-server-help.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">联系客服</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='set.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">设置</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+		</section>
+		<div class="weui-tabbar">
+			<a href="main.html" class="weui-tabbar__item">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/jingxuan.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge hide" style="position: absolute;top: -2px;right: -13px;">8</span>
+				</span>
+				<p class="weui-tabbar__label">精选</p>
+			</a>
+			<a href="group-shopping.html" class="weui-tabbar__item">
+				<img src="img/pintuan2.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">拼团</p>
+			</a>
+			<a href="hunting-service.html" class="weui-tabbar__item">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/fuwu2.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge weui-badge_dot hide" style="position: absolute;top: 0;right: -6px;"></span>
+				</span>
+				<p class="weui-tabbar__label">找服务</p>
+			</a>
+			<a href="decorate-live.html" class="weui-tabbar__item">
+				<img src="img/zhibo3.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">装修直播</p>
+			</a>
+			<a href="javascript:;" class="weui-tabbar__item active">
+				<img src="img/wode.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">我的</p>
+			</a>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var userInfoUrl = APIBASEURL + "/smj/app/usercontroller/selectuser";
+			$(function() {
+				$.showLoading();
+				FastClick.attach(document.body);
+				loadData();
+			});
+
+			function loadData() {
+				if(loginJudge()) {
+					$.ajaxGet(userInfoUrl + $.toQueryString({
+						"userId": getCookie("userId"),
+						"tokenUser": getCookie("tokenUser")
+					}, true), function(res) {
+						if(res.status == 0) {
+							console.log(res);
+							showData(res.data);
+						} else {
+							//$.alert("请求失败：" + res.msg);
+						}
+					});
+				}
+			}
+
+			function showData(data) {
+				if(data) {
+					var content = ".bodybk";
+					var control = new Controller(content);
+					control.set(data, function() {
+						if(!data.user.account) {
+							$(".price-color").text("0.00");
+						}
+						$.hideLoading();
+					});
+					$(".weui-avatar").attr("src", data.user.headImgUrl);
+					if(data.opcount != 0) {
+						$(".user-menu span[bind='opcount']").removeClass("hide");
+					}
+					if(data.oscount != 0) {
+						$(".user-menu span[bind='oscount']").removeClass("hide");
+					}
+					if(data.count != 0) {
+						$(".new-msg").removeClass("hide");
+					}
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

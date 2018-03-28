@@ -1,0 +1,318 @@
+{
+	"main.html": {
+		"resources": [
+			"js/main.js",
+			"img/shoucang2.png",
+			"css/main.css",
+			"img/fuwu2.png",
+			"img/jingxuan2.png",
+			"img/zhibo3.png",
+			"img/pinglun.png",
+			"css/weui.min.css",
+			"img/zan.png",
+			"img/banner3.jpg",
+			"img/pintuan2.png",
+			"img/wujiaoxing1.png",
+			"img/banner2.jpg",
+			"js/fastclick.js",
+			"img/wode2.png",
+			"img/fenxoang.png",
+			"img/wujiaoxing3.png",
+			"img/banner.jpg",
+			"js/jquery-3.2.1.min.js",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"img/wujiaoxing2.png",
+			"js/jquery-weui.min.js",
+			"group-shopping.html",
+			"group-shopping-details.html",
+			"hunting-service.html",
+			"user-center.html",
+			"decorate-live.html",
+			"js/jquery.mobile-events.min.js"
+		],
+		"refer": [
+			"group-shopping.html",
+			"group-shopping-details.html",
+			"hunting-service.html",
+			"user-center.html",
+			"decorate-live.html"
+		]
+	},
+	"group-shopping.html": {
+		"resources": [
+			"js/main.js",
+			"css/main.css",
+			"js/jquery.mobile-events.min.js",
+			"img/fuwu2.png",
+			"img/zhibo3.png",
+			"css/weui.min.css",
+			"img/jingxuan.png",
+			"img/banner3.jpg",
+			"img/xiaoxi1.png",
+			"js/fastclick.js",
+			"img/wode2.png",
+			"img/banner.jpg",
+			"img/pintuan1.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"hunting-service.html",
+			"js/jquery-weui.min.js",
+			"main.html",
+			"js/jquery-3.2.1.min.js",
+			"img/banner2.jpg",
+			"decorate-live.html",
+			"group-shopping-details.html"
+		],
+		"refer": [
+			"hunting-service.html",
+			"main.html",
+			"decorate-live.html",
+			"group-shopping-details.html"
+		]
+	},
+	"hunting-service.html": {
+		"resources": [
+			"img/shousuo.png",
+			"js/main.js",
+			"js/jquery.mobile-events.min.js",
+			"css/main.css",
+			"img/zhibo3.png",
+			"css/weui.min.css",
+			"img/jingxuan.png",
+			"img/pintuan2.png",
+			"img/wujiaoxing1.png",
+			"img/banner2.jpg",
+			"js/fastclick.js",
+			"img/wode2.png",
+			"img/wujiaoxing3.png",
+			"js/city-picker.min.js",
+			"js/jquery-3.2.1.min.js",
+			"img/sanjiao.png",
+			"img/fuwu.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"img/wujiaoxing2.png",
+			"js/jquery-weui.min.js",
+			"img/banner3.jpg",
+			"img/banner.jpg",
+			"search.html",
+			"main.html",
+			"decorate-live.html",
+			"group-shopping.html",
+			"user-center.html"
+		],
+		"refer": [
+			"main.html",
+			"search.html",
+			"decorate-live.html",
+			"group-shopping.html",
+			"user-center.html"
+		]
+	},
+	"search.html": {
+		"resources": [
+			"js/main.js",
+			"js/fastclick.js",
+			"img/lishi.png",
+			"css/main.css",
+			"img/shousuo2.png",
+			"css/weui.min.css",
+			"img/fanhui2.png",
+			"img/shanchu3.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js"
+		]
+	},
+	"group-shopping-details.html": {
+		"resources": [
+			"js/main.js",
+			"css/main.css",
+			"js/jquery.mobile-events.min.js",
+			"css/weui.min.css",
+			"img/fenxiang.png",
+			"img/yindaoxian.png",
+			"js/fastclick.js",
+			"img/dingwei.png",
+			"js/jquery-3.2.1.min.js",
+			"img/fanhui.png",
+			"img/dianhua.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js",
+			"img/shoucang2.png",
+			"img/banner.jpg",
+			"main.html",
+			"offered.html",
+			"group-shopping.html"
+		],
+		"refer": [
+			"main.html",
+			"offered.html",
+			"group-shopping.html"
+		]
+	},
+	"user-center.html": {
+		"resources": [
+			"js/main.js",
+			"img/wode.png",
+			"img/dingdan.png",
+			"img/shoucang.png",
+			"js/jquery.mobile-events.min.js",
+			"css/main.css",
+			"img/gouwuce.png",
+			"img/fuwu2.png",
+			"img/zhibo3.png",
+			"css/weui.min.css",
+			"img/jingxuan.png",
+			"img/xiaoxi1.png",
+			"img/banner3.jpg",
+			"img/pintuan2.png",
+			"js/fastclick.js",
+			"js/jquery-3.2.1.min.js",
+			"img/dianhua.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js",
+			"user-hire-orders.html",
+			"decorate-live.html",
+			"hunting-service.html",
+			"main.html",
+			"img/tuangoudingdan.png",
+			"img/xiaoxi.png",
+			"img/shouji.png"
+		],
+		"refer": [
+			"decorate-live.html",
+			"user-hire-orders.html",
+			"hunting-service.html",
+			"main.html"
+		]
+	},
+	"decorate-live.html": {
+		"resources": [
+			"img/shousuo.png",
+			"js/main.js",
+			"user-center.html",
+			"img/shoucang2.png",
+			"js/jquery.mobile-events.min.js",
+			"css/main.css",
+			"img/zhibo2.png",
+			"img/fuwu2.png",
+			"img/pinglun.png",
+			"img/jingxuan.png",
+			"css/weui.min.css",
+			"img/zan.png",
+			"img/xiaoxi1.png",
+			"img/banner3.jpg",
+			"img/pintuan2.png",
+			"js/fastclick.js",
+			"img/wode2.png",
+			"img/fenxoang.png",
+			"img/banner.jpg",
+			"js/jquery-3.2.1.min.js",
+			"img/xiezhibo.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"hunting-service.html",
+			"js/jquery-weui.min.js",
+			"add-information.html",
+			"main.html",
+			"search.html"
+		],
+		"refer": [
+			"user-center.html",
+			"hunting-service.html",
+			"add-information.html",
+			"main.html",
+			"search.html"
+		]
+	},
+	"user-hire-orders.html": {
+		"resources": [
+			"js/main.js",
+			"js/fastclick.js",
+			"js/jquery.mobile-events.min.js",
+			"css/main.css",
+			"css/weui.min.css",
+			"img/fanhui2.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js",
+			"img/yonghu.png"
+		]
+	},
+	"add-information.html": {
+		"resources": [
+			"js/main.js",
+			"js/fastclick.js",
+			"js/jquery.mobile-events.min.js",
+			"css/main.css",
+			"css/weui.min.css",
+			"js/jquery-3.2.1.min.js",
+			"img/fanhui2.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js",
+			"add-information-select.html"
+		],
+		"refer": [
+			"add-information-select.html"
+		]
+	},
+	"add-information-select.html": {
+		"resources": [
+			"img/zhangdan.png",
+			"css/main.css",
+			"img/zhibo.png",
+			"css/weui.min.css",
+			"js/jquery-3.2.1.min.js",
+			"img/fanhui2.png",
+			"add-information-bill.html",
+			"css/jquery-weui.min.css",
+			"add-information-live.html"
+		],
+		"refer": [
+			"add-information-bill.html",
+			"add-information-live.html"
+		]
+	},
+	"add-information-bill.html": {
+		"resources": [
+			"js/main.js",
+			"js/fastclick.js",
+			"js/jquery.mobile-events.min.js",
+			"css/main.css",
+			"css/weui.min.css",
+			"js/jquery-3.2.1.min.js",
+			"img/fanhui2.png",
+			"js/swiper-3.4.2.jquery.min.js",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js",
+			"decorate-live.html"
+		],
+		"refer": [
+			"decorate-live.html"
+		]
+	},
+	"offered.html": {
+		"resources": [
+			"css/main.css",
+			"css/weui.min.css",
+			"img/fanhui2.png",
+			"css/jquery-weui.min.css"
+		]
+	},
+	"add-information-live.html": {
+		"resources": [
+			"css/weui.min.css",
+			"css/jquery-weui.min.css",
+			"img/tianjia.png",
+			"add-information-select.html"
+		],
+		"refer": [
+			"add-information-select.html"
+		]
+	}
+}

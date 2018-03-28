@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.pay-info {
+				line-height: 2rem;
+			}
+			
+			.weui-icon {
+				width: 1.6rem;
+				margin-right: .5rem;
+			}
+			
+			.weui-panel__hd:after {
+				left: 0;
+			}
+			
+			.page-btn {
+				margin-bottom: .5rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">雇佣服务商</h2>
+		</header>
+		<section class="padding pay-info whitebk">
+			<div class="weui-flex">
+				<h3>订单编号：</h3>
+				<p class="weui-flex-item order-num">6264961546164</p>
+			</div>
+			<div class="weui-flex">
+				<h3>托管金额：</h3>
+				<p class="weui-flex-item price-color">￥3000.00</p>
+			</div>
+		</section>
+		<section class="weui-panel">
+			<div class="weui-panel__hd weui-flex">
+				<div class="">
+					<img src="img/weixin.png" class="pull-left weui-icon" />
+					<h2 class="pull-left" style="color: #0f0f0f;">微信支付</h2>
+					<div class="clear"></div>
+				</div>
+				<h2 class="weui-flex-item text-right price-color" style="width:calc(100% - 6rem)">￥3000.00</h2>
+			</div>
+			<div class="weui-panel__bd padding">
+				<label for="weuiAgree" class="weui-agree">
+            		<input id="weuiAgree" type="checkbox" checked="checked" class="weui-agree__checkbox">
+            		<span class="weui-agree__text">
+              		  阅读并同意<a href="javascript:void(0);">《免责声明》</a>
+            		</span>
+       			</label>
+				<input type="button" class="weui-btn page-btn btn-pay" value="确定" />
+				<span style="color: #B3B3B3;">注：支付的余额将托管到平台，业主验收完成才会到账至商家账户，若取消订单则自动退换全部金额</span>
+			</div>
+		</section>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var payUrl = APIBASEURL + "/smj/app/order_shop/updatestate";
+			var id = $.getQueryObject().id;
+			var price = $.getQueryObject().price;
+			$(function() {
+				FastClick.attach(document.body);
+				$(".order-num").text(id);
+				$(".price-color").text("￥" + price);
+				$("#weuiAgree").change(function() {
+					if(!$(this).is(":checked")) {
+						$(".btn-pay").attr("disabled", "disabled").addClass("weui-btn_disabled");
+						$(".btn-pay").unbind("tap");
+					} else {
+						$(".btn-pay").removeAttr("disabled", "disabled").removeClass("weui-btn_disabled");
+						$(".btn-pay").tap(function() {
+							postData();
+						});
+					}
+				});
+				$(".weui-agree").tap(function() {
+					viewDeclare();
+				});
+				$(".btn-pay").tap(function() {
+					postData();
+				});
+			});
+
+			function postData() {
+				var datas = {
+					openid: getCookie("openid"),
+					total_fee: price,
+					body: $.getQueryObject().title,
+					orderType: 1,
+					orderId:$.getQueryObject().orderId,
+					orderNo:id
+				}
+				setPayInfo(datas, "2");
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

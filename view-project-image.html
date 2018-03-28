@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.img-list img {
+				width: 100%;
+			}
+			
+			.view-store {
+				display: inline-block;
+				width: 3rem;
+				color: #ff6500;
+				text-align: center;
+				font-size: .8rem;
+				height: 1.6rem;
+				line-height: 1.6rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="javascript:;"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">空间效果设计图</h2>
+			<a href="javascript:;" class="view-store fontsize34">去店铺</a>
+		</header>
+		<p class="padding case-info"></p>
+		<section class="img-list padding">
+			<!--<img src="img/banner.jpg" /><img src="img/banner.jpg" /><img src="img/banner.jpg" />-->
+		</section>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"><img src=""> </span>
+			<div class="weui-gallery__opr">
+				<a href="javascript:" class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var id = $.getQueryObject().id;
+			var loadDataUrl = APIBASEURL + "/smj/app/case/case/" + id;
+			$(function() {
+				FastClick.attach(document.body);
+				loadData();
+				$(".view-store").tap(function() {
+					window.location.href = "store-details.html?id=" + $(this).data("id");
+				});
+				$("header .back-img").tap(function() {
+					window.location.href = "hunting-service.html";
+					//					if(window.history.length == 1) {
+					//					} else {
+					//						window.history.go(-1);
+					//					}
+				});
+			});
+
+			function loadData() {
+				$.showLoading();
+				$.ajaxGet(loadDataUrl, function(res) {
+					if(res.status == 0) {
+						if(res.data) {
+							$(".header h2").text(res.data.title);
+							$(".case-info").text(res.data.profile);
+							$(".img-list").append(res.data.details);
+							$(".view-store").data("id", res.data.shopId);
+							$("title").text("尚米家-" + res.data.title);
+
+						} else {
+							//$.alert("加载案例失败："+res.msg);
+						}
+						showImg($(".img-list"));
+					}
+					$.hideLoading();
+				});
+			}
+
+			function showImg(dom) {
+				dom.find("img").unbind("tap").tap(function() {
+					var _this = this;
+					$(".weui-gallery span img").attr("src", $(this).attr("src"));
+					$(".weui-gallery").css("display", "block");
+					$(".weui-gallery__img").unbind("tap").tap(function() {
+						$(".weui-gallery").css("display", "none");
+					});
+					$(".weui-gallery__del").unbind("tap").tap(function() {
+						$(_this).parent().remove();
+						$(".weui-gallery").css("display", "none");
+					});
+				});
+				$(".del-img").tap(function() {
+					$(this).parent().remove();
+				});
+			}
+		</script>
+	</body>
+
+</html>

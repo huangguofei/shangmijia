@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 50px;
+			}
+			
+			header {
+				background: #fff;
+			}
+			
+			.weui-article .title {
+				color: #666;
+				overflow: auto;
+				margin-bottom: 0;
+			}
+			
+			.weui-article .title b {
+				font-size: 0.9rem;
+				color: #060606;
+			}
+			
+			.swiper-slide {
+				position: relative;
+				padding-bottom: 3rem;
+			}
+			/*.swiper-slide .page-describe {
+				position: absolute;
+				bottom: 0;
+			}
+			
+			.page-describe h1 {
+				margin-bottom: 0rem;
+			}*/
+			
+			.weui-tabbar {
+				position: fixed;
+			}
+			
+			.group-header {
+				border-bottom: 0.01rem solid #F0F0F0;
+				padding: .8rem .8rem .3rem 0;
+			}
+			
+			.group-header span {
+				display: inline-block;
+				text-indent: .7rem;
+			}
+			
+			.group-header a {
+				color: #ff2847;
+				font-size: .7rem;
+				line-height: 3rem;
+			}
+			
+			.group-header h2 {
+				border-left: 0.15rem solid #FF6600;
+				font-size: 0.97rem;
+				padding-left: .5rem;
+			}
+			
+			.weui-progress__bar,
+			.weui-progress__inner-bar {
+				height: 0.5rem;
+				border-radius: 0.2rem;
+			}
+			
+			.weui-progress {
+				margin-bottom: 1rem;
+			}
+			
+			.img-box img {
+				width: 100%;
+				max-height: 10rem;
+				height: auto;
+			}
+			
+			.img-boxs a {
+				width: 30%;
+			}
+			
+			.weui-avatar {
+				width: 3rem;
+				height: 3rem;
+				margin: 0 .3rem 0 0;
+			}
+			
+			.weui-media-box:before {
+				left: 0;
+				border-top-color: #F0F0F0;
+			}
+			
+			.weui-media-box-noborder:before {
+				border-top-color: #fff;
+			}
+			
+			.cuttopline:before {
+				content: "";
+				height: 1px;
+				border-top: 1px solid #bbb;
+				width: 110%;
+				display: block;
+				margin-left: -1rem;
+			}
+			
+			.cutbottomline:after {
+				content: "";
+				height: 1px;
+				border-top: 1px solid #bbb;
+				width: 110%;
+				display: block;
+				margin-left: -1rem;
+			}
+			
+			.handle-list {
+				padding: 0rem 0.3rem;
+				height: 2rem;
+				line-height: 2rem;
+				padding-top: 0.2rem;
+				text-align: center;
+				color: #b3b3b3;
+				width: 105%;
+				margin-left: -15px;
+			}
+			
+			.handle-list i {
+				position: absolute;
+				top: -.8rem;
+				font-style: inherit;
+				font-size: 0.6rem;
+			}
+			
+			.handle-list img {
+				width: 1rem;
+				vertical-align: sub;
+			}
+			
+			.handle-list span {
+				vertical-align: top;
+				margin-left: 0.3rem;
+			}
+			
+			.page .group,
+			.page .server,
+			.page .material,
+			.page .construct,
+			.page .lives {
+				/*margin-top: 1px;*/
+			}
+			
+			.server .weui-media-box-header {
+				margin-bottom: .5rem;
+			}
+			
+			.server .weui-media-box-info {
+				width: 100%;
+			}
+			
+			.server .weui-media-box-info .price-info {
+				margin-top: 10px;
+			}
+			
+			.logo {
+				margin-top: .2rem;
+			}
+			
+			.weui-media-box_appmsg .weui-media-box__hd {
+				width: 6rem;
+				height: 6rem;
+			}
+			
+			.send-name {
+				color: #4B6398;
+			}
+			
+			p.comment {
+				margin: .3rem 0;
+			}
+			
+			.weui-grid:before {
+				display: none;
+			}
+			
+			.level img {
+				width: 0.8rem;
+			}
+			
+			.weui-grids:after,
+			.weui-grids:before,
+			.weui-grid:after {
+				display: none;
+			}
+			
+			.case-box {
+				padding-bottom: 0;
+				padding-top: 0;
+			}
+			
+			.weui-grids .case-box:first-child {
+				padding-left: 0;
+			}
+			
+			.weui-grids .case-box:last-child {
+				padding-right: 0;
+			}
+			
+			.page-content {
+				text-align: center;
+				padding: .5rem 0;
+				z-index: 502;
+			}
+			
+			.page-content .weui-cell {
+				padding-left: 0;
+			}
+			
+			.page-content .weui-cell__hd {
+				padding: 0 .3rem;
+			}
+			
+			.page-content .weui-label {
+				width: auto;
+			}
+			
+			.btn-group input.weui-btn {
+				width: 30%;
+			}
+			
+			.page-btn {
+				margin-top: 1rem;
+			}
+			
+			.banner-title {
+				position: absolute;
+				bottom: 0rem;
+				width: 100%;
+				/*background: #0f0f0f;
+				opacity: .5;
+				color: #fff;*/
+				padding: .3rem .5rem;
+			}
+			
+			.banner-title h1 {
+				margin-bottom: 0;
+			}
+			
+			.swiper-container {
+				/*padding-bottom: .5rem;*/
+			}
+			
+			.swiper-container-horizontal>.swiper-pagination-bullets {
+				bottom: 4.5rem;
+			}
+			
+			.group-info {
+				padding-top: .3rem;
+			}
+			
+			.group-info .group-btn {
+				background: url(img/btn-group.jpg);
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				width: 5rem;
+				height: 2rem;
+				line-height: 2rem;
+			}
+			
+			.weui-panel {
+				margin-top: 0;
+			}
+			
+			.server-title {
+				display: none;
+			}
+			
+			.header-title {
+				font-style: inherit;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header>
+			<article class="weui-article">
+				<h1 class="page__title fontsize40" style="margin-bottom: 0;font-weight: bold;">今日推荐</h1>
+				<section style="margin-bottom: 0;min-height: 1rem;">
+					<p class="title fontsize26"><i class="header-title">大家最近爱选的和最近入手的</i><span class="pull-right fontsize26 banner-num"></span></p>
+				</section>
+				<div class="swiper-container">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+						<!-- Slides -->
+
+					</div>
+					<!-- If we need pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
+			</article>
+		</header>
+		<div class="page">
+			<section class="page__bd">
+				<div class="weui-panel weui-panel_access group">
+					<!--精选拼团-->
+					<div class="weui-panel-hd">
+						<div class="group-header">
+							<h2 class="color-0f fontsize40 font-weight">精选拼团<a href="group-shopping.html" class="pull-right">查看更多</a></h2>
+							<span class="color-66 font-size-26">材料要怎么买</span>
+						</div>
+					</div>
+					<div class="weui-panel-bd">
+
+					</div>
+				</div>
+				<div class="weui-panel weui-panel_access server" style="background: inherit;">
+					<!--精选服务-->
+
+					<div class="weui-panel-bd">
+						<div class="weui-panel-hd whitebk">
+							<div class="group-header">
+								<h2 class=" fontsize40 font-weight">精选设计<a href="hunting-service.html?index=0" class="pull-right">查看更多</a></h2>
+								<span class="color-66 fontsize26">最优先的设计师</span>
+							</div>
+						</div>
+						<div class="weui-panel project">
+							<!--设计-->
+
+						</div>
+						<div class="weui-panel-hd whitebk">
+							<div class="group-header">
+								<h2 class=" fontsize40 font-weight">精选施工<a href="hunting-service.html?index=1" class="pull-right">查看更多</a></h2>
+								<span class="color-66 fontsize26">最精湛的施工队</span>
+							</div>
+						</div>
+						<div class="weui-panel construct">
+							<div class="weui-media-box weui-media-box_text weui-media-box_appmsg hide">
+								<div class="weui-media-box__hd">
+									<img src="img/banner2.jpg" class="weui-media-box__thumb" />
+								</div>
+								<div class="weui-media-box__bd">
+									<div>
+										<h2 class="pull-left font-weight margin-right fontsize34">张飒飒</h2>
+										<span class="pull-left logo">企</span>
+										<div class="clear"></div>
+									</div>
+									<p class="color-b3 bottomline fontsize22">服务：清包，半包</p>
+									<p class="weui-media-box__desc color-66 fontsize28">简介：我们提供优质服务，包您满意到家，温馨一辈子，款感十足</p>
+									<p class="level"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing1.png"><img src="img/wujiaoxing2.png">
+										<span class="color-b3 fontsize22">已成交16笔</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="weui-panel-hd whitebk">
+							<div class="group-header">
+								<h2 class=" fontsize40 font-weight">精选材料<a href="hunting-service.html?index=2" class="pull-right">查看更多</a></h2>
+								<span class="color-66 fontsize26">材料要怎么买</span>
+							</div>
+						</div>
+						<div class="weui-panel weui-grids material">
+							<a href="" class="weui-grid js_grid hide">
+								<div class="placeholder">
+									<img src="img/banner2.jpg" class="width-block" />
+									<h3 class="font-weight fontsize26">这是标题这是标题</h3>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="weui-panel weui-panel_access lives">
+					<!--精选直播-->
+					<div class="weui-panel-hd">
+						<div class="group-header">
+							<h2 class=" fontsize40 font-weight">精选直播<a href="decorate-live.html" class="pull-right">查看更多</a></h2>
+							<span class="color-66 fontsize26">最精选的干货</span>
+						</div>
+						<div class="weui-panel-bd">
+							<div class="weui-media-box weui-media-box_text hide">
+								<div class="weui-media-box__hd weui-media-box_appmsg padding-bottom">
+									<img src="img/banner3.jpg" class="pull-left weui-avatar" />
+									<div class="weui-media-box__bd">
+										<div class="">
+											<h3 class="pull-left">小傻瓜</h3>
+											<span class="color-b3 pull-right">06-16 10:10</span>
+											<div class="clear"></div>
+										</div>
+										<p class="color-b3"><span class="color-0f margin-right">设计</span>三室两厅/34m²/简约清新</p>
+									</div>
+								</div>
+								<div class="weui-media-box__bd">
+									<p class="margin-bottom">爱你不是两三天，啦啦啦不快乐。听风的方向，孤单的飞翔，广播里的那首歌曲，重复那是的那条杰</p>
+									<div class="img-boxs">
+										<img src="img/banner.jpg" />
+										<img src="img/banner.jpg" />
+									</div>
+								</div>
+								<div class="weui-flex topline bottomline handle-list text-center">
+									<div class="weui-flex__item">
+										<img src="img/zan.png" /><span>111</span>
+									</div>
+									<div class="weui-flex__item">
+										<img src="img/shoucang2.png" /><span>111</span>
+									</div>
+									<div class="weui-flex__item">
+										<img src="img/pinglun.png" /><span>111</span>
+									</div>
+									<div class="weui-flex__item">
+										<img src="img/fenxoang.png" /><span>111</span>
+									</div>
+								</div>
+								<div class="weui-media-box__ft">
+									<p class="color-66"><span class="send-name">张三</span>：好牛逼哦</p>
+									<p><span class="send-name">李四</span>回复<span class="send-name">张三</span>：假的</p>
+								</div>
+							</div>
+							<!--<div class="weui-media-box weui-media-box_text">
+								<div class="weui-media-box__hd">
+									<img src="img/banner3.jpg" class="pull-left weui-avatar" />
+								</div>
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="weui-tabbar">
+			<a href="javascript:;" class="weui-tabbar__item active">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/jingxuan2.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge hide" style="position: absolute;top: -2px;right: -13px;">8</span>
+				</span>
+				<p class="weui-tabbar__label">精选</p>
+			</a>
+			<a href="group-shopping.html" class="weui-tabbar__item">
+				<img src="img/pintuan2.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">拼团</p>
+			</a>
+			<a href="hunting-service.html" class="weui-tabbar__item">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/fuwu2.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge weui-badge_dot hide" style="position: absolute;top: 0;right: -6px;"></span>
+				</span>
+				<p class="weui-tabbar__label">找服务</p>
+			</a>
+			<a href="decorate-live.html" class="weui-tabbar__item">
+				<img src="img/zhibo3.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">装修直播</p>
+			</a>
+			<a href="user-center.html" class="weui-tabbar__item">
+				<img src="img/wode2.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">我的</p>
+			</a>
+		</div>
+		<article class="page-box phone-verify-page hide" style="z-index: 501;">
+			<div class="page-bg"></div>
+			<div class="page-content text-center">
+				<h3>手机绑定</h3>
+				<div class="weui-cells weui-cells_form">
+					<div class="weui-cell weui-cell_vcode">
+						<div class="weui-cell__hd">
+							<label class="weui-label">手机号</label>
+						</div>
+						<div class="weui-cell__bd">
+							<input class="weui-input phone" type="tel" placeholder="请输入手机号">
+						</div>
+						<div class="weui-cell__ft">
+							<button class="weui-vcode-btn">获取验证码</button>
+						</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+						<div class="weui-cell__bd">
+							<input class="weui-input phone-code" maxlength="6" type="number" pattern="[0-9]*" placeholder="请输入验证码号">
+						</div>
+					</div>
+				</div>
+				<div class="btn-group">
+					<input type="button" name="" class="weui-btn weui-btn_mini page-btn" value="绑定" />
+					<input type="button" name="" class="weui-btn weui-btn_mini cancel-btn" value="取消" />
+				</div>
+
+			</div>
+		</article>
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script>
+			var loginUrl = APIBASEURL + "/smj/app/usercontroller/login";
+			var bannerImgUrl = APIBASEURL + "/smj/banner/list/20";
+			var groupUrl = APIBASEURL + "/smj/app/product/products/elite";
+			var serverUrl = APIBASEURL + "/smj/app/shop/list/design";
+			var liveUrl = APIBASEURL + "/smj/app/note/list/isElite";
+			var outLoginUrl = APIBASEURL + "/smj/app/usercontroller/out";
+			var saveData = {};
+			var loginDatas = {
+				openid: "o3sGmwUa8aAeaMYDCkHY_Y7ODVNM",
+				openId: "o3sGmwUa8aAeaMYDCkHY_Y7ODVNM",
+				userId: "ef7cf2fdec0a4aa0b5f759fb37ae752c",
+				username: "honey",
+				headimgurl: "http://wx.qlogo.cn/mmhead/PiajxSqBRaEL3bhJn1wib1YpoicibGNLeN9RU8NsFMiaCwe2dNe6RicAGLnw/0",
+				telephone: 13316951140,
+				phone: 13316951140,
+				tokenUser: "eyJhbGciOiJIUzI1NiJ9.eyJmbGFnIjoidHJ1ZSIsInVzZXJfa2V5IjoiY2JlMmM1ZmJkODQ2NDQ3NTg1YzY4OTBjYmIxM2M5NDEiLCJzaG9ydF9uYW1lIjoic2luc2luZXQifQ.mi_G7FJ8ndECl2VqTI8tPlCiSQluWT-3t42m_bDGxeU"
+			}
+
+			$(function() {
+				var loadNum = $("img").length;
+				$.showLoading();
+				FastClick.attach(document.body);
+				login();
+				loadOtherInfo();
+				loadData(); //加载数据
+				$(".weui-vcode-btn").tap(function() { //获取手机验证码
+					var phone = $(".phone").val();
+					var _this = this;
+					if(!phone) {
+						$.alert("手机号不能为空");
+						return false;
+					}
+					var reg = /^1[0-9]{10}/;
+					if(!reg.test(phone)) {
+						$.alert("请正确填写手机号！");
+						$(".phone").focus();
+						return false;
+					}
+					if($(this).attr("iswaiting"))
+						return false;
+					$.ajaxPost(getPhoneCodeUrl, {
+						"phone": phone
+					}, function(res) {
+						if(res.status == 0) {
+							codeWaiting(_this);
+							$.toast("发送成功");
+						} else {
+							$.alert("发送失败");
+						}
+					});
+				});
+				$(".cancel-btn").tap(function() {
+					$(".phone-verify-page").addClass("hide");
+					outLogin();
+					$("body,html").removeClass("bodyoh").removeAttr("scroll");
+				});
+				$(".page-btn").tap(function() {
+					var code = $(".phone-code").val();
+					var phone = $(".phone").val();
+					if(!phone) {
+						$.alert("手机号不能为空");
+						return false;
+					}
+					if(!code) {
+						$.alert("验证码为空！");
+					}
+					$.ajaxPost(verifyPhoneCodeUrl, {
+						"userId": saveData.userId,
+						"phone": phone,
+						"tokenUser": saveData.tokenUser,
+						"code": code
+					}, function(res) {
+						if(res.status == 0) {
+							$.toast("绑定成功");
+							$(".phone-verify-page").addClass("hide");
+							setCookie("telephone", phone);
+							savecookie(saveData);
+							collectData();
+							$("body,html").removeClass("bodyoh").removeAttr("scroll");
+						} else {
+							$.alert("绑定失败");
+						}
+					});
+				});
+				if(sessionStorage.getItem("outlogin")) {
+					clearCookie();
+
+					sessionStorage.removeItem("outlogin");
+				}
+			});
+
+			function codeWaiting(control) {
+				$(control).attr("iswaiting", true);
+				var second = 60;
+				var interval = setInterval(countDown, 1000);
+
+				function countDown() {
+					if(second == 0) {
+						$(control).text("重新发送");
+						$(control).attr("iswaiting", false);
+						clearInterval(interval);
+					} else {
+						$(control).text(second + "s");
+						second--;
+					}
+				}
+			}
+
+			function isLoadOver() {
+				loadNum--;
+				if(loadNum == 0)
+					$.hideLoading();
+			};
+
+			function isBindPhone() {
+				var phone = getAllCookie().telephone;
+				if(!phone) {
+					$(".phone-verify-page").removeClass("hide");
+				}
+			}
+
+			function login() {
+				//				savecookie(loginDatas);
+				//------------------------------------------------------
+				//												if(!getCookie("userId")) {
+				//													$.ajaxPost(loginUrl, loginDatas, function(res) {
+				//														if(res.status == 0) {
+				//															$.toast("登录成功");
+				//															savaLoginInfo(res);
+				//														} else {
+				//															$.alert("登录失败：" + res.msg);
+				//														}
+				//													});
+				//												}
+				//												return false;
+				//------------------------------------------------------
+				var loginData = "";
+				console.log(getCookie("data"));
+				if(getCookie("data")) {
+					loginData = getCookie("data").split(",");
+					for(var i in loginData) {
+						var d = loginData[i].split("=");
+						saveData[d[0].replace(/\"/g, "")] = d[1].replace(/\"/g, "");
+					}
+					if(!saveData.telephone) {
+						console.log(saveData.telephone);
+						phoneVerifyPage();
+					} else {
+						collectData();
+						savecookie(saveData);
+					}
+					deleteCookie("data");
+					console.log(saveData);
+				} else {
+					$.confirm("是否登录？", function() {
+						window.location.href = openLoginUrl;
+					});
+				}
+
+			}
+
+			function loadData() {
+				$.ajaxGet(bannerImgUrl, function(res) { //获取banner
+					console.log(res);
+					if(res.status == 0) {
+						var srcList = [];
+						if(res.data.length != 0)
+							$(".swiper-wrapper").empty();
+						for(var i in res.data) {
+							var src = res.data[i].bannerImgUrl;
+							var str = "<div class=\"swiper-slide\" data-url='" + res.data[i].hyperUrl + "'>" +
+								"<img src=\"" + showImgUrl + src + "\" />" +
+								"<div class='banner-title'><h1 class=\"font-weight\">" + res.data[i].masterTitle + "</h1>" +
+								"<span class=\"fontsize24\">" + res.data[i].slaveTitle + "</span></div>" +
+								"</div>";
+							srcList.push(showImgUrl + src);
+							$(".swiper-wrapper").append(str);
+						}
+						$(".header-title").text(res.data[0].headTitle);
+						$(".banner-num").append("<b class=\"banner-index font-size-36\">1</b>/" + res.data.length);
+						preloadimages(srcList).done(function(img) {
+							if(res.data.length <= 1)
+								return
+							$(".swiper-container").swiper({
+								loop: true,
+								autoplay: 3000,
+								speed: 1000,
+								autoplayDisableOnInteraction: false,
+								pagination: ".swiper-pagination",
+								onSlideChangeStart: function(swiper) {
+									$(".banner-index").text(swiper.realIndex + 1);
+								}
+							});
+							$.hideLoading();
+						});
+
+						$(".swiper-slide").tap(function() {
+							//							window.location.href = $(this).data("url");
+							window.location.href = "http://" + $(this).data("url");
+						});
+					} else {
+						//$.alert("获取失败:" + res.msg);
+					}
+					//isLoadOver();
+				});
+				$.ajaxGet(groupUrl, function(res) { //获取三条精选拼团
+					console.log(res);
+					if(res.status == 0) {
+						showGroup(res.data);
+					} else {
+						//$.alert("获取失败:" + res.msg);
+					}
+					//isLoadOver();
+				});
+				$.ajaxGet(serverUrl, function(res) { //获取精选服务数据
+					console.log(res)
+					$(".server .weui-panel-bd>.weui-panel").empty();
+					if(res.status == 0) {
+						showProjectInfo(res.data.listDesign);
+						showConstructionInfo(res.data.listConstruction);
+						showMaterialInfo(res.data.listBusiness);
+					} else {
+						//$.alert("获取失败:" + res.msg);
+					}
+					//isLoadOver();
+				});
+				$.ajaxGet(liveUrl, function(res) {
+					$(".lives .weui-panel-bd").empty();
+					if(res.status == 0) {
+						showLive(res.data);
+					} else {
+						//$.alert("获取失败:" + res.msg);
+					}
+					//isLoadOver();
+				});
+			}
+
+			function showBannerImg() {
+
+			}
+
+			function phoneVerifyPage() { //验证短信
+				$(".phone-verify-page").removeClass("hide");
+				$.hideLoading();
+				$("body,html").addClass("bodyoh").attr("scroll", "no");
+			}
+
+			function showGroup(data) {
+				if(data) {
+					$(".group .weui-panel-bd").empty();
+					for(var i = 0; i < data.length; i++) {
+						var d = data[i];
+						var str = "<div class=\"weui-media-box weui-media-box_text\" data-id=" + d.groupProductId + ">" +
+							"<div class=\"img-box group-to\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" />" +
+							"</div>" +
+							"<h3 class=\"font-weight fontsize30 group-to\">" + d.name + "</h3>" +
+							"<p class=\"price padding-bottom fontsize24\">团购价：<span class=\"fontsize36 price-color margin-right\">￥" + d.groupPrice + "</span>" +
+							"<span class=\"strikethrough color-b3 fontsize24\">原价：￥" + d.orignalPrice + "</span>" +
+							"</p>" +
+							showDifferentGroup(d) +
+							"</div>";
+						$(".group .weui-panel-bd").append(str);
+						$(".group .weui-media-box[data-id=" + d.groupProductId + "] .group-btn").data("groupdata", d);
+					}
+					$(".group .weui-media-box .group-to").siblings().tap(function() {
+						window.location.href = "group-shopping-details.html?id=" + $(this).parents(".weui-media-box").data("id");
+					});
+					progressAnimation();
+					$(".group-btn").tap(function() {
+						if(loginJudge()) {
+							var b = $(this).data("groupdata");
+							console.log(b);
+							var data = {
+								"title": b.name,
+								"img": b.thumbnailUrl,
+								"newPrice": b.groupPrice,
+								"oldPrice": b.orignalPrice,
+								"productId": b.groupProductId,
+								"shopId": b.shop.shopId,
+								"storeName": b.shop.shopName,
+								"storePhone": b.shop.phone,
+								"storeAddress": b.shop.shopAddress,
+								"storeImg": b.shop.thumbnailUrl,
+								"downPay": b.downPay,
+								"unit": b.unit
+							};
+							window.location.href = "offered.html" + $.toQueryString(data, true);
+
+						}
+					});
+				}
+			}
+
+			function showDifferentGroup(d) {
+				var str = "";
+				if(d) {
+					if(d.participants == 0) {
+						str = "<div class='group-info topline fontsize24 color-66'>" +
+							"<div class='weui-flex'>" +
+							"<div>" +
+							"<h3 class='color-0f'>【" + d.shop.shopName + "】</h3>" +
+							"<p>开拼时间:" + changeTime(d.creatime, "MM-dd hh:mm") + "~" + changeTime(d.expiryTime, "MM-dd hh:mm") + "</p>" +
+							"</div>" +
+							"<button type='button' class='weui-btn group-btn'>马上拼团</button>" +
+							"</div>" +
+							"<p class='group-content'>" + (d.info ? d.info : "") + "</p>" +
+							"</div>";
+					} else {
+						str = "<div class=\"weui-progress\" data-max=\"" + d.planParticipants + "\" data-index=\"" + d.participants + "\">" +
+							"<div class=\"we ui-progress__bar\">" +
+							"<div class=\"weui-progress__inner-bar js_progress\" style=\"width:0%;\"></div>" +
+							"</div>" +
+							"</div>" +
+							"<h3 class=\"text-center fontsize30\">" +
+							(d.status == 3 ? "已成团，赶紧加入吧！" : ("已拼" + d.participants + "人，差" + loadGroupNum(d.participants, d.planParticipants) + "人成团")) +
+							"</h3><p class=\"text-center color-b3 fontsize26\">" + (d.status == 3 ? "" : "快成团了，") + "约熟悉的朋友一起拼</p>";
+					}
+				}
+				return str;
+			}
+
+			function showProjectInfo(data) { //显示设计(排序)
+				if(data) {
+					data = data.sort(compare('sortNo'));
+					for(var i = 0; i < data.length; i++) {
+						var d = data[i];
+						var str = "<div data-id='" + d.shopId + "' class=\"weui-media-box weui-media-box_text\">" +
+							"<div class=\"weui-media-box-header  weui-media-box_appmsg\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" class=\"pull-left weui-avatar\" />" +
+							"<div class=\"weui-media-box-info weui-media-box__bd\">" +
+							"<div class=\"color-0f\">" +
+							"<h2 class=\"pull-left fontsize34\">" + d.shopName + "</h2>" +
+							"<span class=\"pull-right price-info fontsize22\">设计费：" + d.sericePrice + "</span>" +
+							"<div class=\"clear\"></div>" +
+							"</div>" +
+							"<p class=\"level\">" + showLevel(d.score) +
+							"<span class=\"color-b3 fontsize22\">" + (d.deals ? d.deals : 0) + "个案列</span>" +
+							"</p>" +
+							"</div>" +
+							"</div>" +
+							"<div class=\"weui-grids\">" + loadCase(d.cases) +
+							"</div>" +
+							"</div>";
+						$(".server .weui-panel-bd .project").append(str);
+					}
+					$(".project .case-box").tap(function() {
+						window.location.href = "view-project-image.html?id=" + $(this).data("id") + "&shopId=" + $(this).data("shop-id");
+					});
+					$(".project .weui-media-box-header").tap(function() {
+						window.location.href = "store-details.html?id=" + $(this).parent().data("id");
+					});
+				}
+			}
+
+			function compare(property) {
+				return function(a, b) {
+					var value1 = a[property];
+					var value2 = b[property];
+					return value1 - value2;
+				}
+			}
+
+			function showConstructionInfo(data) { //显示施工
+				if(data) {
+					console.log(data);
+					data = data.sort(compare('sortNo'));
+					console.log(data);
+					for(var i = 0; i < data.length; i++) {
+						var d = data[i];
+						var str = "<div data-id='" + d.shopId + "' class=\"weui-media-box weui-media-box_text weui-media-box_appmsg\">" +
+							"<div class=\"weui-media-box__hd\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" class=\"weui-media-box__thumb\" />" +
+							"</div>" +
+							"<div class=\"weui-media-box__bd\">" +
+							"<div>" +
+							"<h2 class=\"pull-left font-weight margin-right fontsize34\">" + d.shopName + "</h2>" +
+							"<span class=\"pull-left logo\">" + (d.typeAuth == 15 ? "个" : "企") + "</span>" +
+							"<div class=\"clear\"></div>" +
+							"</div>" +
+							"<p class=\"color-b3 bottomline fontsize22\" style=\"margin: .3rem 0;padding-bottom: .3rem;\">服务：" + loadStoreServerTypeCN(d.typeService) + "</p>" +
+							"<p class=\"weui-media-box__desc color-66 fontsize28\">简介：" + d.profile + "</p>" +
+							"<p class=\"level\">" + showLevel(d.score) +
+							"<span class=\"color-b3 fontsize22\">已成交" + d.deals + "笔</span>" +
+							"</p>" +
+							"</div>" +
+							"</div>";
+						$(".server .weui-panel-bd .construct").append(str);
+					}
+					$(".construct .weui-media-box").tap(function() {
+						window.location.href = "store-details.html?id=" + $(this).data("id");
+					});
+				}
+			}
+
+			function showMaterialInfo(data) { //显示材料
+				if(data) {
+					data = data.sort(compare('sortNo'));
+					for(var i = 0; i < data.length; i++) {
+						var str = "<a href=\"javascript:;\" class=\"weui-grid js_grid\"><div class=\"placeholder\" data-id='" + data[i].shopId + "'>" +
+							"<img src=\"" + showImgUrl + data[i].thumbnailUrl + "\" class=\"width-block\" />" +
+							"<h3 class=\"font-weight color-0f fontsize26 text-center\">" + data[i].shopName + "</h3>" +
+							"</div>" +
+							"</div></a>";
+						$(".server .material").append(str);
+					}
+					$(".material .placeholder").tap(function() {
+						window.location.href = "store-details.html?id=" + $(this).data("id");
+					});
+				}
+			}
+
+			function loadCase(data) {
+				var str = "";
+				if(data) {
+					for(var i in data) {
+						var d = data[i];
+						str += "<a href=\"javascript:;\" class='weui-grid js_grid case-box' data-shop-id='" + d.shopId + "' data-id='" + d.caseId + "'><img class=\"width-block\" src=\"" + showImgUrl + d.thumbnailUrl + "\" /></a>";
+
+					}
+				}
+				return str;
+			}
+
+			function showLive(data) {
+				if(data) {
+					for(var i = 0; i < data.listnote.length; i++) {
+						var d = data.listnote[i];
+						var collect = loadCollectInfo(d.noteid);
+						var str = "<div class=\"weui-media-box weui-media-box_text\" id='" + d.noteid + "'>" +
+							"<div class=\"weui-media-box__hd weui-media-box_appmsg padding-bottom\">" +
+							"<img src=\"" + (d.userurl || (showImgUrl + d.shopurl)) + "\" class=\"pull-left weui-avatar\" />" +
+							"<div class=\"weui-media-box__bd\">" +
+							"<div class=\"\">" +
+							"<h3 class=\"pull-left\">" + (d.username || d.shopname) + "</h3>" +
+							"<span class=\"color-b3 pull-right\">" + changeTime(d.creatime, "MM-dd hh:mm") + "</span>" +
+							"<div class=\"clear\"></div>" +
+							"</div>" +
+							"<p class=\"color-b3\"><span class=\"color-0f margin-right\">" + liveType[d.stage] + "</span>" + houseType[d.typehouse] + "/" + d.are + "m²/" + decorationType[d.decoration] + "</p>" +
+							"</div>" +
+							"</div>" +
+							"<div class=\"weui-media-box__bd\">" +
+							"<p class=\"margin-bottom\">" + d.content + "</p>" +
+							"<div class=\"img-boxs\">" + loadLiveImg(d.notevediourl) +
+							"</div>" +
+							"</div>" +
+							"<div class=\"weui-flex topline bottomline handle-list text-center\" collectid='" + (collect ? collect.clid : "") + "'  data-id='" + d.noteid + "'>" +
+							"<div class=\"weui-flex__item praise\"><img src=\"img/zan.png\" /><span class=\"relative\">赞<i>" + d.thumbscount + "</i></span>" +
+							"</div>" +
+							"<div class=\"weui-flex__item collect\"><img src=\"img/" + (collect ? "soucang3" : "shoucang2") + ".png\" /><span class=\"relative\">收藏<i>" + d.collectioncount + "</i></span>" +
+							"</div>" +
+							"<div class=\"weui-flex__item comment\">" +
+							"<img src=\"img/pinglun.png\" /><span class=\"relative\">评论<i>" + d.commentcount + "</i></span>" +
+							"</div>" +
+							"<div class=\"weui-flex__item hide\">" +
+							"<img src=\"img/fenxoang.png\" /><span>" + d.commentcount + "</i></span>" +
+							"</div>" +
+							"</div>" +
+							"<div class=\"weui-media-box__ft\">" + showComment(d.uComment) +
+							//"<p class="color-66"><span class="send-name">张三</span>：好牛逼哦</p>" +
+							//"<p><span class="send-name">李四</span>回复<span class="send-name">张三</span>：假的</p>" +
+							"</div>" +
+							"<a href=\"javascript:;\" class=\"color-b3 zoom " + ($(commentContent).length >= 3 ? "" : "hide") + "\">展开∨</a>" +
+							"</div>";
+						$(".lives .weui-panel-bd").append(str);
+					}
+					liveHandle();
+				}
+			}
+
+			function loadLiveImg(data) {
+				var str = "";
+				if(data) {
+					data = JSON.parse(data);
+					for(var i in data) {
+						str += "<img src=\"" + showImgUrl + data[i] + "\" />";
+					}
+				}
+				return str
+			}
+		</script>
+
+	</body>
+
+</html>

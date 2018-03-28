@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.comment-level {
+				height: 5rem;
+			}
+			
+			.comment-level p {
+				text-align: center;
+				line-height: 5rem;
+			}
+			
+			.comment-level p img {
+				width: 1.5rem;
+			}
+			
+			.comment-level p a {
+				display: inline-block;
+			}
+			
+			.comment-content {
+				resize: none;
+				outline: none;
+				border: 0;
+				background: #F5F5F5;
+				padding: .5rem;
+				width: 100%;
+				box-sizing: border-box;
+				min-height: 5rem;
+				font-size: 1rem;
+			}
+			
+			.page-btn {
+				width: calc(100% - 1.5rem);
+				margin: .5rem .75rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">评论</h2>
+		</header>
+		<section>
+			<div class="comment-level whitebk">
+				<p>
+					<a href="javascript:;"><img src="img/wujiaoxing2.png"></a>
+					<a href="javascript:;"><img src="img/wujiaoxing2.png"></a>
+					<a href="javascript:;"><img src="img/wujiaoxing2.png"></a>
+					<a href="javascript:;"><img src="img/wujiaoxing2.png"></a>
+					<a href="javascript:;"><img src="img/wujiaoxing2.png"></a>
+				</p>
+			</div>
+			<div class="weui-panel">
+				<h3 class="width-block fontsize34 padding">评论</h3>
+				<textarea class="comment-content" placeholder="请在这里描述商家的服务态度及质量"></textarea>
+			</div>
+			<div class="">
+				<label for="weuiAgree" class="weui-agree">
+      				<input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+      				<span class="weui-agree__text">匿名评论
+      				</span>
+    			</label>
+				<input type="button" class="weui-btn page-btn" id="" value="确认" />
+			</div>
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script><script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var id = $.getQueryObject().id;
+			var orderId=$.getQueryObject().orderid;
+			var commentStoreUrl = APIBASEURL + "/smj/app/ucommentcontroller/insertshopucomment";
+			var commentUrl=APIBASEURL+"/smj/app/order_shop/evaluate";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".comment-level a").tap(function() {
+					$(this).toggleClass("active");
+					if($(this).hasClass("active")) {
+						$(this).children("img").attr("src", "img/wujiaoxing3.png");
+						$(this).prevAll().find("img").attr("src", "img/wujiaoxing3.png");
+					} else {
+						$(this).children("img").attr("src", "img/wujiaoxing2.png");
+						$(this).nextAll().find("img").attr("src", "img/wujiaoxing2.png");
+					}
+				});
+				$(".page-btn").tap(function() {
+					var content = $(".comment-content").val();
+					var index = 11;
+					if($("#weuiAgree").is(":checked"))
+						index = 10;
+					if(!content) {
+						$.alert("评论内容不能为空");
+						return false;
+					}
+					var data = {
+						userId: getCookie("userId"),
+						tokenUser: getCookie("tokenUser"),
+						shopId: id,
+						isAnonyMous: index,
+						score:($(".comment-level .active").length==0?"0":$(".comment-level .active").index()+1),
+						content: content
+					}
+					$.ajaxPost(commentStoreUrl, data, function(res) {
+						if(res.status == 0) {
+							$.toast("评论成功");
+							sessionStorage.setItem("isback",true);
+							window.location.href = "user-hire-orders-details.html?id="+orderId;
+						} else {
+							$.alert("评论失败");
+						}
+					});
+				});
+			});
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

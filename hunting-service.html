@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 50px;
+			}
+			
+			header.padding {
+				height: 1.8rem;
+				line-height: 1.8rem;
+				padding-bottom: 0rem;
+			}
+			
+			.weui-flex .select-city {
+				width: 3rem;
+			}
+			
+			.select-city img {
+				width: .5rem;
+				vertical-align: inherit;
+			}
+			
+			.search img {
+				width: 1rem;
+				vertical-align: middle;
+			}
+			
+			.nav h2 {
+				font-weight: initial;
+				font-size: 1rem;
+			}
+			
+			.active h2 {
+				font-weight: bold;
+				color: #0f0f0f;
+			}
+			
+			.nav .active p {
+				position: absolute;
+				bottom: 0;
+				border-bottom: .2rem solid #0f0f0f;
+				width: 40%;
+				margin: 0 30%;
+			}
+			
+			.menu {
+				background: #F5F5F5;
+				border: 1px solid #F0F0F0;
+				height: 2.5rem;
+				line-height: 2.5rem;
+				font-size: .8rem;
+			}
+			
+			.menu img {
+				width: .6rem;
+			}
+			
+			.menu img.rotate {
+				transform: rotate(180deg);
+				-webkit-transform: rotate(180deg);
+			}
+			
+			.img-boxs img {
+				width: 30%;
+			}
+			
+			.weui-avatar {
+				width: 3rem;
+				height: 3rem;
+				margin-right: .3rem;
+			}
+			
+			.weui-media-box_appmsg .weui-media-box__hd {
+				width: 40%;
+				height: 100%;
+			}
+			
+			.placeholder {
+				padding: 0 0.2rem;
+				text-align: center;
+				color: #0f0f0f;
+				line-height: 1.2rem;
+			}
+			
+			.placeholder img {
+				height: auto;
+			}
+			
+			.weui-panel {
+				margin-top: 0;
+			}
+			
+			.group-name {
+				font-size: 1rem;
+			}
+			
+			.price-info {
+				font-size: 0.6rem;
+			}
+			
+			.logo {
+				margin-top: .5rem;
+				margin-left: .2rem;
+			}
+			
+			.weui-media-box-info {
+				width: 100%;
+			}
+			
+			.right-info {
+				height: 2rem;
+				line-height: 2rem;
+			}
+			
+			.level-img img {
+				width: 1rem;
+				vertical-align: sub;
+			}
+			
+			.level-img span {
+				font-size: .6rem;
+			}
+			
+			.construction .weui-media-box__hd {
+				width: 6rem;
+				height: 6rem;
+			}
+			
+			.server-content {
+				font-size: .6rem;
+			}
+			
+			.server-details {
+				font-size: .8rem;
+				min-height: 1.6rem;
+			}
+			
+			.cut {
+				margin: .2rem 0;
+				border: 0;
+				border-bottom: 1px solid #F2F2F2;
+			}
+			
+			.page-content {
+				width: 100%;
+				margin: 0;
+				position: fixed;
+				left: 0;
+				right: 0;
+				box-sizing: border-box;
+				text-align: left;
+			}
+			
+			.page-content span {
+				width: 30%;
+				margin: 0.5rem 0%;
+				display: inline-block;
+				border: 1px solid #ccc;
+				border-radius: .1rem;
+				line-height: 1.8rem;
+				text-align: center;
+				margin-left: 4%;
+			}
+			
+			.page-content span:nth-child(3n-2) {
+				margin-left: 0;
+			}
+			
+			.page-content span.active {
+				border-color: #FA6707;
+				color: #FA6707;
+			}
+			
+			.weui-grid:after,
+			.weui-grid:before {
+				display: none;
+			}
+			
+			.weui-grid {
+				padding-bottom: 0.3rem;
+				/*padding: .3rem 0.2rem .2rem .2rem;*/
+				min-height: 6.5rem;
+			}
+			
+			.weui-grids {
+				margin-top: .5rem;
+			}
+			
+			.construction .logo {
+				margin-top: .3rem;
+			}
+			
+			.weui-grids:after,
+			.weui-grids:before {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="padding weui-flex">
+			<div class="select-city">
+				<input type="text" class="select-input hide" id="select-input" />
+				<span id="city-picker" style="width: .5rem; font-size: .6rem;">株洲</span>
+				<img src="img/sanjiao.png">
+			</div>
+			<div class="weui-flex__item weui-flex text-center nav color-66">
+				<div class="weui-flex__item relative active" data-value="17">
+					<h2>找设计</h2>
+					<p></p>
+				</div>
+				<div class="weui-flex__item relative" data-value="18">
+					<h2>找施工</h2>
+					<p></p>
+				</div>
+				<div class="weui-flex__item relative" data-value="19">
+					<h2>找商家</h2>
+					<p></p>
+				</div>
+			</div>
+			<a href="search.html" class="search text-right"><img src="img/shousuo.png"></a>
+		</header>
+		<div class="page panel">
+			<div class="weui-panel project">
+				<!--找设计-->
+				<div class="weui-panel-hd weui-flex text-center menu">
+					<div class="weui-flex__item" data-type="1" data-key="typeSkilledField">
+						<span>擅长空间</span>
+						<img class="select-img" src="img/sanjiao.png" />
+					</div>
+					<div class="weui-flex__item" data-type="sortType" style="border-left: 1px solid #E0E0E0;">
+						<span>排序方式</span>
+						<img class="select-img" src="img/sanjiao.png" />
+					</div>
+				</div>
+				<div class="weui-panel-bd">
+					<div class="weui-media-box weui-media-box_text hide">
+						<div class="weui-media-box-header  weui-media-box_appmsg">
+							<img src="img/banner3.jpg" class="pull-left weui-avatar" />
+							<div class="weui-media-box-info weui-media-box__bd">
+								<div class="right-info">
+									<h3 class="pull-left group-name">张飒飒</h3>
+									<span class="pull-left logo">企</span><span class="pull-right">设计费：50-90元/m²</span>
+									<div class="clear"></div>
+								</div>
+								<p class="level-img"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing1.png"><img src="img/wujiaoxing2.png">
+									<span class="color-b3">10个案列</span>
+								</p>
+							</div>
+						</div>
+						<div class="img-boxs margin-top">
+							<img src="img/banner.jpg" />
+							<img src="img/banner.jpg" />
+							<img src="img/banner.jpg" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="weui-panel construction hide">
+				<!--找施工-->
+				<div class="weui-panel-hd weui-flex text-center menu">
+					<div class="weui-flex__item" data-type="2" data-key="typeService">
+						<span>服务分类</span>
+						<img class="select-img" src="img/sanjiao.png" />
+					</div>
+					<div class="weui-flex__item" data-type="sortType" style="border-left: 1px solid #E0E0E0;">
+						<span>排序方式</span>
+						<img class="select-img" src="img/sanjiao.png" />
+					</div>
+				</div>
+				<div class="weui-panel-bd">
+					<div class="weui-media-box weui-media-box_text weui-media-box_appmsg hide">
+						<div class="weui-media-box__hd">
+							<img src="img/banner2.jpg" class="weui-media-box__thumb" />
+						</div>
+						<div class="weui-media-box__bd">
+							<div>
+								<h3 class="pull-left group-name">张飒飒</h3>
+								<span class="pull-left logo">企</span>
+								<div class="clear"></div>
+							</div>
+							<p class="server-content">服务：清包，半包</p>
+							<hr class="cut" />
+							<p class="weui-media-box__desc server-details">简介：我们提供优质服务，包您满意到家，温馨一辈子，款感十足</p>
+							<p class="level-img"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing3.png"><img src="img/wujiaoxing1.png"><img src="img/wujiaoxing2.png">
+								<span class="color-b3">已成交16笔</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="weui-panel merchant hide">
+				<!--找商家-->
+				<div class="weui-panel-hd weui-flex text-center menu">
+					<div class="weui-flex__item" data-type="3" data-key="typeMaterial">
+						<span>材料品类</span>
+						<img class="select-img" src="img/sanjiao.png" />
+					</div>
+					<div class="weui-flex__item" data-type="sortType" style="border-left: 1px solid #E0E0E0;">
+						<span>排序方式</span>
+						<img class="select-img" src="img/sanjiao.png" />
+					</div>
+				</div>
+				<div class="weui-panel-bd">
+					<div class="weui-grids">
+						<a href="" class="weui-grid js_grid hide">
+							<div class="placeholder">
+								<img src="img/banner2.jpg" class="width-block" />
+								<h3>这是标题这是标题</h3>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="weui-tabbar">
+			<a href="main.html" class="weui-tabbar__item">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/jingxuan.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge hide" style="position: absolute;top: -2px;right: -13px;">8</span>
+				</span>
+				<p class="weui-tabbar__label">精选</p>
+			</a>
+			<a href="group-shopping.html" class="weui-tabbar__item">
+				<img src="img/pintuan2.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">拼团</p>
+			</a>
+			<a href="javascript:;" class="weui-tabbar__item active">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/fuwu.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge weui-badge_dot hide" style="position: absolute;top: 0;right: -6px;"></span>
+				</span>
+				<p class="weui-tabbar__label">找服务</p>
+			</a>
+			<a href="decorate-live.html" class="weui-tabbar__item">
+				<img src="img/zhibo3.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">装修直播</p>
+			</a>
+			<a href="user-center.html" class="weui-tabbar__item">
+				<img src="img/wode2.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">我的</p>
+			</a>
+		</div>
+		<div class="select-page page-box hide">
+			<div class="page-bg"></div>
+			<div class="page-content">
+				<span class="span active">减速</span>
+				<span class="">减速</span>
+				<span class="">减速</span>
+				<span class="">减速</span>
+			</div>
+		</div>
+		<div class="weui-loadmore hide">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script type="text/javascript" src="js/city-picker.min.js"></script>
+		<script>
+			var serverUrl = APIBASEURL + "/smj/app/shop/list";
+			var index = $.getQueryObject().index;
+			var sortTypeData = ["按评分", "按成交量", "个人认证", "企业认证"];
+			var loading = false; //状态标记
+			var currPage = 1;
+			var alertIsShow = false;
+			$(function() {
+				loadModalInit(true);
+				FastClick.attach(document.body);
+				$(".nav>div").tap(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".page>div").eq($(this).index()).removeClass("hide").siblings().addClass("hide");
+					$(".select-page").addClass("hide");
+					$(".menu img").removeClass("rotate");
+					loadModalInit(true);
+					loadData();
+					sessionStorage.setItem("serveractive", $(this).index());
+				});
+				$(".nav>div").eq(index).addClass("active").siblings().removeClass("active");
+				$(".menu>div").tap(function() {
+					$(this).siblings().children().removeClass("rotate");
+					$(this).children("img").toggleClass("rotate");
+					if($(this).children("img").hasClass("rotate")) {
+						showSelectPage($(this).data("type"), $(this).children("span").attr("value"));
+						$("body,html").addClass("bodyoh").attr("scroll", "no");
+						alertIsShow = true;
+					} else {
+						$(".select-page").addClass("hide");
+						$("body,html").removeClass("bodyoh").removeAttr("scroll");
+						alertIsShow = false;
+					}
+
+				});
+				if(sessionStorage.getItem("serveractive")) {
+					$(".nav>div").eq(sessionStorage.getItem("serveractive")).trigger("tap");
+					sessionStorage.removeItem("serveractive");
+				}
+				loadData();
+			});
+
+			function showSelectPage(type, value) {
+				console.log(arguments);
+				$(".page-content").empty();
+				var top = $("header").outerHeight(true) + $(".menu").outerHeight(true);
+				$(".page-box").css("top", top);
+				var data = "";
+				if(type == 1) {
+					data = goodatData;
+				} else if(type == 2) {
+					data = serverTypeData;
+				} else if(type == 3) {
+					data = materialData;
+				} else {
+					data = sortTypeData;
+				}
+				console.log(value)
+				for(var i in data) {
+					var str = "<span data-value=" + i + " class=\"" + (i == value ? "active" : "") + "\">" + data[i] + "</span>";
+					$(".page-content").append(str);
+				}
+				$(".select-page").removeClass("hide");
+				$(".page-content span").tap(function() {
+					if($(this).hasClass('active')) {
+						$(this).removeClass("active");
+						$(".menu img.rotate").prev().text($(".menu img.rotate").prev().data("name"));
+						$(".menu img.rotate").prev().removeAttr("value")
+					} else {
+						$(this).addClass("active").siblings().removeClass("active");
+						if(!$(".menu img.rotate").prev().attr("vaule")) {
+							$(".menu img.rotate").prev().attr("data-name", $(".menu img.rotate").prev().text());
+						}
+						$(".menu img.rotate").prev().text($(this).text()).attr("value", $(this).data("value"));
+					}
+					$(".select-page").addClass("hide");
+					$(".menu img").removeClass("rotate");
+					loadModalInit(true);
+					loadData();
+				});
+			}
+
+			function loadData(callback) {
+				$.showLoading();
+				$.ajaxPost(serverUrl, getSendData(), function(res) {
+					console.log(res)
+					if(res.status == 0) {
+						showData(res.data);
+						callback && callback();
+					} else {
+						$.hideLoading();
+						loadModalInit(false);
+						//$.alert("获取失败:" + res.msg);
+					}
+				});
+			}
+
+			function showData(data, callback) {
+				var type = $(".nav .active").data("value");
+				if(type == 17) { //设计
+					if(currPage == 1)
+						$(".project .weui-panel-bd").empty();
+					for(var i in data.shops) {
+						var d = data.shops[i];
+						var str = "<div class=\"weui-media-box weui-media-box_text\" data-id='" + d.shopId + "'>" +
+							"<div class=\"weui-media-box-header  weui-media-box_appmsg\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" class = \"pull-left weui-avatar\" />" +
+							"<div class=\"weui-media-box-info weui-media-box__bd\">" +
+							"<div class=\"right-info\">" +
+							"<h3 class=\"pull-left group-name overflow\">" + d.shopName + "</h3>" +
+							"<span class=\"pull-left logo\">" + (d.typeAuth == 15 ? "个" : "企") + "</span><span class=\"price-info pull-right\">设计费：" + d.sericePrice + "</span>" +
+							"<div class=\"clear\"></div></div>" +
+							"<p class=\"level-img\">" + showLevel(d.score) +
+							"<span class=\"color-b3\">" + d.countel + "个案列</span></p></div></div>" +
+							"<div class=\"weui-grids\">" + loadCase(d.cases) +
+							"</div></div>";
+						$(".project .weui-panel-bd").append(str);
+					}
+					$(".project .case-box").tap(function() {
+						window.location.href = "view-project-image.html?id=" + $(this).data("id") + "&shopId=" + $(this).data("shop-id");
+					});
+					$(".project .weui-media-box-header").tap(function() {
+						window.location.href = "store-details.html?id=" + $(this).parent().data("id");
+					});
+				} else if(type == 18) {
+					console.log("页数：" + currPage)
+					if(currPage == 1)
+						$(".construction .weui-panel-bd").empty();
+					for(var i in data.shops) {
+						var d = data.shops[i];
+						var str = "<div data-id='" + d.shopId + "' class=\"weui-media-box weui-media-box_text weui-media-box_appmsg\">" +
+							"<div class=\"weui-media-box__hd\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" class=\"weui-media-box__thumb\" /></div>" +
+							"<div class=\"weui-media-box__bd\"><div>" +
+							"<h3 class=\"pull-left group-name\">" + d.shopName + "</h3>" +
+							"<span class=\"pull-left logo\">" + (d.typeAuth == 15 ? "个" : "企") + "</span>" +
+							"<div class=\"clear\"></div></div>" +
+							"<p class=\"server-content color-b3\">服务：" + (d.typeService ? d.typeService : "无") + "</p>" +
+							"<hr class=\"cut\" />" +
+							"<p class=\"weui-media-box__desc server-details color-66\">" + (d.profile ? d.profile : "无") + "</p>" +
+							"<p class=\"level-img\">" + showLevel(d.score) +
+							"<span class=\"color-b3\">已成交16笔</span></p></div></div>";
+						$(".construction .weui-panel-bd").append(str);
+
+					}
+					$(".construction .weui-media-box").tap(function() {
+						window.location.href = "store-details.html?id=" + $(this).data("id");
+					});
+				} else {
+					if(currPage == 1)
+						$(".merchant .weui-grids").empty();
+					for(var i in data.shops) {
+						var d = data.shops[i];
+						var str = "<a href=\"javascript:;\" data-id='" + d.shopId + "' class=\"weui-grid js_grid\">" +
+							"<div class=\"placeholder overflow2\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" class=\"width-block\" />" +
+							"<h3 class='fontsize28 overflow1'>" + d.shopName + "</h3>" +
+							"</div>" +
+							"</a>";
+						$(".merchant .weui-grids").append(str);
+					}
+					$(".merchant .weui-grid").tap(function() {
+						window.location.href = "store-details.html?id=" + $(this).data("id");
+					});
+				}
+				$.hideLoading();
+				if(document.documentElement.clientHeight < document.documentElement.offsetHeight) {
+					console.log("有滚动")
+					$(".weui-loadmore").removeClass("hide");
+				} else {
+					console.log("没滚动")
+					$(".weui-loadmore").addClass("hide");
+				}
+			}
+
+			function loadCase(data) {
+				var str = "";
+				if(data) {
+					for(var i in data) {
+						var d = data[i];
+						if(i >= 3)
+							break;
+						str += "<a href=\"javascript:;\" class='weui-grid js_grid case-box' data-shop-id='" + d.shopId + "' data-id='" + d.caseId + "'><img class=\"width-block\" src=\"" + showImgUrl + d.thumbnailUrl + "\" /></a>";
+					}
+				}
+				return str;
+			}
+
+			function getSendData() {
+				var data = {};
+				data.userId = getCookie("userId");
+				data.token = getCookie("tokenUser");
+				var sortType = $(".weui-panel:not(.hide) .menu div[data-type='sortType'] span").attr("value");
+				data.typeAuth = sortType == 2 ? 15 : (sortType == 3 ? 16 : "");
+				data.typeShop = $(".nav .active").data("value");
+				data.areadId = "";
+				data.pageNo = currPage;
+				data.isScore = sortType == 0 ? 1 : "";
+				data.isDeal = sortType == 1 ? 1 : "";;
+				var searchTypeDom = $(".panel>div").eq($(".nav .active").index()).find(".menu>div:first-child");
+				var type = searchTypeDom.data("key");
+				var value = searchTypeDom.children("span[data-name]").text();
+				data[type] = value ? value : "";
+				var keyWord = getCookie("searchKeyword");
+				deleteCookie("searchKeyword");
+				if(keyWord) {
+					data.keyword = keyWord;
+				}
+				console.log(data)
+				return data;
+			}
+
+			function showServerCn(str) {
+				if(str) {
+					str = str.split("").sort();
+					return str.map(index => serverTypeData[index]).join(",");
+				}
+			}
+
+			function loadModalInit(status) {
+				if(status) {
+					$(".weui-loadmore").removeClass("hide");
+					$(document.body).infinite();
+					currPage = 1;
+					$(document.body).on("infinite", function() {
+						console.log("触发" + loading)
+						if(loading) return;
+						loading = true;
+						currPage++;
+						loadData(function() {
+							loading = false;
+						});
+					});
+					console.log("初始化完成")
+				} else {
+					loading = false;
+					$(document.body).destroyInfinite();
+					$(".weui-loadmore").addClass("hide");
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

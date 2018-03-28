@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 3rem;
+			}
+			
+			.store-info {
+				margin-top: -1px;
+			}
+			
+			.show-works .weui-media-box:first-child:before {
+				border: 0;
+			}
+			
+			.show-works h2 {
+				line-height: 3rem;
+			}
+			
+			.show-works .name {
+				font-size: 1rem;
+			}
+			
+			.show-works img {
+				width: 100%;
+				margin-bottom: .5rem;
+			}
+			
+			.weui-media-box:before {
+				left: 0;
+			}
+			
+			.store-comment {
+				background: #fff;
+			}
+			
+			.store-comment .weui-avatar {
+				width: 3rem;
+				height: 3rem;
+				margin-right: 1rem;
+			}
+			
+			.comment-info {
+				height: 3rem;
+				line-height: 2.5rem;
+			}
+			
+			.footer-btn {
+				height: 3rem;
+				line-height: 3rem;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: #fff;
+			}
+			
+			.footer-btn .btn-offered {
+				background: #0F0F0F;
+				color: #fff;
+			}
+			
+			.footer-btn img {
+				width: 1.3rem;
+			}
+			
+			.footer-btn p {
+				height: 1rem;
+				font-size: .65rem;
+			}
+			
+			.want-grounp .group-left {
+				width: 6rem;
+			}
+			
+			.want-grounp img {
+				width: 2rem;
+			}
+			
+			.want-grounp .weui-flex-item img {
+				vertical-align: text-top;
+			}
+			
+			.comment-content {
+				margin-left: 4rem;
+			}
+			
+			.comment-contents {
+				margin-left: -.75rem;
+				padding: .3rem .75rem 0rem 4.75rem;
+			}
+			
+			.intention-content {
+				min-height: 5rem;
+				background: #F5F5F5;
+				font-family: sans-serif;
+				padding: .5rem;
+				display: block;
+				box-sizing: border-box;
+				margin-bottom: 1rem;
+			}
+			
+			.logo {
+				display: inline-block;
+				margin-left: .3rem;
+			}
+			
+			.level img {
+				width: .8rem;
+				vertical-align: sub;
+			}
+			
+			.trading-volume {
+				margin-left: .3rem;
+			}
+			
+			.address {
+				margin-top: .3rem;
+			}
+			
+			.address img {
+				width: 1rem;
+				vertical-align: text-bottom;
+			}
+			
+			.store-server {
+				padding-top: 0;
+				line-height: 1.2rem;
+			}
+			
+			.store-info-title {
+				vertical-align: top;
+				color: #666;
+			}
+			
+			.store-info-text {
+				display: inline-block;
+				width: calc(100% - 4rem);
+				color: #141414;
+				margin-right: .3rem;
+			}
+			
+			.send-name {
+				margin: 0 .3rem;
+				color: #3B5392;
+			}
+			
+			.server-phone {
+				display: inline-block;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="javascript:;"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center" bind="shop.shopName"></h2>
+		</header>
+		<section class="weui-panel store-info">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img src="" class="weui-media-box__thumb store-logo" />
+				</div>
+				<div class="weui-media-box__bd">
+					<h3><span class="fontsize34 store-name" bind="shop.shopName"></span><span class="logo">企</span></h3>
+					<p class="level">
+					</p>
+					<p class="address color-66 fontsize26"><img src="img/dingwei.png" /><span bind="shop.shopAddress"></span></p>
+				</div>
+			</div>
+			<div class="padding store-server">
+				<span class="store-info-title fontsize26">提供服务</span>
+				<span class="store-info-text fontsize26 server-type"></span>
+			</div>
+			<div class="padding store-server server-cost">
+				<span class="store-info-title fontsize26">设计费用</span>
+				<span class="store-info-text fontsize26" bind="shop.sericePrice">0</span>
+			</div>
+			<div class="weui-media-box" style="line-height: 1rem;">
+				<span class="store-info-title fontsize26 store-menu">店铺简介:</span>
+				<span class="store-info-text fontsize26 " bind="shop.profile">无</span>
+			</div>
+		</section>
+		<section class="weui-panel weui-flex want-grounp padding group-intention">
+			<div class="group-left">
+				<img src="img/gouwuce.png" style="display: block" />
+				<span class="fontsize26 color-0f">我想团</span>
+			</div>
+			<div class="weui-flex-item">
+				<span class="fontsize26 color-66">如果你对该商品有意向，那么就点击这里，统计用户的意见后就可以发起团购</span>
+				<img src="img/shoushi.png" />
+			</div>
+		</section>
+		<section class="weui-panel show-works">
+			<h2 class="text-center title fontsize36">品牌介绍</h2>
+
+		</section>
+		<section class="store-comment">
+			<div class="comment-list padding">
+
+			</div>
+
+			<div class="weui-cell weui-cell_access view-all-comment">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">查看全部<span bind="shop.count"></span>条评论</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+		</section>
+		<footer class="footer-btn weui-flex text-center topline">
+			<div class="weui-flex__item weui-flex" style="line-height: 1rem;padding-top: .1rem;">
+				<div class="weui-flex__item collect">
+					<img src="img/soucang3.png" />
+					<p>收藏</p>
+				</div>
+				<div class="weui-flex__item">
+					<a href="tel:" class="server-phone color-0f">
+						<img src="img/dianhua.png" />
+						<p>咨询</p>
+					</a>
+				</div>
+			</div>
+			<div class="weui-flex__item btn-offered">
+				<h2>雇佣</h2>
+			</div>
+		</footer>
+		<article class="group-intention-page page-box hide">
+			<div class="page-bg"></div>
+			<div class="page-content">
+				<h2 class="text-center">团购收集意向</h2>
+				<textarea class="intention-content weui-textarea" placeholder="请简短描述下你对该品牌团购的想法"></textarea>
+				<input type="button" class="weui-btn page-btn " value="确定" />
+			</div>
+		</article>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var id = $.getQueryObject().id;
+			var loadDataUrl = APIBASEURL + "/smj/app/shop/get/" + id;
+			var collectUrl = APIBASEURL + "/smj/app/collectioncontroller/insertshop";
+			var groupShoppingUrl = APIBASEURL + "/smj/app/want/add";
+			var storeData = "";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".group-intention").tap(function() {
+					$(".page-box").removeClass("hide");
+				});
+				$(".collect").tap(function() {
+					var _this = this;
+					if($(this).attr("collectid")) {
+						cancelCollect($(this).attr("collectid"), function() {
+							$(_this).removeAttr("collectid").find("img").attr('src', "img/soucang3.png");
+						});
+						return false;
+					}
+					collectStore(function(data) {
+						$(_this).attr("collectid", data);
+						$(".collect img").attr("src", "img/soucang4.png");
+					});
+				})
+				$(".page-btn").tap(function() {
+					upDataGroupShopping();
+				});
+				$(".btn-offered").tap(function() {
+					window.location.href = 'hire-server-store.html?id=' + id + "&type=" + storeData.shop.typeShop + "&title=" + $("span.store-name").text();
+				});
+				$(".page-bg").tap(function() {
+					$(".page-box").addClass("hide")
+				});
+				$(".view-all-comment").tap(function() {
+					window.location.href = 'comment-content.html?id=' + id;
+				});
+				$("header a").tap(function() {
+					if(window.history.length == 1) {
+						window.location.href = "hunting-service.html";
+					} else {
+						window.history.go(-1);
+					}
+				});
+				loadData();
+			});
+
+			function loadData() {
+				$.showLoading();
+				$.ajaxGet(loadDataUrl, function(res) {
+					if(res.status == 0) {
+						storeData = res.data;
+						showData(res.data);
+						$.hideLoading();
+					} else {
+						//$.alert("获取店铺信息失败：" + res.msg);
+						$.hideLoading();
+					}
+				});
+			}
+
+			function showData(data) {
+				if(data) {
+					var container = ".bodybk";
+					var content = new Controller(container);
+					content.set(data);
+					$(".store-logo").attr("src", showImgUrl + data.shop.thumbnailUrl);
+					$(".level").html(showLevel(data.shop.score) + "<span class=\"fontsize22 color-b3 trading-volume\">已成交" + (data.shop.deals ? data.shop.deals : 0) + "笔</span>");
+					$(".server-type").text((data.shop.typeService || data.shop.space || data.typeMaterial || "无"));
+					$(".logo").text(loadStoreType(data.shop.typeAuth));
+					$(".title").siblings().remove();
+					$("title").text(data.shop.shopName);
+					var collect = loadCollectInfo(data.shop.shopId);
+					if(collect) {
+						$(".collect img").attr("src", "img/soucang4.png");
+						$(".collect").attr("collectid", collect.clid);
+					}
+					$(".server-phone").attr("href", "tel:" + data.shop.phone);
+					if(data.shop.typeShop == 17 || data.shop.typeShop == 18) { //设计施工
+						$(".group-intention").addClass("hide");
+						$(".title").text("工地作品");
+						for(var i in data.listel) {
+							var d = data.listel[i];
+							var str = "<div class=\"bottomline padding\" data-id='" + d.shopId + "' data-shopId='" + d.caseId + "'>" +
+								"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" />" +
+								"<p><span class=\"name fontsize36\">" + d.title + "</span><span class=\"pull-right color-b3 fontsize24 " + (data.shop.typeShop == 18 ? "hide" : "") + "\">" + goodatData[d.typeSkilledField] + "</span></p>" +
+								"<p class=\"fontsize26 color-66\">" + d.profile + "</p>" +
+								"</div>";
+							$(".title").after(str);
+						}
+						$(".title").siblings().tap(function() {
+							window.location.href = "view-project-image.html?shopId=" + $(this).data("id") + "&id=" + $(this).data("shopid");
+						});
+						if(data.shop.typeShop == 18) {
+							$(".server-cost").addClass("hide");
+						} else {
+							$(".store-menu").text("个人简介:")
+						}
+					} else {
+						$(".title").after(data.listel[0].details);
+						$(".title").siblings().addClass("padding");
+						$(".server-cost").addClass("hide");
+					}
+					loadComment(data.listuc);
+				}
+			}
+
+			function collectStore(callback) {
+				var data = {
+					"userId": getCookie("userId"),
+					"token": getCookie("tokenUser"),
+					"shopId": id
+				}
+				$.ajaxPost(collectUrl, data, function(res) {
+					if(res.status == 0) {
+						$.toast("收藏成功！");
+						callback && callback(res.data);
+						collectData();
+					} else {
+						$.alert("收藏失败");
+					}
+				});
+			}
+
+			function upDataGroupShopping() {
+				var content = $(".intention-content").val();
+				if(!content) {
+					$.alert("请填写团购意向");
+					return false;
+				}
+				var data = {
+					"userId": getCookie("userId"),
+					"token": getCookie("tokenUser"),
+					"shopId": id,
+					"openid": getCookie("openid"),
+					"content": content
+				}
+				$.ajaxPost(groupShoppingUrl, data, function(res) {
+					if(res.status == 0) {
+						$(".page-box").addClass("hide");
+						$.toast("提交成功");
+					} else {
+						$.alert("提交失败");
+					}
+				});
+			}
+
+			function loadComment(data) {
+				var str = "";
+				$(".comment-list").empty();
+				if(data) {
+					for(var i in data) {
+						var d = data[i];
+						if(i >= 3)
+							continue;
+						str += "<div class=\"comment-info\">" +
+							"<img src=\"" + d.userUrl + "\" class=\"weui-avatar pull-left\" />" +
+							"<h3 class=\" pull-left\">" + (d.isanonymous == 10 ? "匿名用户" : d.userName) + "</h3>" +
+							"<span class=\"pull-right color-b3 fontsize22\">" + changeTime(d.creatime, "yy-MM-dd") + "</span>" +
+							"<div class=\"clear\"></div>" +
+							"</div><p class=\"comment-content\">" + d.content + "</p>";
+						if(d.sComment.length != 0) {
+							str += "<p class=\"comment-contents topline price-color\">" +
+								"掌柜回复<span class=\"send-name\">" + d.userName + "</span>" + d.scoms[0].content + "</p>";
+						}
+
+					}
+					$(".comment-list").append(str);
+				}
+
+			}
+		</script>
+	</body>
+
+</html>

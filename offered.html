@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.offered-info .offered-img {
+				width: 6rem;
+				height: 6rem;
+				margin-right: .5rem;
+			}
+			
+			.offered-price {
+				line-height: 1.5rem;
+			}
+			
+			.offered-price .price-color span {
+				font-size: 1rem;
+			}
+			
+			.shopping-number {
+				/*margin-top: 1rem;*/
+			}
+			
+			.shopping-number h2 {
+				margin-right: 1rem;
+				font-size: 1rem;
+			}
+			
+			.shopping-number a {
+				display: inline-block;
+				width: 2rem;
+				font-size: 2rem;
+				font-weight: bold;
+				height: 1.8rem;
+				line-height: 1.2rem;
+				border: 1px solid #BBBBBB;
+				color: #444444;
+			}
+			
+			.shopping-number a img {
+				width: 1.2rem;
+				vertical-align: middle;
+				margin-top: .2rem;
+			}
+			
+			.shopping-number a.add {
+				border-left: 0;
+				margin-left: -.1rem;
+			}
+			
+			.shopping-number a.reduce {
+				border-right: 0;
+				margin-right: -.1rem;
+			}
+			
+			.shopping-number input {
+				width: 5rem;
+				height: 1.4rem;
+				border: 1px solid #bbb;
+				vertical-align: top;
+				margin: 0 -.3rem;
+				padding: .2rem;
+				font-size: 1rem;
+			}
+			
+			.remark h2 {
+				font-size: 1rem;
+			}
+			
+			.remark textarea {
+				resize: none;
+				background: #F0F0F0;
+				padding: .5rem;
+				width: 100%;
+				min-height: 5rem;
+				margin: 0.5rem auto;
+				display: block;
+				border: 0;
+				box-sizing: border-box;
+				outline: none;
+				color: #666;
+			}
+			
+			.group-title {
+				font-size: 1rem;
+			}
+			
+			.select-address {
+				background: #fff;
+				font-size: .9rem;
+			}
+			
+			.select-address img {
+				vertical-align: bottom;
+				width: 1.4rem;
+				margin-right: 1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">参团</h2>
+		</header>
+		<section class="select-address bottomline">
+			<a class="weui-cell weui-cell_access" href="javascript:;">
+				<div class="weui-cell__bd">
+					<p><img src="img/tianjia.png" />添加收货地址</p>
+				</div>
+				<div class="weui-cell__ft">
+				</div>
+			</a>
+		</section>
+		<section class="offered-info padding">
+			<div class="weui-flex" style="height: 6rem;">
+				<img src="" class="offered-img" />
+				<div class="weui-flex-item">
+					<h2 class="group-title overflow2" bind="title">这是好东西</h2>
+					<p class="offered-price">拼团价：<span class="price-color">￥<span bind="newPrice">89.00</span>/套</span>
+					</p>
+					<p class="offered-price strikethrough color-b3">原价：￥<span bind="oldPrice">5666.00</span>/套</p>
+				</div>
+			</div>
+		</section>
+		<div class="shopping-number topline padding">
+			<h2 class="pull-left">购买数量</h2>
+			<div class="pull-right">
+				<a href="javascript:;" class="reduce text-center"><img src="img/reduce-num.png" /></a>
+				<input type="number" value="1" class="number weui-input text-center" />
+				<a href="javascript:;" class="add text-center"><img src="img/add-num.png" /></a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<section class="remark topline padding">
+			<h2>备注</h2>
+			<textarea class="remark-text" placeholder="在这里输入你的需求"></textarea>
+		</section>
+		<footer class="btn-group padding">
+			<input type="button" name="" class="weui-btn weui-btn_primary page-btn" value="确定" />
+		</footer>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var uploadUrl = APIBASEURL + "/smj/app/order/add";
+			var loadAddressUrl = APIBASEURL + "/smj/app/addresscontroller/selectaddress";
+			var data = $.getQueryObject();
+			//"title": groupData.name,
+			//"img":groupData.bannerImgUrls,
+			//"newPrice":groupData.groupPrice,
+			//"oldPrice":groupData.orignalPrice,
+			//"productId":groupData.groupProductId
+			//"storeName":groupData.product.shop.shopName,
+			//"shopId":
+			//"storePhone":groupData.product.shop.phone,
+			//"storeAddress":groupData.product.shop.shopAddress,
+			//"storeImg":groupData.product.shop.thumbnailUrl
+			//downPay定金
+			//unit单位
+			console.log(data)
+			$(function() {
+				FastClick.attach(document.body);
+				showDefaultAddress();
+				var isPageHide = false;
+				window.addEventListener('pageshow', function() {
+					if(isPageHide) {
+						window.location.reload();
+					}
+				});
+				window.addEventListener('pagehide', function() {
+					isPageHide = true;
+				});
+
+				$(".add").tap(function() {
+					numberChange(1);
+				});
+				$(".reduce").tap(function() {
+					numberChange(-1);
+				});
+				showData();
+				$(".page-btn").tap(function() {
+					if($(".address-info").length == 0) {
+						$.alert("请选择收货地址");
+						return false;
+					}
+					var datas = $.getQueryObject();
+					datas.num = $(".number").val();
+					datas.remark = $(".remark-text").val();
+					datas.totalPrice = datas.num * datas.newPrice;
+					datas.addressId = $(".address-info").data("id");
+					datas.userId = getCookie("userId");
+					$.ajaxPost(uploadUrl, datas, function(res) {
+						if(res.status == 0) {
+							if(datas.downPay == 0 && datas.totalPrice == 0) {
+								window.location.href = "offered-succed.html?type=1&id="+res.data.orderProductId;
+							} else {
+								datas.orderNum = res.data.orderNo;
+								datas.orderId = res.data.orderProductId;
+								window.location.href = "pay-money.html" + $.toQueryString(datas, true);
+							}
+						} else {
+							$.confirm(res.msg, function() {
+								if(res.msg == "此团购产品您有未支付的订单,是否立即支付?") {
+									window.location.href = 'user-group-shopping-details.html?id=' + res.data.orderProductId;
+								}
+							});
+						}
+					});
+					//window.location.href = "pay-money.html" + $.toQueryString(data, true);
+				});
+				$(".select-address").tap(function() {
+					window.location.href = "user-shipping-address.html?isSelect=true";
+				});
+				loadAddress();
+			});
+
+			function loadAddress() {
+				var data = getAllCookie();
+				if(data.addressId) {
+					$(".select-address .weui-cell__bd").empty().append("<p class='address-info fontsize22' data-id=\"" + data.addressId + "\"><span class='fontsize30'>" +
+						data.addressName + "</span>　　" + data.addressPhone +
+						"<p class='fontsize22'>" + data.addressStr + "</p></p>");
+				}
+				delCookie(["addressId", "addressName", "addressPhone", "addressStr"]);
+			}
+
+			function showData() {
+				var container = ".offered-info";
+				var content = new Controller(container);
+				content.set(data);
+				$(".offered-img").attr("src", showImgUrl + data.img);
+			}
+
+			function numberChange(type) {
+				if(type) {
+					var num = parseInt($(".number").val());
+					var val = num + type;
+					if(val < 0) {
+						val = 0;
+					} else {
+						$(".number").val(val);
+					}
+				}
+			}
+			//显示默认地址
+			function showDefaultAddress() {
+				if(getCookie("addressId"))
+					return false;
+				var data = {
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser"),
+					"currPage": 1,
+					"currNum": 5
+				}
+				$.ajaxGet(loadAddressUrl + $.toQueryString(data, true), function(res) {
+					if(res.status == 0) {
+						var data = res.data.listAddress;
+						if(data.lenth != 0) {
+							for(var i in data) {
+								var d = data[i];
+								if(d.isDefault == 10) {
+									$(".select-address .weui-cell__bd").empty().append("<p class='address-info fontsize22' data-id=\"" + d.addressId + "\"><span class='fontsize30'>" +
+										d.name + "</span>　　" + d.phone +
+										"<p class='fontsize22'>" + d.msg + "</p></p>");
+									break;
+								}
+							}
+						}
+					} else {
+						//$.alert("请求失败：" + res.msg);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

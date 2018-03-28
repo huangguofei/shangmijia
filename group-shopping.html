@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 50px;
+			}
+			
+			.swiper-container .banner-btn {
+				position: absolute;
+				bottom: 35px;
+				z-index: 2;
+				background: #0f0f0f;
+				color: #fff;
+				width: 5rem;
+				left: calc((100% - 5rem)/2);
+				border: 0;
+				font-size: .7rem;
+			}
+			
+			.weui-progress__bar,
+			.weui-progress__inner-bar {
+				height: 0.5rem;
+				border-radius: 0.2rem;
+			}
+			
+			.rule-content p {
+				color: #666;
+				margin: 1rem 0.5rem;
+			}
+			
+			.weui-progress {
+				margin: .5rem 0;
+			}
+			
+			.price-color {
+				margin-right: .5rem;
+			}
+			
+			.weui-panel:first-child {
+				margin-top: 10px;
+			}
+			
+			header img {
+				width: 1.6rem;
+			}
+			
+			header.header {
+				border-bottom: 0;
+			}
+			
+			.weui-media-box img {
+				max-height: 10rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="header">
+			<a href="message-inform.html" class="pull-left relative" onclick="javascript:;">
+				<img class="" src="img/xiaoxi1.png">
+				<span class="weui-badge weui-badge_dot new-msg hide"></span>
+			</a>
+			<h2 class="text-center">拼团</h2>
+			<div class="clearfix"></div>
+		</header>
+		<section class="banner padding whitebk">
+			<div class="swiper-container" style="position: relative;">
+				<!-- Additional required wrapper -->
+				<div class="swiper-wrapper">
+					<!-- Slides -->
+
+				</div>
+				<!-- If we need pagination -->
+				<div class="swiper-pagination"></div>
+				<input type="button" name="" class="weui-btn weui-btn_plain-default banner-btn" value="拼团规则" />
+			</div>
+		</section>
+		<section class="content group-list">
+			<div class="page weui-panel hide">
+				<div class="weui-panel-hd">
+					<div class="weui-media-box" style="padding-bottom: 0;">
+						<img src="img/banner.jpg" class="width-block" /></div>
+				</div>
+				<div class="weui-panele-bd">
+					<div class="weui-media-box">
+						<h2 class="page__title">宇宙无敌世界无敌国家无敌超强地板</h2>
+						<p class="price">团购价：<span class="price-color font-size-36">￥25.50</span>
+							<span class="strikethrough color-b3">原价：￥50.00</span>
+						</p>
+						<div class="weui-progress" data-max="20" data-index="19">
+							<div class="weui-progress__bar">
+								<div class="weui-progress__inner-bar js_progress" style="width: 0%;"></div>
+							</div>
+						</div>
+						<h2 class="text-center color-0f">已拼8人，差12人成团</h2>
+						<p class="color-b3 text-center">快成团了，约熟悉的朋友一起拼</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="weui-tabbar">
+			<a href="main.html" class="weui-tabbar__item">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/jingxuan.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge hide" style="position: absolute;top: -2px;right: -13px;">8</span>
+				</span>
+				<p class="weui-tabbar__label">精选</p>
+			</a>
+			<a href="javascript:;" class="weui-tabbar__item weui-bar__item_on active">
+				<img src="img/pintuan1.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">拼团</p>
+			</a>
+			<a href="hunting-service.html" class="weui-tabbar__item">
+				<span style="display: inline-block;position: relative;">
+                        <img src="img/fuwu2.png" alt="" class="weui-tabbar__icon">
+                        <span class="weui-badge weui-badge_dot hide" style="position: absolute;top: 0;right: -6px;"></span>
+				</span>
+				<p class="weui-tabbar__label">找服务</p>
+			</a>
+			<a href="decorate-live.html" class="weui-tabbar__item">
+				<img src="img/zhibo3.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">装修直播</p>
+			</a>
+			<a href="user-center.html" class="weui-tabbar__item">
+				<img src="img/wode2.png" alt="" class="weui-tabbar__icon">
+				<p class="weui-tabbar__label">我的</p>
+			</a>
+		</div>
+		<article class="group-shopping-rule page-box hide">
+			<div class="rule-bg page-bg"></div>
+			<div class="rule-content page-content">
+				<h2 class="text-center">规则说明</h2>
+				<p class="text-left">这是拼团规则这是拼团规则这是拼团规则这是拼团规则这是拼团规则</p>
+				<input type="button" class="weui-btn page-btn" value="确定" onclick="$('.group-shopping-rule').addClass('hide');" />
+			</div>
+		</article>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var bannerImgUrl = APIBASEURL + "/smj/banner/list/21";
+			var groupRuleUrl = APIBASEURL + "/smj/app/rule/get";
+			var groupUrl = APIBASEURL + "/smj/app/product/products";
+			var groupRule = "";
+			$(function() {
+				$.showLoading();
+				FastClick.attach(document.body);
+				$(".banner-btn").tap(function() {
+					$(".page-content p").html(sessionStorage.getItem("groupRule"));
+					$(".group-shopping-rule").removeClass("hide");
+				});
+				loadData();
+			});
+
+			function loadData() {
+				$.ajaxGet(bannerImgUrl, function(res) {
+					if(res.status == 0) {
+						var srcList = [];
+						if(res.data.length != 0)
+							$(".swiper-wrapper").empty();
+						for(var i in res.data) {
+							var src = res.data[i].bannerImgUrl;
+							var str = "<div class=\"swiper-slide\" data-url='" + res.data[i].hyperUrl + "'>" +
+								"<img src=\"" + showImgUrl + src + "\" />" +
+								"</div>";
+							srcList.push(showImgUrl + src);
+							$(".swiper-wrapper").append(str);
+						}
+						preloadimages(srcList).done(function(img) {
+							$.hideLoading();
+						});
+						$(".swiper-container").swiper({
+							loop: true,
+							autoplay: 3000,
+							speed:1000,
+							autoplayDisableOnInteraction: false,
+							pagination: ".swiper-pagination",
+							onSlideChangeStart: function(swiper) {
+								$(".banner-index").text(swiper.realIndex + 1);
+							}
+						});
+						$(".swiper-slide").tap(function() {
+							window.location.href = "http://" + $(this).data("url");
+						});
+					} else {
+						//$.alert("获取失败:" + res.msg);
+					}
+				});
+				$.ajaxGet(groupUrl+"?userId="+getCookie("userId"), function(res) {
+					if(res.status == 0) {
+						$(".group-list").empty();
+						showGroup(res.data);
+					} else {
+						//$.alert("获取失败:" + res.msg);
+					}
+				});
+			}
+
+			function showGroup(data) { //显示拼团数据
+				var str = "";
+				if(data) {
+					if(data.count != 0)
+						$(".new-msg").removeClass("hide");
+					for(var i in data.products) {
+						var d = data.products[i];
+						str = "<div class=\"page weui-panel\" id='" + d.groupProductId + "'>" +
+							"<div class=\"weui-panel-hd\">" +
+							"<div class=\"weui-media-box\" style=\"padding-bottom: 0;\">" +
+							"<img src=\"" + showImgUrl + d.thumbnailUrl + "\" class=\"width-block\" /></div>" +
+							"</div>" +
+							"<div class=\"weui-panele-bd\">" +
+							"<div class=\"weui-media-box\">" +
+							"<h2 class=\"page__title fontsize30\">" + d.name + "</h2>" +
+							"<p class=\"price fontsize26\">团购价：<span class=\"price-color font-size-36\">￥" + d.groupPrice + "</span>" +
+							"<span class=\"strikethrough color-b3\">原价：￥" + d.orignalPrice + "</span>" +
+							"</p>" +
+							"<div class=\"weui-progress\" data-max=\"" + d.planParticipants + "\" data-index=\"" + d.participants + "\">" +
+							"<div class=\"weui-progress__bar\">" +
+							"<div class=\"weui-progress__inner-bar js_progress\" style=\"width: 0%;\"></div>" +
+							"</div>" +
+							"</div>" +
+							"<h2 class=\"text-center color-0f fontsize30\">" + (d.status == 3 ? "已成团，赶紧加入吧！" : ("已拼" + d.participants + "人，差" + loadGroupNum(d.participants, d.planParticipants) + "人成团")) + "</h2>" +
+							"<p class=\"color-b3 text-center\">" + (d.status == 3 ? "" : "快成团了，") + "约熟悉的朋友一起拼</p>" +
+							"</div></div>" +
+							"</div>";
+						$(".group-list").append(str);
+					}
+					progressAnimation();
+					$(".group-list .page").tap(function() {
+						window.location.href = "group-shopping-details.html?id=" + $(this).attr("id");
+					});
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

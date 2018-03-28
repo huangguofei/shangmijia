@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+	
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				background: #F0F0F0;
+			}
+			
+			.weui-media-box:before {
+				left: 0;
+			}
+			
+			.weui-avatar {
+				width: 2rem;
+				height: 2rem;
+				border-radius: 1rem;
+				vertical-align: middle;
+				margin-right: 0.5rem;
+			}
+			
+			.weui-panel-title span.title-left {
+				vertical-align: middle;
+				font-size: 1rem;
+				display: inline-block;
+				width: calc(100% - 1rem);
+			}
+			
+			.group-status {
+				font-size: 1rem;
+				/*color: #E51C23;*/
+			}
+			
+			.group-info>span {
+				color: #666;
+			}
+			
+			.group-info h3 {
+				font-size: 1rem;
+			}
+			
+			.weui-media-box_appmsg .weui-media-box__hd {
+				width: 6rem;
+				margin-right: .5rem;
+				height: 6rem;
+			}
+			
+			.weui-panel:first-child {
+				margin-top: -1px;
+			}
+			
+			.price-color {
+				min-width: 4rem;
+				line-height: 1.7rem;
+			}
+			
+			.new-msg {
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: inherit;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">团购订单</h2>
+		</header>
+		<section>
+
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var groupListUrl = APIBASEURL + "/smj/app/order/list";
+			$(function() {
+				FastClick.attach(document.body);
+				loadData();
+				if(sessionStorage.getItem("isrefresh")){
+					sessionStorage.removeItem("isrefresh");
+					window.location.reload();
+				}
+			});
+
+			function loadData() {
+				$("section").empty();
+				$.ajaxGet(groupListUrl + $.toQueryString({
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser")
+				}, true), function(res) {
+					if(res.status == 0) {
+						console.log(res);
+						if(res.data)
+							showData(res.data.orders);
+					} else {
+						//$.alert("请求失败");
+					}
+				});
+			}
+
+			function showData(data) {
+				if(data) {
+					for(var i in data) {
+						var d = data[i];
+						if(!d.product)
+							continue;
+						var str = "<div class=\"weui-panel\" onclick = \"window.location.href='user-group-shopping-details.html?id=" + d.orderProductId + "'\">" +
+							"<div class=\"weui-flex weui-media-box\">" +
+							"<div class=\"weui-flex__item weui-panel-title relative\"><span class=\"weui-badge weui-badge_dot new-msg hide "+(d.product.isElite==10?"hide":"")+"\"></span>" +
+							"<span class='title-left overflow1'>" +
+							"<img src=\"" + showImgUrl + d.product.shop.thumbnailUrl + "\" class=\"weui-avatar\">" + d.shopName + "</span>" +
+							"</div>" +
+							"<div class=\"group-status price-color fontsize30\">" + (groupStatusShow(d.product.downPay, d.product.groupPrice, d.list.orderStatus) || orderSatus[d.orderStatus]) + "</div>" +
+							"</div>" +
+							"<div class=\"weui-media-box weui-media-box_appmsg\">" +
+							"<div class=\"weui-media-box__hd\">" +
+							"<img src=\"" + showImgUrl + d.product.thumbnailUrl + "\" class=\"weui-media-box__thumb\">" +
+							"</div>" +
+							"<div class=\"weui-media-box__bd group-info\">" +
+							"<h3 class='fontsize30 overflow2'>" + d.product.name + "</h3>" +
+							"<span class='fontsize26'>成团价：￥" + d.product.groupPrice + "元/套</span><br>" +
+							"<span class='fontsize26'>数量：" + d.list.number + "套</span>" +
+							"<p class=\"fontsize26 color-66\">已付定金：<span class=\"price-color\">￥" + d.list.hadPay + "</span></p>" +
+							"</div>" +
+							"</div>" +
+							"</div>";
+						$("section").append(str);
+					}
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

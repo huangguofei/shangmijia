@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">参团成功</h2>
+		</header>
+		<div class="weui-msg">
+			<div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+			<div class="weui-msg__text-area">
+				<h2 class="weui-msg__title">参团成功</h2>
+				<p class="weui-msg__desc">您已参团成功，可在
+					<a href="user-center.html">个人中心</a>-
+					<a href="user-group-shopping-order.html" class="location-text">团购订单</a>中查看
+				</p>
+			</div>
+			<div class="weui-msg__opr-area">
+				<p class="weui-btn-area">
+					<a href="javascript:;" class="weui-btn weui-btn_primary view-order">查看订单详情</a>
+					<a href="javascript:;" class="weui-btn weui-btn_default hide">辅助操作</a>
+				</p>
+			</div>
+			<div class="weui-msg__extra-area hide">
+				<div class="weui-footer">
+					<p class="weui-footer__links">
+						<a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>
+					</p>
+					<p class="weui-footer__text">Copyright © 2008-2016 weui.io</p>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var type = $.getQueryObject().type;
+			var id=$.getQueryObject().id;
+			$(function() {
+				FastClick.attach(document.body);
+				showInfo();
+				$(".view-order").tap(function() {
+					if(type == 1)
+						window.location.href = 'user-group-shopping-details.html?id='+id;
+					else
+						window.location.href = 'user-hire-orders-details.html?id='+id;
+				})
+			});
+
+			function showInfo() {
+				if(type) {
+					if(type == 1) { //参团
+						$(".header h2,.weui-msg__title").text("参团成功");
+						$(".location-text").text("订单中心").attr("href", "user-group-shopping-order.html");
+					} else if(type == 2) { //雇佣
+						$(".header h2").text("托管成功");
+						$(".weui-msg__title").text("订单托管成功");
+						$(".location-text").text("雇佣订单").attr("href", "user-hire-orders.html");
+
+					}
+
+				}
+			}
+		</script>
+	</body>
+
+</html>

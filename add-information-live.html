@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.content {
+				resize: none;
+				background: #F5F5F5;
+				border: 0;
+				width: 100%;
+				min-height: 8rem;
+				margin-top: .5rem;
+				font-size: .8rem;
+				font-family: -webkit-pictograph;
+				padding: .5rem;
+				box-sizing: border-box;
+				outline: none;
+			}
+			
+			.add-files {
+				float: left;
+				width: 3rem;
+				height: 3rem;
+				padding: .2rem;
+				color: #101010;
+				margin-right: .5rem;
+			}
+			
+			.add-files img {
+				vertical-align: middle;
+			}
+			
+			.btn-group {
+				margin-top: 2rem;
+			}
+			
+			.file-content {
+				margin-left: 4rem;
+				height: 3rem;
+				line-height: 3rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">发直播</h2>
+		</header>
+		<section class="">
+			<div class="weui-cell weui-cell_select weui-cell_select-after bottomline">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">装修阶段：</label>
+				</div>
+				<div class="weui-cell__bd">
+					<select class="weui-select" name="select2">
+					</select>
+				</div>
+			</div>
+			<article class="padding">
+				<h3>直播内容</h3>
+				<textarea class="content" placeholder="输入您装修日记内容"></textarea>
+				<a href="javascript:;" class="add-files">
+					<img class="width-block" src="img/tianjia.png" />
+				</a>
+				<div class="fontsize30 color-b3 file-content">添加照片</div>
+				<input type="file" class="file hide" name="file" id="file" onchange="fileUpload('file')" />
+				<div class="btn-group">
+					<input type="button" class="weui-btn page-btn" value="确定" />
+				</div>
+			</article>
+		</section>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"><img src=""> </span>
+			<div class="weui-gallery__opr">
+				<a href="javascript:" class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+		<script>
+			var data = $.getQueryObject();
+			var postUrl = APIBASEURL + "/smj/app/note/add/note";
+			$(function() {
+				FastClick.attach(document.body);
+				showSelect();
+				$(".page-btn").tap(function() {
+					var content = $(".content").val();
+					if(!content) {
+						$.alert("直播内容不能为空");
+						return false;
+					}
+					var imgUrls = [];
+					$(".file-content img[data-src]").each(function(i) {
+						imgUrls.push($(this).data("src"));
+					});
+					data.imgUrls = JSON.stringify(imgUrls);
+					data.userId = getCookie("userId");
+					data.token = getCookie("tokenUser");
+					data.typeDecorationStage = $(".weui-select").val();
+					data.content = content;
+					$.ajaxPost(postUrl, data, function(res) {
+						if(res.status == 0) {
+							$.toast("发布直播成功");
+							window.location.href = "decorate-live.html";
+						} else {
+							$.alert("发布失败");
+						}
+					});
+				});
+				$(".add-files").tap(function() {
+					$("#file").trigger("click");
+				});
+			});
+
+			function fileUpload(fileId) {
+				$.ajaxFileUpload({
+					type: "post",
+					url: APIBASEURL + "/smj/app/note/upload",
+					fileElementId: fileId, //文件上传域的ID  
+					dataType: 'json',
+					data: {
+						userId: getCookie("userId"),
+						tokenUser: getCookie("tokenUser")
+					},
+					success: function(result) {
+						if($(".file-content img").length == 0)
+							$(".file-content").empty();
+						var data = JSON.parse(result.data.imgUrls);
+						$(".file-content").append("<a href='javascript:;' class='relative'><img data-src='" +
+							data[0] + "' src='" + showImgUrl + data[0] + "'><img class='del-img' src='img/del_img.png'></a>");
+						showImg();
+					},
+					error: function(data) {
+						alert("4")
+						console.log(data)
+					}
+				});
+			}
+
+			function showImg() {
+				$(".file-content img[data-src]").unbind("tap").tap(function() {
+					var _this = this;
+					$(".weui-gallery span img").attr("src", $(this).attr("src"));
+					$(".weui-gallery").css("display", "block");
+					$(".weui-gallery__img").unbind("tap").tap(function() {
+						$(".weui-gallery").css("display", "none");
+					});
+					$(".weui-gallery__del").unbind("tap").tap(function() {
+						$(_this).parent().remove();
+						$(".weui-gallery").css("display", "none");
+					});
+				});
+				$(".del-img").tap(function() {
+					$(this).parent().remove();
+				});
+			}
+
+			function showSelect() {
+				for(var i in liveType) {
+					$(".weui-select").append("<option value=\"" + i + "\">" + liveType[i] + "</option>");
+				}
+			}
+		</script>
+	</body>
+
+</html>

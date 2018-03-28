@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 2.5rem;
+			}
+			
+			.order-details {
+				margin-top: -1px;
+			}
+			
+			.select-address {
+				background: #fff;
+				font-size: .9rem;
+			}
+			
+			.select-address img {
+				vertical-align: bottom;
+				width: 1.4rem;
+				margin-right: 1rem;
+			}
+			
+			.price-color {
+				font-size: 1rem;
+			}
+			
+			.remark {
+				color: #666;
+			}
+			
+			.store-info .weui-media-box__hd {
+				width: 3.5rem;
+				height: 3.5rem;
+			}
+			
+			.store-info .weui-media-box__bd img {
+				width: .8rem;
+				height: .8rem;
+				margin-right: .3rem;
+			}
+			
+			.pay-remark p {
+				color: #b3b3b3;
+			}
+			
+			.btn-group {
+				height: 3rem;
+				line-height: 3rem;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: #fff;
+			}
+			
+			.btn-group .weui-flex-item {
+				width: 50%;
+			}
+			
+			.btn-group .weui-flex-item:last-child {
+				color: #fff;
+				background: #0F0F0F;
+			}
+			
+			.group-title {
+				font-size: 1rem;
+				line-height: 1.2rem;
+			}
+			
+			.weui-cell {
+				height: 2rem;
+			}
+			
+			.weui-agree {
+				padding: 1rem 0;
+			}
+			
+			.weui-agree .weui-agree__text {
+				color: #0f0f0f;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">参团</h2>
+		</header>
+		<section class="select-address hide">
+			<a class="weui-cell weui-cell_access" href="javascript:;">
+				<div class="weui-cell__bd">
+					<p><img src="img/tianjia.png" />添加收货地址</p>
+				</div>
+				<div class="weui-cell__ft">
+				</div>
+			</a>
+		</section>
+		<section class="weui-panel order-details">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img src="" class="weui-media-box__thumb benner-img" />
+				</div>
+				<div class="weui-media-box__bd">
+					<h2 class="group-title" bind="title"></h2>
+					<p>成团价：<span class="price-color">￥<span bind="newPrice">63333</span>/套</span>
+					</p>
+					<span style="color: #666;">数量：<span bind="num"></span>套</span>
+				</div>
+			</div>
+			<div class="weui-media-box">
+				<h2 class="group-title">总价：<span class="price-color all-price">￥<span bind="totalPrice">63300.00</span></span></h2>
+			</div>
+			<div class="weui-media-box">
+				<h2 class="group-title">备注：<span class="remark" bind="remark">呜呜呜</span></h2>
+			</div>
+		</section>
+		<section class="weui-panel store-info">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img src="" class="weui-media-box__thumb store-img" />
+				</div>
+				<div class="weui-media-box__bd">
+					<h3 bind="storeName">材料铺名称</h3>
+					<p><img src="img/dianhua.png"><span class="color-66" bind="storePhone">13316521563</span></p>
+					<p><img src="img/dingwei.png"><span class="color-66" bind="storeAddress">深圳市南山区西丽</span></p>
+				</div>
+			</div>
+		</section>
+		<section class="weui-cells pay-">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><img src="img/weixin.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+				<div class="weui-cell__bd">
+					<p>微信支付</p>
+				</div>
+				<div class="weui-cell__ft">我们只支持微信支付</div>
+			</div>
+		</section>
+		<section class="pay-remark padding">
+			<p>注：若拼团不成功，定金将会自动退换，若拼团成功，将支付剩余尾款</p>
+			<label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" checked="checked" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+                阅读并同意<a href="javascript:;" class="view-declare">免责声明</a>
+            </span>
+        </label>
+		</section>
+		<footer class="btn-group weui-flex text-center">
+			<div class="weui-flex-item">
+				需支付定金：<span class="price-color pay-money" bind="downPay">￥500</span>
+			</div>
+			<div class="weui-flex-item pay-money-btn">
+				<h3>立即支付</h3>
+			</div>
+		</footer>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var data = $.getQueryObject();
+			console.log(data)
+			var editOrderSatusUrl = APIBASEURL + "/smj/app/order/payConfirm";
+			//"title": groupData.name,
+			//"img":groupData.bannerImgUrls,
+			//"newPrice":groupData.groupPrice,
+			//"oldPrice":groupData.orignalPrice,
+			//"groupId":groupData.groupProductId
+			//"storeName":groupData.product.shop.shopName,
+			//"storePhone":groupData.product.shop.phone,
+			//"storeAddress":groupData.product.shop.shopAddress,
+			//"storeImg":groupData.product.shop.thumbnailUrl
+			//data.num
+			//data.remark
+			$(function() {
+				FastClick.attach(document.body);
+				$(".select-address").tap(function() {
+					window.location.href = "user-shipping-address.html";
+				});
+				$(".pay-money-btn").tap(function() {
+					if($(this).attr("disableds"))
+						return false;
+					var datas = {
+						openid: getCookie("openid"),
+						total_fee: (data.downPay == 0 ? data.totalPrice : data.downPay),
+						body: data.title,
+						orderType: 0,
+						orderNo:data.orderNum,
+						orderId:data.orderId
+					}
+					setPayInfo(datas, "1");
+					//window.location.href = "offered-succed.html";
+				});
+				$("#weuiAgree").change(function() {
+					if($(this).is(":checked")) {
+						$(".pay-money-btn").removeClass("weui-btn_disabled").removeAttr("disableds");
+					} else {
+						$(".pay-money-btn").addClass("weui-btn_disabled").attr("disableds", "off");
+					}
+				});
+				$(".weui-agree").tap(function() {
+					viewDeclare();
+				});
+				showData();
+			});
+
+			function showData() {
+				var container = ".bodybk";
+				var content = new Controller(container);
+				content.set(data);
+				$(".benner-img").attr("src", showImgUrl + data.img);
+				$(".store-img").attr("src", showImgUrl + data.storeImg);
+				$(".all-price").text("￥" + (data.num * data.newPrice));
+				if(data.downPay == 0) {
+					$(".pay-money").text("￥" + data.totalPrice);
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

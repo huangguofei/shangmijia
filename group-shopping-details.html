@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 2.5rem;
+				position: relative;
+			}
+			
+			header.header {
+				border: 0;
+				background: initial;
+				position: absolute;
+				top: 0;
+				z-index: 5;
+			}
+			
+			.banner img {
+				width: 100%;
+				/*max-height: 10rem;*/
+				height: auto;
+			}
+			
+			.back-img {
+				width: 1.6rem;
+			}
+			
+			.group-details {
+				height: 2rem;
+				line-height: 2rem;
+				font-size: .7rem;
+			}
+			
+			.group-details .price-color {
+				font-size: 1.1rem;
+			}
+			
+			.group-details p {
+				margin-left: .4rem;
+				text-decoration: line-through;
+			}
+			
+			.group-info {
+				padding-top: 0;
+			}
+			
+			.group-info .stop-time {
+				font-size: .5rem;
+				position: absolute;
+				/*top: 2rem;*/
+				right: 1rem;
+			}
+			
+			.group-title {
+				font-size: 1rem;
+				font-weight: bold;
+			}
+			
+			.share button {
+				width: 5.5rem;
+				font-size: .7rem;
+				padding: 0rem;
+				border-color: #666;
+				height: 2rem;
+				color: #0f0f0f;
+			}
+			
+			.share button img {
+				vertical-align: middle;
+				margin-right: .4rem;
+				width: 1rem;
+			}
+			
+			.weui-progress {
+				margin: .5rem 0;
+			}
+			
+			.group-munber .font-weight {
+				font-size: 1.4rem;
+			}
+			
+			.store-info .weui-media-box__hd {
+				width: 3.5rem;
+				height: 3.5rem;
+			}
+			
+			.store-info p img {
+				margin-right: .3rem;
+			}
+			
+			.store-info .weui-media-box__bd img {
+				width: .8rem;
+				height: .8rem;
+			}
+			
+			.group-details-list h2 {
+				color: #666;
+				font-size: .9rem;
+			}
+			
+			.group-details-list h2.active {
+				color: #0f0f0f;
+				font-size: .95rem;
+			}
+			
+			.group-details-list img {
+				width: 100%;
+			}
+			
+			.footer-btn {
+				height: 3rem;
+				line-height: 3rem;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: #fff;
+				border-top: 1px solid #dbdbdb;
+			}
+			
+			.footer-btn .btn-offered {
+				background: #0F0F0F;
+				color: #fff;
+			}
+			
+			.distable {
+				opacity: .6;
+			}
+			
+			.footer-btn img {
+				width: 1.3rem;
+			}
+			
+			.footer-btn p {
+				height: 1rem;
+				font-size: .65rem;
+			}
+			/*分享*/
+			
+			.share-page {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+			
+			.share-bg {
+				width: 100%;
+				height: 100%;
+				background: #000;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				opacity: .5;
+			}
+			
+			.share-content {
+				position: relative;
+				z-index: 3;
+				text-align: right;
+			}
+			
+			.share-content img {
+				margin-right: 1rem;
+			}
+			
+			.share-content .share-text {
+				color: #fff;
+				font-size: 1rem;
+				font-weight: bold;
+				margin-right: 2rem;
+			}
+			
+			.share-content .share-text span {
+				color: #FF6500;
+			}
+			
+			.share-text .weui-btn {
+				width: 8rem;
+				color: #FF6500;
+				border-color: #FF6500;
+				margin-top: 2rem;
+			}
+			
+			.logo {
+				font-size: .8rem;
+				padding: 0 .2rem;
+				margin-left: .3rem;
+			}
+			
+			.phone {
+				display: inline-block;
+				height: 100%;
+				width: 100%;
+				color: #0f0f0f;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="header">
+			<a href="javascript:;"><img class="back-img" src="img/fanhui.png"></a>
+		</header>
+		<div class="banner">
+			<img src="" class="banner-img" />
+		</div>
+		<section class="group-info padding relative whitebk">
+			<h2 class="group-title" bind="name"></h2>
+			<span class="stop-time"></span>
+			<div class="group-details">
+				<h3 class="pull-left">成团价:<span class="price-color">￥<span bind="groupPrice"></span></span></h3>
+				<p class="pull-left color-66">原价:￥<span bind="orignalPrice">5500.00</span></p>
+				<div class="clear"></div>
+			</div>
+			<div class="share">
+				<button type="button" class="weui-btn pull-right weui-btn_plain-default">
+					<img src="img/fenxiang.png"/>分享给朋友
+				</button>
+				<div class="clear"></div>
+			</div>
+			<div class="weui-progress">
+				<div class="weui-progress__bar">
+					<div class="weui-progress__inner-bar js_progress" style="width: 0%;"></div>
+				</div>
+			</div>
+			<h2 class="text-center group-title">已拼<span bind="participants"></span>人，差<span class="planParticipants"></span>人成团</h2>
+			<p class="group-munber text-center hide"><span class="font-weight">70%</span>(参团人数：<span bind="participants"></span>/<span bind="planParticipants"></span>)</p>
+			<p class="text-center color-b3 titles">快成团了，约熟悉的朋友一起拼</p>
+		</section>
+		<section class="weui-panel store-info">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img src="" class="weui-media-box__thumb store-logo" />
+				</div>
+				<div class="weui-media-box__bd">
+					<h3 bind="shop.shopName">材料铺名称<span class="logo">企</span></h3>
+					<p class="color-66"><img src="img/dianhua.png"><span bind="shop.phone">13316521563</span></p>
+					<p class="color-66"><img src="img/dingwei.png"><span bind="shop.shopAddress">深圳市南山区西丽</span></p>
+				</div>
+			</div>
+		</section>
+		<section class="weui-panel group-details-list">
+			<div class="weui-panel__hd weui-flex text-center">
+				<h2 class="weui-flex__item active">产品信息</h2>
+				<h2 class="weui-flex__item">购物保障</h2>
+				<h2 class="weui-flex__item">购物流程</h2>
+			</div>
+			<div class="weui-panel__bd padding">
+				<div class="shopping-info-page">
+					<p bind="info">无</p>
+
+				</div>
+				<div class="shopping-safeguard-page hide">
+					<p>无</p>
+				</div>
+				<div class="shopping-flow-page hide">
+					<p>无</p>
+				</div>
+			</div>
+		</section>
+		<footer class="footer-btn weui-flex text-center">
+			<div class="weui-flex" style="line-height: 1rem;padding: .3rem 0; width: 40%;">
+				<div class="weui-flex__item collect">
+					<img src="img/soucang3.png" />
+					<p>收藏</p>
+				</div>
+				<div class="weui-flex__item">
+					<a class="phone">
+						<img src="img/dianhua.png" />
+						<p>咨询</p>
+					</a>
+				</div>
+			</div>
+			<div class="weui-flex__item btn-offered">
+				<h2>拼团</h2>
+			</div>
+		</footer>
+		<article class="share-page hide">
+			<div class="share-bg"></div>
+			<div class="share-content">
+				<img src="img/yindaoxian.png" />
+				<div class="share-text">
+					<p>“<span>分享</span>”给小伙伴们来参团</p>
+					<a href="javascript:$('.share-page').addClass('hide');$('body').css('overflow-y','auto')" class="weui-btn btn-off-page weui-btn_plain-default">我知道了</a>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var id = $.getQueryObject().id;
+			var shopId = "";
+			var loadDataUrl = APIBASEURL + "/smj/app/product/product/" + id;
+			var collectUrl = APIBASEURL + "/smj/app/collectioncontroller/insertgroupproduct";
+			var groupData = "";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".group-details-list h2").tap(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".group-details-list .weui-panel__bd>div").eq($(this).index()).removeClass("hide").siblings().addClass("hide")
+				});
+				$(".share button").tap(function() {
+					$("body").css("overflow-y", "hidden");
+					$(".share-page").removeClass("hide");
+				});
+				$(".collect").tap(function() {
+					var _this = this;
+					if($(this).attr("collectid")) {
+						cancelCollect($(this).attr("collectid"), function() {
+							$(_this).removeAttr("collectid").find("img").attr('src', "img/soucang3.png");
+						});
+						return false;
+					}
+					collectGroup(function(data) {
+						$(_this).attr("collectid", data);
+						$(".collect img").attr("src", "img/soucang4.png");
+					});
+				});
+				$(".btn-offered").tap(function() {
+					if($(this).attr("distable"))
+						return;
+					if(loginJudge()) {
+						var data = {
+							"title": groupData.product.name,
+							"img": groupData.product.thumbnailUrl,
+							"newPrice": groupData.product.groupPrice,
+							"oldPrice": groupData.product.orignalPrice,
+							"productId": groupData.product.groupProductId,
+							"shopId": groupData.product.shop.shopId,
+							"storeName": groupData.product.shop.shopName,
+							"storePhone": groupData.product.shop.phone,
+							"storeAddress": groupData.product.shop.shopAddress,
+							"storeImg": groupData.product.shop.thumbnailUrl,
+							"downPay": groupData.product.downPay,
+							"unit": groupData.product.unit
+						};
+						window.location.href = "offered.html" + $.toQueryString(data, true);
+
+					}
+				});
+				$(".store-info").tap(function() {
+					window.location.href = "store-details.html?id=" + $(this).data("id");
+				});
+				$("header").tap(function() {
+					if(window.history.length == 1) {
+						window.location.href = "group-shopping.html";
+					} else {
+						window.history.go(-1);
+					}
+				});
+				loadData();
+			});
+
+			function isGoback() {
+
+			}
+
+			function loadData() {
+				$.showLoading();
+				$.ajaxGet(loadDataUrl, function(res) {
+					if(res.status == 0) {
+						groupData = res.data;
+						showData(res.data);
+					} else {
+						//$.alert("请求失败：" + res.msg);
+					}
+					$.hideLoading();
+				});
+			}
+
+			function showData(data) {
+				if(data) {
+					$("title").text(data.product.name);
+					var container = ".bodybk";
+					var content = new Controller(container);
+					content.set(data.product);
+					var d = data.product;
+					$(".banner-img").attr("src", showImgUrl + data.product.thumbnailUrl);
+					$(".store-logo").attr("src", showImgUrl + data.product.shop.thumbnailUrl);
+					if(d.bannerImgUrls) {
+						try {
+							var imglist = JSON.parse(d.bannerImgUrls);
+							for(var i in imglist) {
+								$(".shopping-info-page").append("<img src='" + showImgUrl + imglist + "' >");
+							}
+						} catch(e) {}
+					}
+					$(".stop-time").text("截止日期：" + changeTime(data.product.creatime, "MM-dd"));
+					$(".weui-progress").data({
+						"max": data.product.planParticipants,
+						"index": data.product.participants
+					});
+					shopId = data.product.shop.shopId;
+					$(".store-info").data("id", shopId);
+					$(".planParticipants").text(loadGroupNum(data.product.participants, data.product.planParticipants));
+					progressAnimation();
+					$(".phone").attr("href", "tel:" + data.product.shop.phone);
+					$(".shopping-safeguard-page").html(sessionStorage.getItem("process"));
+					$(".shopping-flow-page").html(sessionStorage.getItem("secure"));
+					var collect = loadCollectInfo(data.product.groupProductId);
+					if(collect) {
+						$(".collect img").attr("src", "img/soucang4.png");
+						$(".collect").attr("collectid", collect.clid);
+					}
+					if(data.product.status == 3) {
+						$(".group-title").text("已成团，赶紧加入吧！");
+						$(".titles").text("约熟悉的朋友一起拼");
+					}
+					if((data.product.participants == data.product.planParticipants)) {
+						$(".btn-offered").addClass("distable").attr('distable', true);
+					}
+				}
+			}
+
+			function collectGroup(callback) {
+				$.ajaxPost(collectUrl, {
+					"userId": getCookie("userId"),
+					"shopId": shopId,
+					"groupproductId": id
+				}, function(res) {
+					if(res.status == 0) {
+						$.toast("收藏成功");
+						callback && callback(res.data);
+						collectData();
+					} else {
+						$.alert("收藏失败");
+					}
+				});
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

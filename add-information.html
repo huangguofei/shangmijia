@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.weui-cell__bd input {
+				height: 2rem;
+				width: 80%;
+			}
+			
+			.weui-cell:before {
+				left: 0;
+			}
+			
+			.title {
+				background: #fff;
+			}
+			
+			.title h3 {
+				background: #F5F5F5;
+				padding: 2rem;
+				color: #666;
+			}
+			
+			.btn-group {
+				background: #fff;
+				padding: .5rem .8rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">完善房屋信息</h2>
+		</header>
+		<section class="padding title">
+			<h3 class="text-center">创建装修日记前请完善您的房屋信息</h3>
+		</section>
+		<section class="select-info weui-panel">
+			<div class="weui-cell weui-cell_select weui-cell_select-after select-house-type">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">户型：</label>
+				</div>
+				<div class="weui-cell__bd">
+					<select class="weui-select house-type" name="select2">
+						<option value="1">简约大气</option>
+						<option value="2">时尚美丽</option>
+						<option value="3">高端大气</option>
+					</select>
+				</div>
+			</div>
+			<div class="weui-cell weui-cell_select weui-cell_select-after">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">面积</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input type="number" name="" id="" class="weui-input select-house-size" value="" />
+					<span class="unit">m²</span>
+				</div>
+			</div>
+			<div class="weui-cell weui-cell_select weui-cell_select-after select-fitment-stype">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">装修风格：</label>
+				</div>
+				<div class="weui-cell__bd">
+					<select class="weui-select style-type" name="select2">
+						<option value="1">简约大气</option>
+						<option value="2">时尚美丽</option>
+						<option value="3">高端大气</option>
+					</select>
+				</div>
+			</div>
+		</section>
+		<div class="btn-group">
+			<input type="button" class="weui-btn page-btn" value="下一步" />
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script><script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			$(function() {
+				FastClick.attach(document.body);
+				showSelect();
+				$(".page-btn").tap(function(){
+					var area=$(".select-house-size").val();
+					if(!area){
+						$.alert("面积不能为空");
+						return false;
+					}
+					var data={
+						"area":area,
+						"typeHouse":$(".house-type").val(),
+						"typeDecoration":$(".style-type").val()
+					}
+					console.log(data)
+					window.location.href='add-information-select.html'+$.toQueryString(data,true);
+				});
+			});
+
+			function showSelect() {
+				$(".house-type,.style-type").empty();
+				for(var i in houseType) {
+					$(".house-type").append("<option value=" + i + ">" + houseType[i] + "</option>");
+				}
+				for(var i in decorationType) {
+					$(".style-type").append("<option value=" + i + ">" + decorationType[i] + "</option>");
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

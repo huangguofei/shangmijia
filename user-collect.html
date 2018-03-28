@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.weui-cell:before {
+				left: 0;
+			}
+			
+			.bottomline {
+				border-bottom: 1px solid #EEEEEE;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">我的收藏</h2>
+		</header>
+		<section>
+			<div class="weui-cell weui-cell_access">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">直播</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">团购</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access bottomline">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">服务商</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script><script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			$(function() {
+				FastClick.attach(document.body);
+				$("section>div").tap(function() {
+					window.location.href = "user-collect-list.html?type=" + $(this).index();
+				});
+			});
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

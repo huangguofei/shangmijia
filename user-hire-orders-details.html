@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 2.5rem;
+			}
+			
+			h3 {
+				font-size: 1rem;
+				font-weight: bold;
+			}
+			
+			.group-status {
+				background: #FF6500;
+				color: #fff;
+				text-align: left;
+				padding: 1rem 2rem;
+				min-height: 3.5rem;
+			}
+			
+			.group-status img {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				width: 4rem;
+			}
+			
+			.group-status h2 {
+				line-height: 3rem;
+			}
+			
+			.group-info {
+				line-height: 2rem;
+			}
+			
+			.store-info .weui-media-box {
+				padding: 0;
+			}
+			
+			.img-boxs {
+				margin-top: .5rem;
+			}
+			
+			.store-info {
+				color: #101010;
+				margin-top: 10px;
+			}
+			
+			.store-info .weui-media-box__hd {
+				width: 4rem;
+				height: 4rem;
+			}
+			
+			.store-info h2 {
+				margin-bottom: .2rem;
+				color: #0f0f0f;
+				font-size: 1rem;
+			}
+			
+			.phone,
+			.location {
+				font-size: .7rem;
+			}
+			
+			.location span {
+				display: inline-block;
+				width: calc(100% - 1rem);
+			}
+			
+			.phone {
+				padding-left: 1rem;
+			}
+			
+			.phone img {
+				width: 2rem;
+			}
+			
+			.location img {
+				width: 1rem;
+				vertical-align: top;
+			}
+			
+			.btn-group {
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				height: 2.8rem;
+				line-height: 2.8rem;
+				font-size: 1rem;
+			}
+			
+			.btn-group .cancel-orders {
+				background: #fff;
+				color: #1C1C1C;
+				width: 40%;
+			}
+			
+			.btn-group .deposit {
+				background: #0F0F0F;
+				color: #fff;
+				width: 60%;
+			}
+			
+			.price-info {
+				background: #fff;
+			}
+			
+			.price-info>div {
+				width: 100%;
+			}
+			
+			.pay-history {
+				/*background: #F5F5F5;*/
+				padding-bottom: 0;
+			}
+			
+			.pay-history div {
+				width: 100%;
+				line-height: 1.4rem;
+				color: #666;
+			}
+			
+			.logo {
+				font-size: .8rem;
+				display: inline-block;
+				margin-left: .3rem;
+				margin-top: .3rem;
+			}
+			
+			.weui-media-box:before {
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">订单详情</h2>
+		</header>
+		<section class="group-status padding text-center relative">
+			<h2 class="font-weight">待托管</h2>
+			<img src="img/qianbao.png" />
+		</section>
+		<div class="group-info whitebk padding">
+			<p class="">订单号：<span bind="orderShop.orderNum">136151616</span></p>
+			<p class="creatime">提交于：2017-6-15</p>
+		</div>
+		<div class="weui-flex price-info topline padding ">
+			<div class="weui-flex-item">托管金额：<span class="price-color">￥<span bind="orderShop.trustAmount">00.00</span></span>
+			</div>
+			<div class="weui-flex-item">托管余额：<span class="price-color">￥<span bind="blances">00.00</span></span>
+			</div>
+		</div>
+		<section class="pay-history padding">
+			<h3>支付记录</h3>
+			<nav>
+				<li class="weui-flex">
+					无
+				</li>
+			</nav>
+		</section>
+		<div class="weui-panel">
+			<div class="weui-media-box">
+				<h3>需求描述</h3>
+				<p class="color-66" bind="orderShop.requireDesc"></p>
+				<div class="img-boxs need-img">
+
+				</div>
+			</div>
+			<div class="weui-media-box">
+				<h3>合同</h3>
+				<div class="img-boxs hetong-img">
+				</div>
+			</div>
+		</div>
+		<section class="weui-panel store-info padding">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd to-store">
+					<img src="" class="weui-media-box__thumb shop-img" />
+				</div>
+				<div class="weui-media-box__bd weui-flex">
+					<div class="weui-flex__item relative to-store">
+						<div class="">
+							<h2 class="pull-left" bind="shop.shopName">店铺名称</h2><span class="logo pull-left">企</span>
+							<div class="clear"></div>
+						</div>
+						<p class="location color-66"><img src="img/dingwei.png" /><span bind="shop.shopAddress"></span></p>
+					</div>
+					<div class="phone leftline">
+						<a href="tel:">
+							<img src="img/dianhua3.png" />
+							<p class="color-b3">联系商家</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="btn-group weui-flex text-center topline">
+			<div class="cancel-orders">取消订单</div>
+			<div class="weui-flex__item deposit">立即托管</div>
+		</footer>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var loadDataUrl = APIBASEURL + "/smj/app/order_shop/getOrder";
+			var cancelOrderUrl = APIBASEURL + "/smj/app/order_shop/cancel";
+			var commentStoreUrl = APIBASEURL + "/smj/app/ucommentcontroller/insertshopucomment";
+			var id = $.getQueryObject().id;
+			var orderStatus = ["", "待托管", "待验收", "待评价", "已完成", "已取消", "审核中"];
+			var orderStatusImg = ["", "img/qianbao.png", "img/daiyanshou.png", "img/daipingjia.png",
+				"img/jiaoyiwancheng.png", "img/yiquxiao.png", "img/shenhezhong.png"
+			];
+			var orderData = "";
+			$(function() {
+				sessionStorage.setItem("isrefresh", true);
+				$.showLoading();
+				FastClick.attach(document.body);
+				loadData();
+				$(".cancel-orders").tap(function() {
+					if($(this).attr("refund")) {
+						window.location.href = "user-cancel-order.html?id=" + id + "&type=2" + "&title=" + orderData.shop.shopName;
+					}
+					$.confirm("确定取消订单？", function() {
+						$.ajaxPut(cancelOrderUrl, {
+							"userId": getCookie("userId"),
+							"tokenUser": getCookie("tokenUser"),
+							"orderShopId": id
+						}, function(res) {
+							if(res.status == 0) {
+								$.toast("取消成功");
+								window.location.reload(true);
+							} else {
+								$.alert("取消失败");
+							}
+						});
+					})
+				});
+				$(".store-info .to-store").tap(function() {
+					window.location.href = 'store-details.html?id=' + $(this).parents(".store-info").data("id");
+				});
+			});
+
+			function loadData() {
+				var data = {
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser"),
+					"orderId": id
+				}
+				$.ajaxGet(loadDataUrl + $.toQueryString(data, true), function(res) {
+					if(res.status == 0) {
+						orderData = res.data;
+						showData(res.data);
+					} else {
+						//$.alert("请求失败：" + res.msg);
+					}
+					console.log(res.data);
+				});
+
+			}
+
+			function showData(data) {
+				if(data) {
+					var content = ".bodybk";
+					var control = new Controller(content);
+					control.set(data);
+					$(".creatime").text("提交于：" + changeTime(data.orderShop.creatime));
+					if(data.paymentRecord) {
+						$(".pay-history nav").empty();
+						for(var i in data.paymentRecord) {
+							var d = data.paymentRecord[i];
+							var str = "<li class=\"weui-flex\">" +
+								"<div class=\"weui-flex-item text-left\">" + changeTime(d.creatime, "yy-MM-dd mm:hh") + "</div>" +
+								"<div class=\"weui-flex-item text-right\">-￥" + d.paymentAmount + "</div>" +
+								"</li>";
+							$(".pay-history nav").append(str);
+						}
+					}
+					$(".need-img").append(imgShow(data.orderShop.requireImgUrls));
+					$(".hetong-img").append(imgShow(data.orderShop.agreementImgUrls));
+					$(".group-status h2").text(orderStatus[data.orderShop.typeStatus]);
+					$(".group-status img").attr("src", orderStatusImg[data.orderShop.typeStatus]);
+
+					if(data.shop) {
+						$(".phone a").attr("href", "tel:" + data.shop.phone);
+						$(".store-info").data("id", data.shop.shopId);
+						$(".shop-img").attr("src", showImgUrl + data.shop.thumbnailUrl);
+					} else {
+						$(".store-info").html("<p>该店铺已冻结，请联系客服</p>");
+						$("footer").addClass("hide");
+					}
+					if(data.orderShop.typeStatus == 1) { //托管
+						$("footer .deposit").text("立即托管").tap(function() {
+							var datas = {
+								id: data.orderShop.orderNum,
+								orderId: data.orderShop.orderShopId,
+								price: data.orderShop.trustAmount,
+								title: data.shop.shopName,
+								type: data.orderShop.type
+							}
+							window.location.href = 'hire-server-store-pay.html' + $.toQueryString(datas, true);
+						});
+					} else if(data.orderShop.typeStatus == 2) {
+						$("footer .cancel-orders").text("申请退款").attr("refund", "hgf");
+						$("footer .deposit").text("支付给商家").tap(function() {
+							window.location.href = "payToStore.html?id=" + data.orderShop.orderShopId + "&price=" + data.blances;
+						});
+
+					} else if(data.orderShop.typeStatus == 3) {
+						$("footer .cancel-orders").addClass("hide");
+						$("footer .deposit").text("立即评价").tap(function() {
+							window.location.href = 'store-comment.html?id=' + data.orderShop.shopId+"&orderid="+data.orderShop.orderShopId;
+						});
+					} else {
+						$("footer").addClass("hide");
+
+					}
+
+				}
+				$.hideLoading();
+			}
+
+			function imgShow(data) {
+				var str = "";
+				if(data) {
+					data = JSON.parse(data);
+					for(var i in data) {
+						str += "<img src='" + showImgUrl + data[i] + "'>";
+					}
+				}
+				return str;
+			}
+		</script>
+	</body>
+
+</html>

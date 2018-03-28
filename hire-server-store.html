@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.need-content {
+				background: #FAFAFA;
+				padding: .5rem;
+				box-sizing: border-box;
+				min-height: 5rem;
+			}
+			
+			.add-img {
+				background: #FAFAFA;
+			}
+			
+			.add-img img {
+				vertical-align: middle;
+				margin-right: .5rem;
+				float: left;
+			}
+			
+			.add-img .file-content {
+				height: 3rem;
+				line-height: 3rem;
+			}
+			
+			.add-img-icon {
+				width: 3rem;
+			}
+			
+			.price-input {
+				height: 2rem;
+				line-height: 2rem;
+			}
+			
+			.price-input input {
+				width: 95%;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">雇佣服务商</h2>
+		</header>
+		<section class="">
+			<h3 class="padding whitebk color-0f fontsize30">请描述你的需求</h3>
+			<textarea class="need-content weui-textarea" placeholder="请详细的描述你的需求，服务商可以更好地为你提供服务"></textarea>
+			<div class="add-img padding">
+				<img src="img/tianjia.png" class="add-img-icon add-file-need" />
+				<div class="fontsize30 color-cc file-content" to="file1">添加图片</div>
+				<input type="file" class="file hide" name="file" id="file1" onchange="fileUpload('file1')" />
+			</div>
+		</section>
+		<section class="weui-panel">
+			<div class="weui-cell price-input fontsize30">
+				<div class="weui-cell__hd"><label class="weui-label">金　额：</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input pull-left text-right price-text" type="number" pattern="[0-9]*" placeholder="请输入托管金额">
+				</div>
+				<span>元</span>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">上传合同：</label></div>
+				<div class="weui-cell__bd">
+					<img src="img/tianjia.png" class="add-img-icon add-file-pact pull-left" />
+					<div class="file-content" to="file2">
+
+					</div>
+					<input type="file" class="file hide" name="file" id="file2" onchange="fileUpload('file2')" />
+				</div>
+			</div>
+			<input type="button" class="weui-btn page-btn" style="width: 80%; margin-bottom: 2rem;" value="确定" />
+		</section>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"><img src=""> </span>
+			<div class="weui-gallery__opr">
+				<a href="javascript:" class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+		<script>
+			var id = $.getQueryObject().id;
+			var type = $.getQueryObject().type;
+			var title = $.getQueryObject().title;
+			console.log()
+			var uploadUrl = APIBASEURL + "/smj/app/order_shop/add";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".page-btn").tap(function() {
+					var price = $(".price-text").val();
+					var content = $(".need-content").val();
+					if(!price) {
+						$.alert("金额不能为空");
+						return false;
+					}
+					if(!content) {
+						$.alert("需求能为空");
+						return false;
+					}
+					var needImgList = [],
+						appointImgList = [];
+					$(".file-content[to=file1] img[data-src]").each(function() {
+						needImgList.push($(this).data("src"));
+					});
+					$(".file-content[to=file2] img[data-src]").each(function() {
+						appointImgList.push($(this).data("src"));
+					});
+					var data = {
+						"userId": getCookie("userId"),
+						"tokenUser": getCookie("tokenUser"),
+						"shopId": id,
+						"type": type,
+						"require": content,
+						"price": price,
+						"requireImgUrls": JSON.stringify(needImgList),
+						"agreementImgUrls": JSON.stringify(appointImgList)
+					}
+					$.ajaxPost(uploadUrl, data, function(res) {
+						if(res.status == 0) {
+							var datas={
+								id:res.data.orderNum,
+								orderId:res.data.orderShopId,
+								price:$(".price-text").val(),
+								title:title
+							}
+							window.location.href = 'hire-server-store-pay.html'+$.toQueryString(datas,true);
+						} else {
+							$.confirm(res.msg, function() {
+								if(res.msg == "您在此店铺有待支付的托管订单,是否立即支付") {
+									window.location.href = "user-hire-orders-details.html?id=" + res.data.orderShopId;
+								}
+							});
+						}
+					});
+				});
+				$(".add-file-pact,.add-file-need").tap(function() {
+					$(this).nextAll("input").trigger("click");
+				});
+			});
+
+			function fileUpload(fileId) {
+				$.ajaxFileUpload({
+					type: "post",
+					url: APIBASEURL + (fileId == "file1" ? "/smj/app/order_shop/uploadmodel" : "/smj/app/order_shop/uploadcontract"),
+					fileElementId: fileId, //文件上传域的ID  
+					dataType: 'json',
+					data: {
+						userId: getCookie("userId"),
+						tokenUser: getCookie("tokenUser")
+					},
+					success: function(result) {
+						if($(".file-content[to=" + fileId + "]").find("img").length == 0)
+							$(".file-content[to=" + fileId + "]").empty();
+						var data = JSON.parse(result.data);
+						$(".file-content[to=" + fileId + "]").append("<a href='javascript:;' class='relative'><img data-src='" +
+							data[0] + "' src='" + showImgUrl + data[0] + "'><img class='del-img' src='img/del_img.png'></a>");
+						showImg($(".file-content[to=" + fileId + "]"));
+					},
+					error: function(data) {
+						console.log(data)
+					}
+				});
+			}
+
+			function showImg(dom) {
+				dom.find("img[data-src]").unbind("tap").tap(function() {
+					var _this = this;
+					$(".weui-gallery span img").attr("src", $(this).attr("src"));
+					$(".weui-gallery").css("display", "block");
+					$(".weui-gallery__img").unbind("tap").tap(function() {
+						$(".weui-gallery").css("display", "none");
+					});
+					$(".weui-gallery__del").unbind("tap").tap(function() {
+						$(_this).parent().remove();
+						$(".weui-gallery").css("display", "none");
+					});
+				});
+				$(".del-img").tap(function() {
+					$(this).parent().remove();
+				});
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

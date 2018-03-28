@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			header {
+				padding: 0.8rem;
+				border-bottom: 1px solid #F0F0F0;
+			}
+			
+			.back-img {
+				width: 0.6rem;
+			}
+			
+			.detele-msg img {
+				width: 1rem;
+				vertical-align: -webkit-baseline-middle;
+			}
+			
+			.weui-media-box_appmsg .weui-media-box__hd {
+				width: 4rem;
+				height: 4rem;
+			}
+			
+			.msg-no-read {
+				color: #FF9800;
+			}
+			
+			.msg-status {
+				position: absolute;
+				top: 0.5rem;
+				right: 1rem;
+			}
+			
+			.msg-read {
+				color: #CCCCCC;
+			}
+			
+			.panel {
+				background: #F5F5F5;
+				padding: 0.5rem;
+				margin-top: 0.5rem;
+				color: #b3b3b3;
+				font-size: 0.85rem;
+			}
+			
+			.weui-media-box-footer {
+				padding: 15px;
+				padding-top: 0;
+			}
+			
+			.msg-time {
+				line-height: 2rem;
+			}
+			
+			.msg-content {
+				font-size: 1rem;
+			}
+			
+			.weui-media-box__bd h2 {
+				font-size: 1.15rem;
+				width: calc(100% - 2rem);
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h3 class="weui-flex__item text-center">消息</h3>
+			<a href="javascript:;" class="detele-msg"><img src="img/shanchu2.png"></a>
+		</header>
+		<section class="msg-list">
+			<div class="weui-panel hide">
+				<div class="weui-panel-bd">
+					<div class="weui-media-box weui-media-box_appmsg">
+						<div class="weui-media-box__hd">
+							<img src="img/banner3.jpg" class="weui-media-box__thumb weui-avatar" />
+						</div>
+						<div class="weui-media-box__bd relative">
+							<h2>熟透的小苹果</h2>
+							<span class="msg-time">2017-6-15 15:24:58</span>
+							<span class="msg-status msg-no-read">未读</span>
+						</div>
+					</div>
+					<div class="weui-media-box-footer">
+						<p class="msg-content">评论这条直播：播的乱七八糟</p>
+						<div class="panel">
+							我是一只小小鸟，怎噩梦飞儿，如果打啊，那就是死啊我是一只小小鸟，怎噩梦飞儿，如果打啊，那就是死啊
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="weui-panel hide">
+				<div class="weui-panel-bd">
+					<div class="weui-media-box weui-media-box_appmsg">
+						<div class="weui-media-box__hd">
+							<img src="img/banner3.jpg" class="weui-media-box__thumb weui-avatar" />
+						</div>
+						<div class="weui-media-box__bd relative">
+							<h3>熟透的小苹果</h3>
+							<span>2017-6-15 15:24:58</span>
+							<span class="msg-status msg-read">已读</span>
+						</div>
+					</div>
+					<div class="weui-media-box-footer">
+						<p class="">评论这条直播：播的乱七八糟</p>
+						<div class="panel">
+							我是一只小小鸟，怎噩梦飞儿，如果打啊，那就是死啊我是一只小小鸟，怎噩梦飞儿，如果打啊，那就是死啊
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="weui-loadmore">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var msgListUrl = APIBASEURL + "/smj/app/messagecontroller/selectmessage";
+			var emptyMsgUrl = APIBASEURL + "/smj/app/messagecontroller/deleteMessage";
+			var currPage = 1;
+			var loading = false;
+
+			$(function() {
+				$.showLoading();
+				loadModalInit(true);
+				FastClick.attach(document.body);
+				loadData();
+				$(".detele-msg").tap(function() {
+					emptyMsg();
+				});
+			});
+
+			function loadData(callback) {
+				var sendData = {
+					userId: getCookie("userId"),
+					tokenUser: getCookie("tokenUser"),
+					currPage: currPage,
+					currNum: 5
+				}
+
+				$.ajaxGet(msgListUrl + $.toQueryString(sendData, true), function(res) {
+					console.log(res)
+					if(res.status == 0) {
+						showMsgInfo(res.data);
+						callback && callback();
+					} else {
+						loadModalInit(false);
+						//$.alert("请求失败");
+					}
+					$.hideLoading();
+				});
+			}
+
+			function showMsgInfo(datas) {
+				if(currPage == 1)
+					$(".msg-list").empty();
+				if(datas) {
+					var data = datas.message[0].concat(datas.message[1]).concat(datas.message[2]);
+					console.log(data)
+					for(var i in data) {
+						var d = data[i];
+						var style = d.msgstyle || d.msgStyle;
+						var str = "<div class=\"weui-panel\" data-msg='" + (d.mmsgid || d.msgId || d.msgid) + "' data-id='" + (d.noteId || d.mnoteid) + "' data-type='" + (style == 1 ? 1 : 2) + "'>" +
+							"<div class=\"weui-panel-bd\">" +
+							"<div class=\"weui-media-box weui-media-box_appmsg\">" +
+							"<div class=\"weui-media-box__hd\">" +
+							"<img src=\"" + (d.headimgurl || d.sheadimgur) + "\" class=\"weui-media-box__thumb weui-avatar\" />" +
+							"</div>" +
+							"<div class=\"weui-media-box__bd relative\">" +
+							"<h2 class='fontsize34'>" + (d.susername || d.title || d.susername || d.username) + "</h2>" +
+							"<span class=\"msg-time\">" + changeTime((d.creatime || d.mcreatime), "MM-dd hh:mm") + "</span>" +
+							createMsgStatus(d.msgstatus || d.msgStatus || d.MsgStatus || d.msgtatus) +
+							"</div>" +
+							"</div>" +
+							"<div class=\"weui-media-box-footer\">" +
+							"<p class=\"msg-content fontsize30\">" + createMsgContent(d) + "</p>" +
+							"<div class=\"panel\">" + (d.mcontent || d.ncontent || d.content || d.ccontent) +
+							"</div>" +
+							"</div>" +
+							"</div>" +
+							"</div>";
+						$(".msg-list").append(str);
+					}
+					$(".weui-panel").tap(function() {
+						if($(this).data("type") == 1)
+							window.location.href = 'serverMsgDetail.html?id=' + $(this).data("msg");
+						else
+							window.location.href = 'live-details.html?id=' + $(this).data("id") + "&msgId=" + $(this).data("msg");
+					});
+					if(document.documentElement.clientHeight < document.documentElement.offsetHeight) {
+						console.log("有滚动")
+						$(".weui-loadmore").removeClass("hide");
+					} else {
+						console.log("没滚动")
+						$(".weui-loadmore").addClass("hide");
+					}
+				}
+			}
+
+			function createMsgStatus(status) {
+				if(status) {
+					if(status == 10) {
+						return "<span class=\"msg-status msg-read\">已读</span>";
+					} else {
+						return "<span class=\"msg-status msg-no-read\">未读</span>";
+					}
+				}
+			}
+
+			function createMsgContent(data) {
+				var str = "";
+				if(data) {
+					var style = data.msgstyle || data.msgStyle;
+					if(style == 1) { //系统
+						str = data.title;
+					} else if(style == 2) { //评论
+						str = "评论了这条直播：" + data.content;
+					} else if(style == 3) { //点赞
+						str = "赞了这条直播";
+					} else if(style == 4) { //收藏
+						str = "收藏了这条直播";
+					} else { //回复
+						str = data.username + "回复了我";
+					}
+				}
+				return str;
+			}
+
+			function emptyMsg() {
+				$.confirm("确认清空全部消息？", "清空", function() {
+					$.ajaxDelete(emptyMsgUrl, {
+						userId: getCookie("userId"),
+						tokenUser: getCookie("tokenUser")
+					}, function(res) {
+						if(res.status == 0) {
+							$.toast("清空成功");
+							$(".msg-list").empty();
+						} else {
+							$.alert("清空失败");
+						}
+					});
+				});
+
+			}
+
+			function loadModalInit(status) {
+				if(status) {
+					$(".weui-loadmore").removeClass("hide");
+					$(document.body).infinite();
+					currPage = 1;
+					$(document.body).on("infinite", function() {
+						console.log("触发" + loading)
+						if(loading) return;
+						loading = true;
+						currPage++;
+						loadData(function() {
+							loading = false;
+						});
+					});
+					console.log("初始化完成")
+				} else {
+					loading = false;
+					$(document.body).destroyInfinite();
+					$(".weui-loadmore").addClass("hide");
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			section h2 {
+				color: #b3b3b3;
+				line-height: 5rem;
+			}
+			.box{
+				width: 4rem;
+			} 
+			section img {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">完善房屋信息</h2>
+		</header>
+		<section class="">
+			<h2 class="text-center fontsize34">开始分享你的装修经验和乐趣吧</h2>
+			<div class="weui-flex" style="padding-top: 2rem;">
+				<div class="weui-flex__item" style="margin-right: 1rem;">
+					<div class="box pull-right live">
+						<img src="img/zhibo.png" />
+						<h3 class=" text-center color-66">发直播</h3>
+					</div>
+
+				</div>
+				<div class="weui-flex__item" style="margin-left: 1rem;">
+					<div class="box bill">
+						<img src="img/zhangdan.png" />
+						<h3 class="text-center color-66">发账单</h3>
+					</div>
+
+				</div>
+			</div>
+
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js" ></script>
+		<script>
+			var data=$.getQueryObject();
+			$(function() {
+				FastClick.attach(document.body);
+				$(".live").tap(function(){
+					window.location.href='add-information-live.html'+$.toQueryString(data,true);
+				});
+				$(".bill").tap(function(){
+					window.location.href='add-information-bill.html'+$.toQueryString(data,true);
+				});
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.weui-progress {
+				margin: .5rem 0;
+			}
+			
+			.price-color {
+				margin-right: .5rem;
+			}
+			
+			.weui-panel:first-child {
+				margin-top: -1px;
+			}
+			
+			.group h2 {
+				font-size: 1rem;
+			}
+			
+			.group,
+			.live,
+			.store {
+				padding-top: 1rem;
+			}
+			
+			.weui-media-box {
+				padding-top: 0;
+			}
+			
+			.stop-time {
+				font-size: 0.7rem;
+			}
+			
+			.group-info span {
+				font-size: 0.8rem;
+			}
+			
+			.weui-avatar {
+				border-radius: .2rem;
+				width: 3rem;
+				height: 3rem;
+				margin-right: .5rem;
+			}
+			
+			.img-boxs img {
+				width: initial;
+				height: auto;
+			}
+			
+			.weui-media-box:before {
+				left: 0;
+			}
+			
+			.handle-list {
+				padding: 0rem 0.3rem;
+				height: 2rem;
+				line-height: 2rem;
+				padding-top: 0.2rem;
+				text-align: center;
+				color: #b3b3b3;
+			}
+			
+			.handle-list i {
+				position: absolute;
+				top: -.8rem;
+				font-style: inherit;
+				font-size: 0.6rem;
+			}
+			
+			.handle-list img {
+				width: 1rem;
+				vertical-align: sub;
+			}
+			
+			.handle-list span {
+				vertical-align: top;
+				margin-left: 0.3rem;
+			}
+			
+			.send-name {
+				color: #4B6398;
+			}
+			
+			.store-title {
+				font-size: 1.05rem;
+			}
+			
+			.store-type span {
+				margin-right: 0.5rem;
+			}
+			
+			.store-introduce {
+				padding-top: 0;
+			}
+			
+			.store-introduce p {
+				margin-bottom: .3rem;
+			}
+			
+			.store .title h3 {
+				font-size: 1rem;
+				color: #0f0f0f;
+				font-weight: bold;
+				margin-right: .3rem;
+			}
+			
+			.store p img {
+				width: 0.8rem;
+				height: 0.8rem;
+			}
+			
+			.store .title .logo {
+				margin-top: .3rem;
+			}
+			
+			.store-img {
+				width: 4rem;
+				height: 4rem;
+				border-radius: .2rem;
+				margin: 0 .5rem 0 0;
+			}
+			
+			.comment-content p {
+				margin-top: .3rem;
+			}
+			
+			.comment-content:before {
+				display: none;
+			}
+			
+			.zoom {
+				padding-left: .7rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">我的收藏</h2>
+		</header>
+		<section class="collect-list">
+			<!-------团购------分割线-->
+			<div class="page weui-panel group hide">
+				<div class="weui-panel-hd">
+					<div class="weui-media-box" style="padding-bottom: 0;">
+						<img src="img/banner.jpg" class="width-block" /></div>
+				</div>
+				<div class="weui-panele-bd">
+					<div class="weui-media-box">
+						<h2 class="page__title">宇宙无敌世界无敌国家无敌超强地板</h2>
+						<p class="stop-time text-right color-b3">截止日期：2016-03-01</p>
+						<p class="price">成团价：<span class="price-color font-size-36">￥25.50</span>
+							<span class="strikethrough color-b3">原价：￥50.00</span>
+						</p>
+						<div class="weui-progress" data-max="20" data-index="19">
+							<div class="weui-progress__bar">
+								<div class="weui-progress__inner-bar js_progress" style="width: 0%;"></div>
+							</div>
+						</div>
+						<h2 class="text-center color-0f group-info">70%<span class="color-66">(参团人数：10/20)</span></h2>
+					</div>
+				</div>
+			</div>
+			<!-------直播------分割线-->
+			<div class="weui-panel live hide">
+				<div class="weui-media-box weui-media-box_appmsg">
+					<img src="img/banner3.jpg" class="pull-left weui-avatar" />
+					<div class="weui-media-box__bd">
+						<div class="">
+							<h3 class="pull-left store-title">小傻瓜</h3><span class="pull-right color-b3">2016-03-03</span>
+							<div class="clear"></div>
+						</div>
+						<p class="color-b3 store-type"><span class="color-66">前期</span>三室两厅/34m²/简约清新</p>
+					</div>
+				</div>
+				<div class="padding bottomline store-introduce">
+					<p class="">爱你不是两三天，啦啦啦不快乐。听风的方向，孤单的飞翔，广播里的那首歌曲，重复那是的那条杰</p>
+					<div class="img-boxs">
+						<img src="img/banner.jpg" />
+						<img src="img/banner.jpg" />
+					</div>
+				</div>
+				<div class="weui-flex handle-list">
+					<div class="weui-flex__item">
+						<img src="img/zan.png" />
+						<span class="relative">赞<i>5</i></span>
+					</div>
+					<div class="weui-flex__item">
+						<img src="img/shoucang2.png" />
+						<span class="relative">收藏<i>5</i></span>
+					</div>
+					<div class="weui-flex__item">
+						<img src="img/pinglun.png" />
+						<span class="relative">评论<i>5</i></span>
+					</div>
+				</div>
+				<div class="weui-media-box">
+					<p class="color-66"><span class="send-name">张三</span>：好牛逼哦</p>
+					<p class="color-66"><span class="send-name">李四</span>回复<span class="send-name">张三</span>：假的</p>
+				</div>
+			</div>
+
+			<!-------服务商------分割线-->
+			<div class="weui-panel weui-flex store padding hide">
+				<img src="img/banner.jpg" class="store-img" />
+				<div class="weui-flex-item">
+					<div class="title">
+						<h3 class="pull-left">店铺名称</h3><span class="pull-left logo">企</span>
+						<div class="clear"></div>
+					</div>
+					<p><img src="img/dianhua.png"><span>13316521563</span></p>
+					<p><img src="img/dingwei.png">深圳市南山区西丽</p>
+				</div>
+			</div>
+			<div class="weui-panel weui-flex store padding hide">
+				<img src="img/banner.jpg" class="store-img" />
+				<div class="weui-flex-item">
+					<div class="title">
+						<h3 class="pull-left">店铺名称</h3><span class="pull-left logo">企</span>
+						<div class="clear"></div>
+					</div>
+					<p><img src="img/dianhua.png"><span>13316521563</span></p>
+					<p><img src="img/dingwei.png">深圳市南山区西丽</p>
+				</div>
+			</div>
+		</section>
+		<div class="weui-loadmore">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"><img src=""></span>
+			<div class="weui-gallery__opr">
+				<a href="javascript:" class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var type = $.getQueryObject().type;
+			var groupUrl = APIBASEURL + "/smj/app/collectioncontroller/selectgroupproduct";
+			var liveUrl = APIBASEURL + "/smj/app/collectioncontroller/selectnote";
+			var storeUrl = APIBASEURL + "/smj/app/collectioncontroller/selectshop";
+
+			var currPage = 1;
+			var loading = false;
+			$(function() {
+				$.showLoading();
+				loadModalInit(true);
+				FastClick.attach(document.body);
+				loadData();
+			});
+
+			function loadData(callback) {
+				var data = {
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser"),
+					"currPage": currPage,
+					"currNum": 5
+				}
+				var url = "";
+				if(type == 0) { //加载直播
+					url = liveUrl;
+				} else if(type == 1) { //加载团购
+					url = groupUrl;
+				} else { //加载服务商
+					url = storeUrl;
+				}
+				$.ajaxGet(url + $.toQueryString(data, true), function(res) {
+					if(res.status == 0) {
+						if(currPage == 1)
+							$(".collect-list").empty();
+						console.log(res);
+						if(type == 0)
+							showLiveData(res.data);
+						else if(type == 1)
+							showGroupData(res.data);
+						else
+							showStoreData(res.data);
+						callback && callback();
+					} else {
+						loadModalInit(false);
+						//$.alert("获取失败");
+					}
+					if(currPage == 1 && document.documentElement.clientHeight < document.documentElement.offsetHeight) {
+						console.log("有滚动")
+						$(".weui-loadmore").removeClass("hide");
+					} else {
+						console.log("没滚动")
+						$(".weui-loadmore").addClass("hide");
+					}
+					$.hideLoading();
+				});
+			}
+
+			function showGroupData(data) {
+				if(data) {
+					if(data.listGroupProduct.length == 0)
+						loadModalInit(false);
+					for(var i in data.listGroupProduct) {
+						var d = data.listGroupProduct[i];
+						var str = "<div class=\"page weui-panel group\" data-id='" + d.group_product_id + "'>" +
+							"<div class=\"weui-panel-hd\">" +
+							"<div class=\"weui-media-box\" style=\"padding-bottom: 0;\">" +
+							"<img src=\"img/banner.jpg\" class=\"width-block\" /></div>" +
+							"</div>" +
+							"<div class=\"weui-panele-bd\">" +
+							"<div class=\"weui-media-box\">" +
+							"<h2 class=\"page__title\">" + d.name + "</h2>" +
+							"<p class=\"stop-time text-right color-b3\">截止日期：2016-03-01</p>" +
+							"<p class=\"price\">成团价：<span class=\"price-color font-size-36\">￥" + d.group_price + "</span>" +
+							"<span class=\"strikethrough color-b3\">原价：￥" + d.orignal_price + "</span>" +
+							"</p>" +
+							"<div class=\"weui-progress\" data-max=\"" + d.plan_participants + "\" data-index=\"" + d.plan_participants + "\">" +
+							"<div class=\"weui-progress__bar\">" +
+							"<div class=\"weui-progress__inner-bar js_progress\" style=\"width: 0%;\"></div>" +
+							"</div></div>" +
+							(d.status == 3 ? "<h3 class=\"text-center fontsize30\">已成团，赶紧加入吧</h3><p class=\"text-center color-b3 fontsize26\">约熟悉的朋友一起拼</p>" :
+								"<h2 class=\"text-center color-0f group-info\">" + (d.participants >= d.plan_participants ? "100" : ((d.participants * 100) / d.plan_participants).toFixed(2)) + "%<span class=\"color-66\">(参团人数：" +
+								d.participants + "/" + d.plan_participants + ")</span></h2>") +
+							"</div></div></div>";
+						$(".collect-list").append(str);
+					}
+					$(".group").tap(function() {
+						window.location.href = 'group-shopping-details.html?id=' + $(this).data("id");
+					});
+					progressAnimation()
+				}
+			}
+
+			function showLiveData(data) {
+				if(data) {
+					if(data.mapNote.length == 0)
+						loadModalInit(false);
+					for(var i in data.mapNote) {
+						var d = data.mapNote[i];
+						var commentContent = showComment(d.uComment);
+						var str = "<div class=\"weui-panel live\" data-id='" + (d.noteid || d.noteId) + "'>" +
+							"<div class=\"weui-media-box weui-media-box_appmsg\">" +
+							"<img src=\"" + d.uheadimgurl + "\" class=\"pull-left weui-avatar\" />" +
+							"<div class=\"weui-media-box__bd\">" +
+							"<div>" +
+							"<h3 class=\"pull-left store-title\">" + (d.uusername || d.shopname) + "</h3><span class=\"pull-right color-b3\">" + changeTime(d.ncreatime, "yyyy-MM-dd") + "</span>" +
+							"<div class=\"clear\"></div>" +
+							"</div>" +
+							"<p class=\"color-b3 store-type\"><span class=\"color-66\">" + liveType[d.ntypedecorationstage] + "</span>" + houseType[d.htypehouse] + "/" + d.harea + "m²/" + decorationType[d.htypedecoration] + "</p>" +
+							"</div></div>" +
+							"<div class=\"padding bottomline store-introduce\"><p class=\"price-color sign " + (d.typenote == 22 ? "hide" : "") + "\">#账单#</p><p>" + d.ncontent + "</p>" +
+							"<div class=\"img-boxs\">" + showBannerImg(d.nnoteimgurls) +
+							"</div></div>" +
+							"<div class=\"weui-flex handle-list bottomline\" collectid='" + d.collectionId + "' data-id='" + d.noteid + "'>" +
+							"<div class=\"weui-flex__item praise\">" +
+							"<img src=\"img/zan.png\" />" +
+							"<span class=\"relative\">赞<i>" + d.nthumbsupcount + "</i></span>" +
+							"</div>" +
+							"<div class=\"weui-flex__item collect\">" +
+							"<img src=\"img/soucang3.png\" />" +
+							"<span class=\"relative\">取消收藏<i>" + d.ncollectioncount + "</i></span>" +
+							"</div>" +
+							"<div class=\"weui-flex__item comment\">" +
+							"<img src=\"img/pinglun.png\" />" +
+							"<span class=\"relative\">评论<i>" + d.ncommentcount + "</i></span>" +
+							"</div></div>" +
+							"<div class=\"weui-media-box comment-content " + ($(commentContent).length >= 3 ? "zoom-hidden" : "") + "\">" + commentContent +
+							"</div>" +
+							"<a href=\"javascript:;\" class=\"color-b3 zoom " + ($(commentContent).length >= 3 ? "" : "hide") + "\">展开∨</a>" +
+							"</div>";
+						$(".collect-list").append(str);
+					}
+					showImg();
+					commentEvent();
+					$(".zoom").tap(function() {
+						$(this).prev().toggleClass("zoom-hidden");
+						if($(this).prev().hasClass("zoom-hidden")) {
+							$(this).text("展开∨");
+						} else {
+							$(this).text("收起∧");
+						}
+					});
+					liveHandle();
+				}
+			}
+
+			function showStoreData(data) {
+				if(data) {
+					if(data.listShop.length == 0)
+						loadModalInit(false);
+					for(var i in data.listShop) {
+						var d = data.listShop[i];
+						var str = "<div class=\"weui-panel weui-flex store padding\" data-id='" + d.shopId + "'>" +
+							"<img src=\"img/banner.jpg\" class=\"store-img\" />" +
+							"<div class=\"weui-flex-item\">" +
+							"<div class=\"title\">" +
+							"<h3 class=\"pull-left\">" + d.shopName + "</h3><span class=\"pull-left logo\">" + (d.typeAuth == 15 ? "个" : "企") + "</span>" +
+							"<div class=\"clear\"></div>" +
+							"</div>" +
+							"<p><img src=\"img/dianhua.png\"><span>" + d.phone + "</span></p>" +
+							"<p><img src=\"img/dingwei.png\">" + d.shopAddress + "</p>" +
+							"</div>" +
+							"</div>";
+						$(".collect-list").append(str);
+					}
+					$(".store").tap(function() {
+						window.location.href = 'store-details.html?id=' + $(this).data("id");
+					});
+				}
+			}
+
+			function showBannerImg(data) {
+				var str = "";
+				if(data) {
+					data = JSON.parse(data);
+					for(var i in data) {
+						str += "<a href='javascript:;' class='hidden-img'><img src=\"" + showImgUrl + data[i] + "\" onload=\"chgdivimgwh(this);\" /></a>";
+					}
+				}
+				return str;
+			}
+
+			function loadModalInit(status) {
+				if(status) {
+					$(".weui-loadmore").removeClass("hide");
+					$(document.body).infinite();
+					currPage = 1;
+					$(document.body).on("infinite", function() {
+						console.log("触发" + loading)
+						if(loading) return;
+						loading = true;
+						currPage++;
+						loadData(function() {
+							loading = false;
+						});
+					});
+					console.log("初始化完成");
+				} else {
+					loading = false;
+					$(document.body).destroyInfinite();
+					$(".weui-loadmore").addClass("hide");
+				}
+			}
+
+			function showImg() {
+				$(".img-boxs img").unbind("tap").tap(function() {
+					var _this = this;
+					$(".weui-gallery span img").attr("src", $(this).attr("src"));
+					$(".weui-gallery").css("display", "block");
+					$(".weui-gallery__img").unbind("tap").tap(function() {
+						$(".weui-gallery").css("display", "none");
+					});
+					$(".weui-gallery__del").addClass("hide");
+				});
+
+			}
+		</script>
+	</body>
+
+</html>

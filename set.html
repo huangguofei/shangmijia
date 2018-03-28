@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.weui-cell:before {
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">设置</h2>
+		</header>
+		<section>
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='user-idea.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">意见反馈</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='user-server-content.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">服务条款</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access" onclick="window.location.href='user-about.html'">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">关于我们</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+			<div class="weui-cell weui-cell_access bottomline exit-login">
+				<div class="weui-cell__bd">
+					<span style="vertical-align: middle">退出登录</span>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</div>
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script>
+			$(function() {
+				FastClick.attach(document.body);
+				$(".exit-login").tap(function() {
+					$.confirm("确认退出登录？", "退出登录", function() {
+						outLogin();
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>

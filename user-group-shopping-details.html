@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			body {
+				padding-bottom: 3.5rem;
+			}
+			
+			.group-status {
+				background: #FF6500;
+				color: #fff;
+				text-align: left;
+				padding: 1rem 2rem;
+				min-height: 3.5rem;
+			}
+			
+			.group-status p {
+				color: #fdcaca;
+			}
+			
+			.group-status p span:first-child {
+				color: #fff;
+				font-size: 1rem;
+			}
+			
+			.group-status img {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				width: 4rem;
+			}
+			
+			.group-details .weui-media-box__bd p {
+				line-height: 1.5rem;
+				font-size: .85rem;
+			}
+			
+			.group-info>span {
+				display: inline-block;
+				line-height: 2rem;
+			}
+			
+			.group-details .weui-media-box__hd {
+				width: 6rem;
+				height: 6rem;
+			}
+			
+			.group-details h2 {
+				font-size: 1rem;
+			}
+			
+			.group-remark .weui-media-box__hd {
+				width: 4rem;
+				height: 4rem;
+			}
+			
+			.group-remark .weui-media-box__hd img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.group-remark .weui-media-box__bd img {
+				width: .8rem;
+				height: .8rem;
+				margin-right: .3rem;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: #fff;
+				/*height: 2.8rem;*/
+				/* line-height: 3rem; */
+				/*padding: .5rem 1rem;*/
+			}
+			
+			footer .btn-group {
+				width: 5rem;
+				display: block;
+				margin-right: 1rem;
+				margin-top: .4rem;
+				color: #0f0f0f;
+				height: 2rem;
+				line-height: 2rem;
+			}
+			
+			footer div {
+				height: 100%;
+			}
+			
+			footer .btn-left {
+				width: 40%;
+				color: #0f0f0f;
+				background: #fff;
+				line-height: 2.8rem;
+			}
+			
+			footer .btn-right {
+				width: 60%;
+				color: #fff;
+				background: #0f0f0f;
+			}
+			
+			.btn-right h3 {
+				line-height: 1.4rem;
+				font-size: 1rem;
+				margin-top: .1rem;
+			}
+			
+			.btn-right p {
+				color: #ccc;
+				font-size: 0.8rem;
+			}
+			
+			footer div .btn {
+				text-align: center;
+				font-size: 1rem;
+			}
+			
+			.weui-cell_access {
+				width: 100%;
+				padding-left: 0;
+			}
+			
+			.weui-cell_access .weui-cell__ft {
+				text-align: left;
+				padding-right: 1rem;
+				width: 65%;
+				color: #666;
+			}
+			
+			.weui-cell_access .weui-cell__ft .address {
+				color: #B3B3B3;
+				font-size: .7rem;
+			}
+			
+			.group-shipping-address {
+				padding-bottom: 0;
+				padding-top: 0;
+			}
+			
+			.lineheight h2 {
+				line-height: 3rem;
+			}
+			
+			.weui-dialog .weui-dialog__btn.default {
+				color: #0f0f0f;
+			}
+			
+			.weui-dialog .weui-dialog__btn.primary {
+				background: #0f0f0f;
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">拼团详情</h2>
+		</header>
+		<section class="group-status padding text-center relative lineheight">
+			<h2>拼团中</h2>
+			<p class="hide">当前参团人数：<span bind="product.participants">13</span>/<span bind="product.planParticipants">20</span>人</p>
+			<img src="img/pintuan.png" />
+		</section>
+		<div class="group-info whitebk padding">
+			<span class="pull-left" style="width: 65%;">订单号：<span bind="orderproduct.orderNo"></span></span>
+			<span class="pull-left" style="width: 35%;">定金：￥<span bind="orderproduct.hadPay">00.00</span></span>
+			<span class="pull-left">参团于：<span class="times">2017-6-15</span></span>
+			<div class="clear"></div>
+		</div>
+		<div class="weui-panel group-details">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img src="" class="weui-media-box__thumb store-benner-img" />
+				</div>
+				<div class="weui-media-box__bd">
+					<h2 class="overflow2" bind="product.name"></h2>
+					<p class="color-66">成团价：<span class="price-color">￥<span bind="product.groupPrice">00.00</span>/套</span>
+					</p>
+					<p class="color-66">数量：<span bind="orderproduct.number">0</span>套</p>
+				</div>
+			</div>
+			<div class="weui-media-box">
+				<h3 class="pull-left">团购总额：</h3>
+				<h3 class="price-color">￥<span bind="orderproduct.totalPrice">0.00</span></h3>
+				<div class="clear"></div>
+			</div>
+			<div class="weui-media-box weui-flex">
+				<h3 class="">备注：</h3>
+				<h3 class="weui-flex__item color-66" bind="orderproduct.remark">无</h3>
+			</div>
+		</div>
+		<div class="weui-panel bottomline group-remark">
+			<div class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__hd">
+					<img src="" class="weui-media-box__thumb shop-banner" />
+				</div>
+				<div class="weui-media-box__bd">
+					<h3 bind="product.shop.shopName">材料铺名称</h3>
+					<p class="color-66"><img src="img/dianhua.png"><span bind="product.shop.phone">13316521563</span></p>
+					<p class="color-66"><img src="img/dingwei.png"><span bind="product.shop.shopAddress">深圳市南山区西丽</span></p>
+				</div>
+			</div>
+		</div>
+		<div class="weui-panel group-shipping-address" onclick="window.location.href='user-shipping-address.html'">
+			<div class="weui-media-box">
+				<div class="weui-cell weui-cell_access">
+					<div class="weui-cell__bd">
+						<h3 style="vertical-align: middle">收货地址：</h3>
+					</div>
+					<div class="weui-cell__ft">
+						<h3><span bind="address.name">张三</span>,<span bind="address.phone">18166423613</span></h3>
+						<p class="address" bind="address.msg">深圳　南山　西丽　某某街道</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="">
+			<div class="hide" data-index="0">
+				<input type="button" class="weui-btn weui-btn_plain-default btn-group group-cancel" value="取消拼团" />
+			</div>
+			<div class="weui-flex hide" data-index="1">
+				<a href="javascript:;" class="btn btn-left group-cancel">取消拼团</a>
+				<a href="javascript:;" class="weui-flex-item btn btn-right btn-pay">
+					<h3>立即支付</h3>
+					<p>支付金额<span class="price-color">￥<span class="price">300.00</span></span>
+					</p>
+				</a>
+			</div>
+			<div class="weui-flex hide" data-index="2">
+				<a href="javascript:;" class="btn btn-left group-cancel-refund">退款</a>
+				<a href="javascript:;" class="weui-flex-item btn btn-right btn-pay">
+					<h3>立即支付</h3>
+					<p>支付尾款<span class="price-color">￥<span class="price">300.00</span></span>
+					</p>
+				</a>
+			</div>
+			<div class="weui-flex hide" data-index="3">
+				<a href="javascript:;" class="btn btn-left group-cancel hide">取消拼团</a>
+				<a href="javascript:;" class="weui-flex-item btn btn-right btn-receive" style="line-height: 2.8rem;">确认收货</a>
+			</div>
+		</footer>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var loadInfoUrl = APIBASEURL + "/smj/app/order/get";
+			var cancelUrl = APIBASEURL + "/smj/app/order/applyCancel";
+			var receivingUrl = APIBASEURL + "/smj/app/order/confirmReceipt";
+			var payUrl = APIBASEURL + "/smj/app/order/payConfirm";
+			var id = $.getQueryObject().id;
+
+			var statusImg = ["img/pintuan.png", "", "img/daifuweikuan.png", "img/shouhuo.png", "img/jiaoyiwancheng.png", "img/yiquxiao.png", "img/pintuan.png",
+				"img/pintuanshibai.png"
+			]
+			var orderData = "";
+			$(function() {
+				sessionStorage.setItem("isrefresh",true);
+				FastClick.attach(document.body);
+				loadData();
+				$(".btn-receive").tap(function() {
+					$.confirm("确认收货后，所支付的金额将会到服务商账户", function() {
+						$.ajaxPost(receivingUrl, {
+							"userId": getCookie("userId"),
+							"tokenUser": getCookie("tokenUser"),
+							"orderId": id
+						}, function(res) {
+							if(res.status == 0) {
+								$.toast("支付成功");
+								window.location.reload(true);
+							} else {
+								$.alert("支付失败");
+							}
+						});
+					}, function() {
+						//点击取消后的回调函数
+					});
+				});
+				$(".group-cancel-refund").tap(function() {
+					window.location.href = 'user-cancel-order.html?id=' + id + "&type=1&title=" + orderData.product.name;
+				})
+				$(".group-cancel").tap(function() {
+					$.confirm("确定取消拼团？", function() {
+						$.ajaxPut(cancelUrl, {
+							orderId: id,
+							userId: getCookie("userId"),
+							tokenUser: getCookie("tokenUser")
+						}, function(res) {
+							if(res.status == 0) {
+								$.toast("取消成功");
+								setTimeout(function() {
+									window.location.reload(true);
+								}, 2000);
+							} else {
+								$.alert("取消失败");
+							}
+						});
+					});
+				});
+				$(".btn-pay").tap(function() { //$(".weui-flex")
+					var str = "温馨提示：1、为保证您能享受到平台带来的服务保障，请完成预付款流程后，至商家门店处提货时，在平台完成尾款支付。2、拼团产品不享受七天无理由退换货，请根据自己的实际需求理性跟团。（产品质量问题除外。）";
+					var _this = this;
+					if($(this).parent(".weui-flex").data("index") == 1) {
+						str = "确定支付？";
+					}
+					$.confirm(str, function() {
+						var datas = {
+							openid: getCookie("openid"),
+							total_fee: $(_this).find(".price").text(),
+							body: orderData.product.name,
+							orderType: 0,
+							orderId: id,
+							orderNo: orderData.orderproduct.orderNo
+						}
+						setPayInfo(datas, "1");
+					});
+				});
+				$(".group-details").tap(function() {
+					window.location.href = "group-shopping-details.html?id=" + $(this).data("id");
+				});
+				$(".group-remark").tap(function() {
+					window.location.href = 'store-details.html?id=' + $(this).data("id");
+				});
+			});
+
+			function loadData() {
+				$.ajaxGet(loadInfoUrl + $.toQueryString({
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser"),
+					"orderId": id
+				}, true), function(res) {
+					if(res.status == 0) {
+						console.log(res);
+						orderData = res.data;
+						showData(res.data);
+					} else {
+						//$.alert("请求失败：" + res.msg);
+					}
+				});
+			}
+
+			function showData(data) {
+				if(data) {
+					var content = ".bodybk";
+					var control = new Controller(content);
+					control.set(data);
+					showStatusInfo(data.orderproduct.orderStatus, data);
+					$(".times").text(changeTime(data.orderproduct.creatime, "yyyy-MM-dd"));
+					$(".group-remark").data("id", data.product.shop.shopId);
+					var price = "";
+					if(data.orderproduct.orderStatus == 1) {
+						price = (data.product.downPay == 0 ? data.orderproduct.totalPrice : data.product.downPay)
+					} else {
+						price = data.orderproduct.totalPrice - data.orderproduct.hadPay;
+					}
+					$(".price").text(price);
+					$(".store-benner-img").attr('src', showImgUrl + data.product.thumbnailUrl);
+					$(".shop-banner").attr('src', showImgUrl + data.product.shop.thumbnailUrl);
+					$(".group-details").data("id", data.orderproduct.groupProductId);
+				}
+			}
+
+			function showStatusInfo(status, data) {
+				console.log(status)
+				$("footer>div[data-index=" + status + "]").removeClass("hide");
+				$(".group-status h2").text(orderSatus[status]);
+				$(".group-status img").attr("src", statusImg[status]);
+				if(status == 0) {
+					$(".group-status p").removeClass("hide");
+					$(".group-status").removeClass("lineheight");
+				} else if(status == 2) {
+					$(".group-status p").removeClass("hide").text("已成团，请支付尾款");
+					$(".group-status").removeClass("lineheight");
+				}
+				if(data.product.downPay == 0 && data.product.groupPrice == 0 && status == 2) {
+					$("footer>div[data-index=" + 0 + "]").removeClass("hide");
+					$(".group-status h2").text(groupStatusShow(data.product.downPay, data.product.groupPrice, status));
+					$(".group-status p").removeClass("hide").text("当前参团人数:" + data.product.participants + "/" + data.product.planParticipants + "人");
+					$(".group-status img").attr("src", "img/apply.png");
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

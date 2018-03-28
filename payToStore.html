@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.content {
+				margin: 2rem auto;
+				height: 2rem;
+				line-height: 2rem;
+				font-size: 1.1rem;
+				padding-left: 2rem;
+			}
+			
+			.content h2 {
+				font-size: 1.1rem;
+				/*margin-right: .3rem;*/
+			}
+			
+			.price-input {
+				width: 7rem;
+				height: 1.4rem;
+				border: 1px solid #ccc;
+				border-right: 0;
+				border-radius: .2rem;
+				margin: 0 .5rem;
+				padding: .3rem;
+				font-size: 1rem;
+				outline: none;
+			}
+			
+			.content span {
+				border: 1px solid #ccc;
+				border-radius: .2rem;
+				border-left: 0;
+				margin-left: -0.8rem;
+				padding-right: .3rem;
+			}
+			
+			.remark {
+				width: 80%;
+				margin: .5rem auto;
+			}
+			
+			.padding .page-btn {
+				width: 80%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">支付托管金额给商家</h2>
+		</header>
+		<section class="padding">
+			<div class="price-info">
+				<h3 class="pull-left">剩余托管金额：</h3>
+				<span class="price-color pull-left">￥<span class="price"></span></span>
+				<div class="clear"></div>
+			</div>
+			<div class="color-0f content">
+				<h2 class="pull-left">支付金额</h2>
+				<input type="number" class="pull-left price-input" />
+				<span class="pull-left">元</span>
+				<div class="clear"></div>
+			</div>
+			<p class="remark color-b3">注：在确认支付后，所输入的金额将到服务商账户</p>
+			<input type="button" class="weui-btn page-btn" value="确定" />
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var prices = $.getQueryObject().price;
+			var id = $.getQueryObject().id;
+			var payUrl = APIBASEURL + "/smj/app/order_shop/payment";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".price").text(prices);
+				$(".page-btn").tap(function() {
+					var price = $(".price-input").val();
+					if(!price || price <= 0) {
+						$.alert("请输入正确支付金额");
+						return false;
+					}
+
+					if(price > prices) {
+						$.alert("支付金额不能大于剩余托管金额");
+						return false;
+					}
+					$.ajaxPost(payUrl, {
+						"userId": getCookie("userId"),
+						"tokenUser": getCookie("tokenUser"),
+						"orderShopId": id,
+						"paymentAmount": price
+					}, function(res) {
+						if(res.status == 0) {
+							$.toast("支付成功");
+							window.location.href = 'user-hire-orders-details.html?id='+id;
+						} else {
+							$.alert("支付失败");
+						}
+					});
+				});
+			});
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

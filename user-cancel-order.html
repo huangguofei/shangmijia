@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.content {
+				resize: none;
+				background: #F5F5F5;
+				border: 0;
+				width: 100%;
+				min-height: 8rem;
+				margin-top: .5rem;
+				font-size: .8rem;
+				font-family: -webkit-pictograph;
+				padding: .5rem;
+				box-sizing: border-box;
+				outline: none;
+			}
+			
+			.add-files {
+				float: left;
+				width: 3rem;
+				height: 3rem;
+				padding: .2rem;
+				color: #101010;
+				margin-right: .5rem;
+			}
+			
+			.add-files img {
+				vertical-align: middle;
+			}
+			
+			.btn-group {
+				margin-top: 2rem;
+			}
+			
+			.file-content {
+				margin-left: 4rem;
+				height: 3rem;
+				line-height: 3rem;
+			}
+			
+			.price {
+				width: 80%;
+				text-align: right;
+				line-height: 1.6rem;
+				height: 1.6rem;
+				font-size: 1rem;
+			}
+			
+			.weui-cell {
+				height: 2rem;
+				line-height: 2rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">取消订单</h2>
+		</header>
+		<section>
+			<div class="weui-cell bottomline">
+				<div class="weui-cell__hd"><label class="weui-label">退款金额：</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input price" type="number" pattern="[0-9]*" placeholder="">
+					<span>元</span>
+				</div>
+			</div>
+			<article class="padding">
+				<h3>退款原因</h3>
+				<textarea class="content" placeholder="输入您的退款原因"></textarea>
+				<a href="javascript:;" class="add-files">
+					<img class="width-block add-file" src="img/tianjia.png" />
+				</a>
+				<div class="fontsize30 color-b3 file-content">上传凭证</div>
+				<input type="file" class="file hide" name="file" id="file" onchange="fileUpload('file')" />
+				<div class="btn-group">
+					<input type="button" class="weui-btn page-btn" value="确定" />
+				</div>
+			</article>
+		</section>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"><img src=""> </span>
+			<div class="weui-gallery__opr">
+				<a href="javascript:" class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+		<script>
+			var type = $.getQueryObject().type;
+			var id = $.getQueryObject().id;
+			var uploadFileHireUrl = APIBASEURL + "/smj/app/order_shop/refund";
+			var uploadFileGroupUrl = APIBASEURL + "/smj/app/order/refund";
+			var hireUrl = APIBASEURL + "/smj/app/order_shop/cancel";
+			var groupUlr = APIBASEURL + "/smj/app/order/refundConfirm";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".add-file").tap(function() {
+					$("#file").trigger("click");
+				});
+				$(".page-btn").tap(function() {
+					postData();
+				});
+			});
+
+			function fileUpload(fileId) {
+				$.ajaxFileUpload({
+					type: "post",
+					url: (type == 1 ? uploadFileGroupUrl : uploadFileHireUrl),
+					fileElementId: fileId, //文件上传域的ID  
+					dataType: 'json',
+					data: {
+						userId: getCookie("userId")
+					},
+					success: function(result) {
+						if($(".file-content img").length == 0)
+							$(".file-content").empty();
+						var data = JSON.parse(result.data.imgUrls);
+						$(".file-content").append("<a href='javascript:;' class='relative'><img data-src='" +
+							data[0] + "' src='" + showImgUrl + data[0] + "'><img class='del-img' src='img/del_img.png'></a>");
+						showImg();
+					},
+					error: function(data) {
+						console.log(data)
+					}
+				});
+			}
+
+			function showImg() {
+				$(".file-content img[data-src]").unbind("tap").tap(function() {
+					var _this = this;
+					$(".weui-gallery span img").attr("src", $(this).attr("src"));
+					$(".weui-gallery").css("display", "block");
+					$(".weui-gallery__img").unbind("tap").tap(function() {
+						$(".weui-gallery").css("display", "none");
+					});
+					$(".weui-gallery__del").unbind("tap").tap(function() {
+						$(_this).parent().remove();
+						$(".weui-gallery").css("display", "none");
+					});
+				});
+				$(".del-img").tap(function() {
+					$(this).parent().remove();
+				});
+			}
+
+			function postData() {
+				var price = $(".price").val();
+				var remarkTxt = $(".content").val();
+				var imgUrls = [];
+				if(!price) {
+					$.alert("退款金额不能为空");
+					return false;
+				}
+				$(".file-content img[data-src]").each(function(i) {
+					imgUrls.push($(this).data("src"));
+				});
+				var data = {
+					userId: getCookie("userId"),
+					tokenUser: getCookie("tokenUser"),
+					orderShopId: id,
+					refundCash: price,
+					cash: price,
+					orderId: id,
+					urls: JSON.stringify(imgUrls),
+					descr: remarkTxt,
+					refundDescr: remarkTxt,
+					refundUrl: JSON.stringify(imgUrls)
+				}
+				$.ajaxPost(type == 1 ? groupUlr : hireUrl, data, function(res) {
+					if(res.status == 0) {
+						$.toast("退款成功");
+						if(type == 1)
+							window.location.href = 'user-group-shopping-details.html?id=' + id;
+						else
+							window.location.href = 'user-hire-orders-details.html?id=' + id;
+					} else {
+						$.alert("退款失败");
+					}
+				});
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

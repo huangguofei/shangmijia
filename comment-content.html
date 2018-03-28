@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.time {
+				line-height: 1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">店铺评论详情</h2>
+		</header>
+		<section class="padding" style="line-height: 1.4rem;">
+
+		</section>
+		<div class="weui-loadmore hide">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var id = $.getQueryObject().id;
+			var loadDataUrl = APIBASEURL + "/smj/app/shop/list/shopuc";
+			var loading = false; //状态标记
+			var currPage = 1;
+			$(function() {
+				loadModalInit(true);
+				FastClick.attach(document.body);
+				loadData();
+			});
+
+			function loadData(callback) {
+				$.ajaxGet(loadDataUrl + $.toQueryString({
+					"shopId": id,
+					"pageNum": currPage,
+					"pageSize": 20
+				}, true), function(res) {
+					if(res.status == 0) {
+						showData(res.data);
+						callback && callback();
+					} else {
+						loadModalInit(false);
+						//$.alert("加载失败：" + res.msg);
+					}
+				});
+			}
+
+			function showData(data) {
+				if(data) {
+					if(data.ucoms.length == 0)
+						loadModalInit(false);
+					for(var i in data.ucoms) {
+						var str = "";
+						var d = data.ucoms[i];
+						str += "<p class=\"color-66\"><span class=\"send-name color-b3\">" + (d.isanonymous == 10 ? "匿名用户" : d.userName) + "</span>：" + d.content +
+							"</p><p class='color-66 fontsize22 text-right time'>" + changeTime(d.creatime, "MM-dd hh:mm") + "</p>";
+						if(d.sComment.length != 0)
+							str += "<p class=\"store-comment price-color\">掌柜回复<span class=\"send-name\">" + d.userName + "</span>：" + d.scoms[0].content +
+							"</p><p class='color-66 fontsize22 text-right time'>" + changeTime(d.scoms[0].creatime, "MM-dd hh:mm") + "</p>";
+						$("section").append(str);
+					}
+					if(document.documentElement.clientHeight < document.documentElement.offsetHeight) {
+						console.log("有滚动")
+						$(".weui-loadmore").removeClass("hide");
+					} else {
+						console.log("没滚动")
+						$(".weui-loadmore").addClass("hide");
+					}
+				}
+			}
+
+			function loadModalInit(status) {
+				if(status) {
+					$(".weui-loadmore").removeClass("hide");
+					$(document.body).infinite();
+					currPage = 1;
+					$(document.body).on("infinite", function() {
+						console.log("触发" + loading)
+						if(loading) return;
+						loading = true;
+						currPage++;
+						loadData(function() {
+							loading = false;
+						});
+					});
+					console.log("初始化完成")
+				} else {
+					loading = false;
+					$(document.body).destroyInfinite();
+					$(".weui-loadmore").addClass("hide");
+				}
+			}
+		</script>
+	</body>
+
+</html>

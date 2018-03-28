@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.weui-panel:first-child {
+				margin-top: -1px;
+			}
+			
+			.weui-panel__hd:after {
+				left: 0;
+			}
+			
+			.shipping-address-list .weui-flex {
+				color: #101010;
+			}
+			
+			.address-headle {
+				/*padding: 0.3rem 0.8rem;*/
+				padding-right: .8rem;
+				padding-left: 0;
+				margin-top: -1px;
+				line-height: 1.4rem;
+			}
+			
+			.address-headle {
+				font-size: .7rem;
+			}
+			
+			.address-headle a {
+				color: #b3b3b3;
+				font-size: .8rem;
+			}
+			
+			.address-headle img {
+				width: 1.2rem;
+				vertical-align: sub;
+				margin-right: .3rem;
+			}
+			
+			.address-headle p {
+				line-height: 2.4rem;
+			}
+			
+			.edit,
+			.address-headle input {
+				margin-right: 1rem;
+			}
+			
+			.dialog {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+			
+			.dialog-bg {
+				width: 100%;
+				height: 100%;
+				background: #ccc;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				opacity: .5;
+			}
+			
+			.dialog-bd>div {
+				padding: 0 0.8rem;
+			}
+			
+			.dialog-bd input {
+				height: 2.5rem;
+				line-height: 2.5rem;
+				font-size: 1rem;
+				padding: .1rem .5rem;
+			}
+			
+			.dialog-content {
+				background: #fff;
+				position: relative;
+				z-index: 3;
+				width: 90%;
+				margin: 30% auto;
+			}
+			
+			.dialog-content h2 {
+				line-height: 3rem;
+			}
+			
+			.off-dialog {
+				position: absolute;
+				top: -1rem;
+				right: -.8rem;
+			}
+			
+			.off-dialog img {
+				width: 2rem;
+			}
+			
+			.details-adress {
+				width: 100%;
+				resize: none;
+				border: 0;
+				font-family: sans-serif;
+				min-height: 5rem;
+				font-size: 1rem;
+				padding: .5rem;
+				box-sizing: border-box;
+			}
+			
+			.add-address {
+				font-size: 1rem;
+			}
+			
+			.address-info {
+				font-size: 1rem;
+				color: #0f0f0f;
+			}
+			
+			.weui-cell__bd {
+				font-size: 1rem;
+				color: #676767;
+			}
+			
+			.active .weui-cell__bd {
+				color: #ff6500;
+			}
+			
+			.address-header {
+				line-height: 2.5rem;
+				font-size: 1rem;
+			}
+			
+			.address-header span {
+				display: inline-block;
+				padding: 0 .3rem;
+				color: #666;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">收货地址</h2>
+			<h3 class="add-address price-color">添加</h3>
+		</header>
+		<section class="shipping-address-list">
+			<div class="weui-panel hide">
+				<div class="weui-panel__hd">
+					<div class="address-info">
+						<p><span class="shipping-address-name">张三</span>，<span>16356495623</span></p>
+						<p class="color-66">深圳 南山 西丽 某某社区某某街道</p>
+					</div>
+				</div>
+				<div class="weui-panel__bd address-headle weui-cells weui-cells_checkbox">
+					<label class="pull-left weui-cell weui-check__label active" for="s11">
+						<div class="weui-cell__hd">
+                    		<input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+                    		<i class="weui-icon-checked"></i>
+                		</div>
+                		<div class="weui-cell__bd">设为默认</div>
+					</label>
+					<p class="pull-right">
+						<a href="javascript:;" class="edit"><img src="img/bianji2.png" />编辑</a>
+						<a href="javascript:;" class="detele"><img src="img/shanchu3.png" />删除</a>
+					</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</section>
+		<div class="dialog hide">
+			<div class="dialog-content">
+				<div class="dialog-hd relative">
+					<h2 class="text-center">添加地址</h2>
+					<a href="javascript:$('.dialog').addClass('hide');" class="off-dialog"><img src="img/guanbi.png" /></a>
+				</div>
+				<div class="dialog-bd">
+					<div class="weui-flex bottomline topline">
+						<input type="text" class="name weui-input weui-flex-item" bind="name" placeholder="姓名" nulltip="收货人姓名" />
+						<input type="number" class="phone weui-input weui-flex_item leftline" oninput="if(value.length>11)value=value.slice(0,11)" maxlength="11" nulltip="联系电话" bind="phone" placeholder="电话" />
+					</div>
+					<div class="bottomline hide">
+						<input type="text" name="" class="area weui-input" placeholder="收货地址" id="shipping-address" />
+					</div>
+					<div class="address-header bottomline"><span>湖南</span>省<span>株洲</span>市</div>
+					<div class="bottomline">
+						<textarea name="" class="weui-textarea bottomline details-adress" bind="msg" nulltip="收货地址" placeholder="详细街道地址"></textarea>
+					</div>
+					<div class="" style="padding-top: .5rem;padding-bottom: .5rem;">
+						<input type="button" class="weui-btn weui-btn_primary page-btn" id="" value="确定" />
+					</div>
+				</div>
+			</div>
+			<div class="page-bg"></div>
+		</div>
+		<div class="weui-loadmore">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/city-picker.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var loadAddressUrl = APIBASEURL + "/smj/app/addresscontroller/selectaddress";
+			var addAddressUrl = APIBASEURL + "/smj/app/addresscontroller/insertaddress";
+			var editAddressUrl = APIBASEURL + "/smj/app/addresscontroller/updateaddress";
+			var deleteAddressUrl = APIBASEURL + "/smj/app/addresscontroller/deleteaddress";
+			var setDefaultAddressUrl = APIBASEURL + "/smj/app/addresscontroller/updatedefault";
+			var currPage = 1;
+			var loading = false; //状态标记
+			var isSelect = $.getQueryObject().isSelect;
+			$(function() {
+				FastClick.attach(document.body);
+				//$(document.body).infinite(); //初始滚动加载
+				$(document.body).on("pull-to-refresh", function() {
+					//alert("下拉刷新了")
+				});
+				$(".add-address").tap(function() {
+					addressUpdate("add");
+				});
+				$(".area").cityPicker({
+					title: "请选择收货地址",
+					showDistrict: false
+				});
+				$(".detele").tap(function() {
+					$.confirm("确定删除该收货地址？", function() {
+						$.toast("地址已经删除!");
+					}, function() {
+
+					});
+				});
+				$(document.body).infinite(0).on("infinite", function() {
+					if(loading) return;
+					loading = true;
+					currPage++;
+					loadData(function() {
+						loading = false;
+					});
+				});
+				loadData();
+			});
+
+			function loadData(callback) {
+				var data = {
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser"),
+					"currPage": currPage,
+					"currNum": 5
+				}
+				if(data.currPage == 1)
+					$(".shipping-address-list").empty();
+				$.ajaxGet(loadAddressUrl + $.toQueryString(data, true), function(res) {
+					console.log(res);
+					if(res.status == 0) {
+						if(res.data.listAddress.length == 0) {
+							$(document.body).destroyInfinite();
+							$(".weui-loadmore").addClass("hide");
+						}
+						showData(res.data.listAddress);
+						callback && callback();
+					} else {
+						//$.alert("请求失败：" + res.msg);
+					}
+				});
+			}
+
+			function showData(data) {
+				if(data) {
+					for(var i in data) {
+						d = data[i];
+						if(!d) {
+							continue;
+						}
+						var str = "<div class=\"weui-panel\" data-id='" + d.addressId + "'>" +
+							"<div class=\"weui-panel__hd\">" +
+							"<div class=\"address-info\">" +
+							"<p><span class=\"shipping-address-name\">" + d.name + "</span>，<span class=\"address-phone\">" + d.phone + "</span></p>" +
+							"<p class=\"color-66 address-url\">" + d.msg + "</p>" +
+							"</div>" +
+							"</div>" +
+							"<div class=\"weui-panel__bd address-headle weui-cells weui-cells_checkbox\">" +
+							"<label class=\"pull-left weui-cell weui-check__label " + (d.isDefault == 10 ? "active" : "") + "\" for=\"" + d.addressId + "\">" +
+							"<div class=\"weui-cell__hd\">" +
+							"<input type=\"checkbox\" class=\"weui-check\" name=\"checkbox1\" id=\"" + d.addressId + "\" " + (d.isDefault == 10 ? "checked=\"checked\"" : "") + ">" +
+							"<i class=\"weui-icon-checked\"></i>" +
+							"</div>" +
+							"<div class=\"weui-cell__bd\">设为默认</div>" +
+							"</label>" +
+							"<p class=\"pull-right\">" +
+							"<a href=\"javascript:;\" class=\"edit\"><img src=\"img/bianji2.png\" />编辑</a>" +
+							"<a href=\"javascript:;\" class=\"detele\" onclick=\"deleteAddress('" + d.addressId + "')\"><img src=\"img/shanchu3.png\" />删除</a>" +
+							"</p>" +
+							"<div class=\"clear\"></div>" +
+							"</div>" +
+							"</div>";
+						if(d.isDefault == 10) {
+							$(".shipping-address-list").prepend(str);
+						} else {
+							$(".shipping-address-list").append(str);
+						}
+						$(".shipping-address-list>div[data-id=" + d.addressId + "] a").data("addressData", d);
+					}
+					$(".edit").unbind("tap").tap(function() {
+						addressUpdate("edit", $(this).data("addressData"));
+					});
+					if(document.documentElement.clientHeight < document.documentElement.offsetHeight) {
+						console.log("有滚动")
+						$(".weui-loadmore").removeClass("hide");
+					} else {
+						console.log("没滚动")
+						$(".weui-loadmore").addClass("hide");
+					}
+					//					$(".detele").unbind("tap").tap(function(){
+					//						
+					//					});
+					$(".weui-check").change(function(e) {
+						var isSelect = $(this).is(":checked");
+						console.log(isSelect)
+						if(isSelect) {
+							$(this).parents(".weui-panel").siblings().find(".weui-check__label").removeClass("active");
+							$(this).parents(".weui-panel").siblings().find("input").prop("checked", false);
+							$(this).parents(".weui-check__label").addClass("active");
+							setDefaultAddress($(this).parents(".weui-panel").data("id"),this)
+						} else {
+							$(this).prop("checked", true);
+						}
+					});
+					if(document.documentElement.clientWidth < document.documentElement.offsetWidth - 4) {
+						$(document.body).infinite(); //初始滚动加载
+						$(".weui-loadmore").removeClass("hide");
+					}
+					if(isSelect) {
+						addSelectTap();
+					}
+				}
+			}
+
+			function addSelectTap() {
+				$(".weui-panel__hd").tap(function() {
+					var data = {
+						"addressId": $(this).parent().data("id"),
+						"addressName": $(this).find(".shipping-address-name").text(),
+						"addressStr": $(this).find(".address-url").text(),
+						"addressPhone": $(this).find(".address-phone").text()
+					}
+					savecookie(data);
+					window.history.back();
+				});
+			}
+			//新增编辑地址
+			function addressUpdate(type, data) {
+				$(".name,.phone,.details-adress").val("");
+				var content = ".dialog";
+				var control = new Controller(content);
+				var contenText = "新增";
+				if(type) {
+					if(type == "edit") { //编辑
+						contenText = "编辑";
+						$(".details-adress").val(data.msg);
+						control.set(data);
+					}
+				}
+				$(".dialog h2").text(contenText + "地址");
+				$(".dialog").removeClass("hide");
+				$(".page-btn").unbind("tap").tap(function() {
+					if(!inputValidateForGritter(content)) {
+						return false;
+					}
+					var datas = {
+						"name": $(".name").val(),
+						"phone": $(".phone").val(),
+						"msg": "湖南省株洲市"+$(".details-adress").val()
+					}
+					console.log(datas);
+					if(type == "edit")
+						datas.addressId = data.addressId;
+					saveData(type, datas);
+				});
+			}
+
+			function saveData(type, data) {
+				if(type && data) {
+					data.userId = getCookie("userId");
+					data.token = getCookie("tokenUser");
+					console.log(data)
+					if(type == "edit") {
+						$.ajaxPut(editAddressUrl, data, function(res) {
+							if(res.status == 0) {
+								$('.dialog').addClass('hide');
+								currPage = 1;
+								loadData();
+								$.toast("修改成功");
+							} else {
+								$.alert("修改失败");
+							}
+						});
+					} else {
+						$.ajaxPost(addAddressUrl, data, function(res) {
+							if(res.status == 0) {
+								$('.dialog').addClass('hide');
+								currPage = 1;
+								loadData();
+								$.toast("新增成功");
+							} else {
+								$.alert("新增失败");
+							}
+						});
+					}
+				}
+			}
+
+			function deleteAddress(id) { //删除地址
+				if(id) {
+					$.alert("确认删除该地址？", "删除地址", function() {
+						$.ajaxDelete(deleteAddressUrl, {
+							"userId": getCookie("userId"),
+							"token": getCookie("tokenUser"),
+							"addressId": id
+						}, function(res) {
+							if(res.status == 0) {
+								$(".weui-panel[data-id='" + id + "']").remove();
+								$.toast("成功");
+							} else {
+								$.alert(res.msg);
+							}
+						});
+					});
+
+				}
+			}
+
+			function setDefaultAddress(id,_this) {
+				if(id) {
+					var data = {
+						"userId": getCookie("userId"),
+						"token": getCookie("tokenUser"),
+						"addressId": id
+					};
+					$.ajaxPut(setDefaultAddressUrl, data, function(res) {
+						if(res.status == 0) {
+							$.toast("成功");
+							$(_this).parents(".weui-panel").find(".weui-panel__hd").trigger("tap");
+						} else {
+							$.alert("设置失败");
+						}
+					});
+				}
+			}
+		</script>
+	</body>
+
+</html>

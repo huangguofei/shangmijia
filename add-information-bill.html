@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.content {
+				resize: none;
+				border: 0;
+				width: 100%;
+				min-height: 8rem;
+				margin-top: .5rem;
+				font-size: .8rem;
+				font-family: -webkit-pictograph;
+				padding: .5rem;
+				background: #f5f5f5;
+				box-sizing: border-box;
+				outline: none;
+			}
+			
+			.file-content {
+				margin-left: 4rem;
+				height: 3rem;
+				line-height: 3rem;
+			}
+			
+			.add-files {
+				float: left;
+				width: 3rem;
+				height: 3rem;
+				padding: .2rem;
+				color: #101010;
+				margin-right: .5rem;
+			}
+			
+			.add-files img {
+				vertical-align: middle;
+			}
+			
+			.weui-cell:before {
+				left: 0;
+			}
+			
+			.title {
+				margin-bottom: .5rem;
+				text-indent: .3rem;
+			}
+			
+			.class span {
+				display: inline-block;
+				border: 1px solid #BBBBBB;
+				width: 20%;
+				margin: .3rem .2rem;
+				text-align: center;
+				line-height: 1.8rem;
+				border-radius: .2rem;
+				color: #666;
+			}
+			
+			.class span.active {
+				border-color: #ff6300;
+				background: #ff6300;
+				color: #fff;
+			}
+			
+			.brand {
+				margin-top: 10px;
+			}
+			
+			section input {
+				text-align: right;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">发账单</h2>
+		</header>
+		<section class="">
+			<div class="padding whitebk">
+				<h3 class="title">类别</h3>
+				<p class="class">
+					<span class="active">设计费</span><span>施工费</span><span>建材购买</span><span>电器</span>
+					<span>家具</span><span>软装配饰</span><span>其他</span>
+				</p>
+			</div>
+
+			<div class="weui-cell brand whitebk">
+				<div class="weui-cell__hd"><label class="weui-label">品牌：</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input " type="text" placeholder="请输入品牌名称">
+				</div>
+			</div>
+			<div class="weui-cell price bottomline whitebk">
+				<div class="weui-cell__hd"><label class="weui-label">价格：</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="number" placeholder="请输入价格">
+				</div>
+			</div>
+			<div class="other-info padding whitebk">
+				<h2 style="font-size: .85rem;">其他信息</h2>
+				<textarea name="" class="content" placeholder="分享一下你的型号、颜色、数量、折扣、采购经历"></textarea>
+				<a href="javascript:;" class="add-files">
+					<img class="width-block" src="img/tianjia.png" /></a>
+				<div class="color-b3 fontsize30 file-content">添加照片</div>
+				<input type="file" class="file hide" name="file" id="file" onchange="fileUpload('file')" />
+			</div>
+			<div class="btn-group padding whitebk">
+				<input type="button" class="weui-btn page-btn" value="确认" />
+			</div>
+		</section>
+		<div class="weui-gallery">
+			<span class="weui-gallery__img"><img src=""> </span>
+			<div class="weui-gallery__opr">
+				<a href="javascript:" class="weui-gallery__del">
+					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+		<script>
+			var postUrl = APIBASEURL + "/smj/app/note/add/bill";
+			var data = $.getQueryObject();
+			$(function() {
+				FastClick.attach(document.body);
+				loadSelect();
+				$(".page-btn").tap(function() {
+					var content = $(".content").val();
+					var price = $(".price input").val();
+					var title = $(".brand input").val();
+					if(!title) {
+						$.alert("品牌不能为空");
+						return false;
+					}
+					if(!price) {
+						$.alert("金额不能为空");
+						return false;
+					}
+					if(!content) {
+						$.alert("日记内容不能为空");
+						return false;
+					}
+					var imgUrls=[];
+					$(".file-content img[data-src]").each(function(i){
+						imgUrls.push($(this).data("src"));
+					});
+					data.imgUrls=JSON.stringify(imgUrls);
+					data.userId = getCookie("userId");
+					data.token = getCookie("tokenUser");
+					data.typeDecorationStage = $(".weui-select").val();
+					data.content = content;
+					data.typeBill = $(".class .active").attr("value");
+					data.brand = title;
+					data.price = price;
+					$.ajaxPost(postUrl, data, function(res) {
+						if(res.status == 0) {
+							$.toast("发布日记成功");
+							window.location.href = "decorate-live.html";
+						} else {
+							$.alert("发布失败");
+						}
+					});
+				});
+				$(".add-files").tap(function() {
+					$("#file").trigger("click");
+				});
+			});
+
+			function fileUpload(fileId) {
+				$.ajaxFileUpload({
+					type: "post",
+					url: APIBASEURL + "/smj/app/note/upload",
+					fileElementId: fileId, //文件上传域的ID  
+					dataType: 'json',
+					data: {
+						userId: getCookie("userId"),
+						tokenUser:getCookie("tokenUser")
+					},
+					success: function(result) {
+						if($(".file-content img").length == 0)
+							$(".file-content").empty();
+						var data = JSON.parse(result.data.imgUrls);
+						$(".file-content").append("<a href='javascript:;' class='relative'><img data-src='" + 
+						data[0] + "' src='" + showImgUrl + data[0] + "'><img class='del-img' src='img/del_img.png'></a>");
+						showImg();
+					},
+					error: function(data, status, e) {
+						console.log(e)
+					}
+				});
+			}
+
+			function showImg() {
+				$(".file-content img[data-src]").unbind("tap").tap(function() {
+					var _this=this;
+					$(".weui-gallery span img").attr("src", $(this).attr("src"));
+					$(".weui-gallery").css("display", "block");
+					$(".weui-gallery__img").unbind("tap").tap(function() {
+						$(".weui-gallery").css("display", "none");
+					});
+					$(".weui-gallery__del").unbind("tap").tap(function() {
+						$(_this).parent().remove();
+						$(".weui-gallery").css("display", "none");
+					});
+				});
+				$(".del-img").tap(function(){
+					 $(this).parent().remove();
+				});
+			}
+
+			function loadSelect() {
+				$(".class").empty();
+				for(var i in billType) {
+					$(".class").append("<span class='" + (i == 0 ? "active" : "") + "' value='" + i + "'>" + billType[i] + "</span>");
+				}
+				$(".class>span").tap(function() {
+					if(!$(this).hasClass("active")) {
+						$(this).addClass("active").siblings().removeClass("active");
+					}
+				});
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

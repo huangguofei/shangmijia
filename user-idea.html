@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.idea-content {
+				resize: none;
+				width: 100%;
+				min-height: 7rem;
+				padding: .5rem;
+				background: #f5f5f5;
+				box-sizing: border-box;
+				margin-bottom: 2rem;
+				font-size: 1rem;
+				outline: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">意见反馈</h2>
+		</header>
+		<section class="padding">
+			<textarea name="" class="idea-content" placeholder="请输入您的意见和建议，我们将不断的完善"></textarea>
+			<input type="button" class="weui-btn page-btn" value="确定" />
+		</section>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script><script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var ideaUrl = APIBASEURL + "/smj/app/feedbackcontroller/insertfeedback";
+			$(function() {
+				FastClick.attach(document.body);
+				$(".page-btn").tap(function() {
+					uploadData();
+				});
+			});
+
+			function uploadData() {
+				var ideaContent = $(".idea-content").val();
+				if(!ideaContent) {
+					$.alert("意见不能为空！");
+					return false;
+				}
+				$.ajaxPost(ideaUrl, {
+					"userId": getCookie("userId"),
+					"token": getCookie("tokrn"),
+					"suggest": ideaContent
+				}, function(res) {
+					if(res.status == 0) {
+						$.toast("反馈成功");
+					}else{
+						$.alert("反馈失败");
+					}
+				})
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

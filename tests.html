@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">设置</h2>
+		</header>
+		<section>
+			<input type="file" accept="image/jpg,image/jpeg,image/png,image/gif" id="fileImage" multiple="true" name="img">
+		</section>
+		<button type="button" class="btn-add">上传</button>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<script>
+			$(function() {
+//				wx.config({
+//					debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+//					appId: getCookie("appId"), // 必填，公众号的唯一标识
+//					timestamp: , // 必填，生成签名的时间戳
+//					nonceStr: '', // 必填，生成签名的随机串
+//					signature: '', // 必填，签名，见附录1
+//					jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+//				});
+//				FastClick.attach(document.body);
+//				$(".btn-add").tap(function() {
+//					wx.chooseImage({
+//						count: 1, // 默认9
+//						sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+//						sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+//						success: function(res) {
+//							var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+//							console.log(res);
+//						}
+//					});
+//				});
+			});
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>

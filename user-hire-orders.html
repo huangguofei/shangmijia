@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>尚米家</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="my first weixinWeb">
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			section .weui-panel {
+				/*background: #fff;*/
+			}
+			
+			.weui-panel__hd img {
+				width: .8rem;
+				margin-right: .3rem;
+			}
+			
+			.weui-panel__hd h2 {
+				color: #0f0f0f;
+				font-size: 1.1rem;
+			}
+			
+			.weui-panel__hd .text-right {
+				font-size: .8rem;
+				color: #666;
+			}
+			
+			.weui-panel__bd {
+				line-height: 1rem;
+			}
+			
+			.new-msg {
+				position: absolute;
+				top: 1rem;
+				left: 5.2rem;
+			}
+		</style>
+	</head>
+
+	<body class="bodybk">
+		<header class="weui-flex header">
+			<a href="#" onclick="javascript:history.go(-1)"><img class="back-img" src="img/fanhui2.png"></a>
+			<h2 class="weui-flex__item text-center">雇佣订单</h2>
+		</header>
+		<section>
+
+		</section>
+		<div class="weui-loadmore hide">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-events.min.js"></script>
+		<script type="text/javascript" src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script src="https://s19.cnzz.com/z_stat.php?id=1262768606&web_id=1262768606" language="JavaScript"></script>
+		<script>
+			var loadDataUrl = APIBASEURL + "/smj/app/order_shop/getOrders";
+			var orderStatus = ["待托管", "待验收", "待评价", "已完成", "已取消", "审核中"];
+			var orderType = {
+				17: "设计",
+				18: "材料",
+				19: "施工"
+			};
+			var currPage = 1;
+			var loading = false;
+			$(function() {
+				$.showLoading();
+				loadModalInit(true);
+				FastClick.attach(document.body);
+				loadData();
+				if(sessionStorage.getItem("isrefresh")) {
+					sessionStorage.removeItem("isrefresh");
+					window.location.reload();
+				}
+			});
+
+			function loadData() {
+				$.ajaxGet(loadDataUrl + $.toQueryString({
+					"userId": getCookie("userId"),
+					"tokenUser": getCookie("tokenUser"),
+					"currPage": currPage,
+					"currNum": 20
+				}, true), function(res) {
+					if(res.status == 0) {
+						showData(res.data.listOrder);
+					} else {
+						//$.alert("获取失败：" + res.msg);
+					}
+					$.hideLoading();
+				});
+			}
+
+			function showData(data) {
+				if(currPage == 1)
+					$("section").empty();
+				if(data) {
+					for(var i in data) {
+						var d = data[i];
+						var str = "<div class=\"weui-panel\" onclick=\"window.location.href='user-hire-orders-details.html?id=" + d.oordershopid + "'\">" +
+							"<div class=\"weui-panel__hd relative\">" +
+							"<h2>" + orderType[d.type] + "服务" + "<span class=\"weui-badge weui-badge_dot new-msg hide " + (d.isRead == 10 ? "hide" : "") + "\"></span></h2>" +
+							"<p class=\"text-right\"><img src=\"img/yonghu.png\">" + d.sshopname + "</p>" +
+							"</div>" +
+							"<div class=\"weui-panel__bd weui-flex padding\">" +
+							"<h3 class=\"weui-flex__item color-66\">已交金额：<span class=\"color-66\">￥" + d.otrustamount + "</span></h3>" +
+							"<span class=\"price-color\">" + orderStatus[d.otypestatus - 1] + "</span>" +
+							"</div>" +
+							"</div>";
+						$("section").append(str);
+					}
+					if(document.documentElement.clientHeight < document.documentElement.offsetHeight) {
+						$(".weui-loadmore").removeClass("hide");
+					} else {
+						$(".weui-loadmore").addClass("hide");
+					}
+					if(data.length == 0)
+						loadModalInit(false)
+				}
+			}
+
+			function loadModalInit(status) {
+				if(status) {
+					$(".weui-loadmore").removeClass("hide");
+					$(document.body).infinite();
+					currPage = 1;
+					$(document.body).on("infinite", function() {
+						console.log("触发" + loading)
+						if(loading) return;
+						loading = true;
+						currPage++;
+						loadData(function() {
+							loading = false;
+						});
+					});
+					console.log("初始化完成")
+				} else {
+					loading = false;
+					$(document.body).destroyInfinite();
+					$(".weui-loadmore").addClass("hide");
+				}
+			}
+		</script>
+		<script>
+		</script>
+	</body>
+
+</html>
